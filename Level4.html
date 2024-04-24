@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">JavaScript Interview Exercises</h1>
+
+    <h3>1: Check Leap year</h3>
+    <script>
+      let year = 1900;
+      const checkLeapYear = (year) => {
+        if (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) {
+          console.log(`${year} is a leap year`);
+        } else {
+          console.log(`${year} is not a leap year`);
+        }
+      };
+      checkLeapYear(year);
+    </script>
+
+    <h3>2: Get file extension type</h3>
+    <script>
+      let fileName = "resume.pdf";
+      const getExtension = (file) => {
+        let ext = file.split(".").pop();
+        console.log(ext);
+      };
+      getExtension(fileName);
+    </script>
+
+    <h3>3: Add titile to any name</h3>
+    <script>
+      let myName = "Tapan Samal";
+      const addTitleToName = (name) => {
+        if (name.toLowerCase().substring(0, 4) === "dev.") {
+          console.log(name);
+        } else {
+          console.log("Dev. " + name);
+        }
+      };
+      addTitleToName(myName);
+    </script>
+
+    <h3>4: Find sum of divisible numbers from a range of number</h3>
+    <script>
+      let sum = 0;
+      const sumOfDivisibleNum = (x, y) => {
+        if (y > x) {
+          for (var i = x; i <= y; i++) {
+            if (i % 3 === 0 || i % 5 === 0) {
+              sum = sum + i;
+            }
+          }
+          return sum;
+        }
+        return "Invalid Range";
+      };
+      console.log(`Sum of divisible numbers: ${sumOfDivisibleNum(5, 10)}`);
+    </script>
+
+    <h3>5: Find the numbers from an array and sum them</h3>
+    <script>
+      const myArray = ["js", 9, "react", 7, 4, "css", "html"];
+      let sumArray = 0;
+      //for of Loop
+      for (let element of myArray) {
+        if (typeof element === "number") {
+          sumArray = sumArray + element;
+        }
+      }
+      console.log("Sum of array numbers: ", sumArray);
+
+      //forEach Loop
+      myArray.forEach((ele) => {
+        if (typeof ele === "number") {
+          sumArray += ele;
+        }
+      });
+      console.log("Sum of array numbers: ", sumArray);
+    </script>
+
+    <h3>6: Flatten array of array</h3>
+    <script>
+      var nestedArray = [
+        1,
+        2,
+        [3, "tapan", 4],
+        5,
+        6,
+        [7, 8, [9, ["kumar"], 10], 11],
+        "samal",
+        12,
+      ];
+
+      const displayElement = (array) => {
+        array.forEach((element) => {
+          if (Array.isArray(element)) {
+            displayElement(element);
+          } else {
+            console.log(element);
+          }
+        });
+      };
+      displayElement(nestedArray);
+
+      //flat method
+      const flatArray = nestedArray.flat(Infinity).join(" ");
+      console.log(flatArray);
+    </script>
+
+    <h3>7: Total cost of product</h3>
+    <script>
+      const product = [
+        { name: "Laptop", price: 72000 },
+        { name: "Mobile", price: 16000 },
+        { name: "Tab", price: 22000 },
+      ];
+      let productSum = 0;
+      product.forEach((item) => {
+        productSum += item.price;
+      });
+      console.log("Total cost of product: ", productSum);
+    </script>
+
+    <h3>8: Category wise total product/cost</h3>
+    <script>
+      const productList = [
+        { company: "HP", category: "Laptop", quantity: 7 },
+        { company: "Moto", category: "Mobile", quantity: 5 },
+        { company: "Mac", category: "Laptop", quantity: 9 },
+        { company: "Iphone", category: "Mobile", quantity: 7 },
+        { company: "Sony", category: "TV", quantity: 6 },
+        { company: "LG", category: "TV", quantity: 4 },
+      ];
+
+      let totalProductList = {};
+      productList.forEach((product) => {
+        const { category, quantity } = product;
+        if (!totalProductList[category]) {
+          totalProductList[category] = quantity;
+        } else {
+          totalProductList[category] += quantity;
+        }
+      });
+      console.log(totalProductList);
+    </script>
+
+    <h3>9: Remove vowels from text</h3>
+    <script>
+      const vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
+      const removeVowels = (text) => {
+        let newStr = "";
+        for (let i = 0; i < text.length; i++) {
+          if (!vowels.includes(text[i])) {
+            newStr += text[i];
+          }
+        }
+        console.log(newStr);
+      };
+      removeVowels("tapan kumar samal");
+    </script>
+
+    <h3>10: Count vowels from text</h3>
+    <script>
+      const countVowels = (text) => {
+        let counts = 0;
+        for (let i = 0; i < text.length; i++) {
+          if (vowels.includes(text[i])) {
+            counts++;
+          }
+        }
+        console.log("Total vowels: ", counts);
+      };
+      countVowels("tapan kumar samal");
+    </script>
+
+    <h3>11: Find element and return true or false</h3>
+    <script>
+      const findElement = (data, arr) => {
+        // arr.forEach((element) => {  //forEach not work, Bcz function create local scope
+        //   if(element === data){
+        //     return true;
+        //   }
+        // })
+        for (let element of arr) {
+          if (element === data) {
+            return true;
+          }
+        }
+        return false;
+      };
+      console.log(findElement(5, [2, 3, 5, 7]));
+    </script>
+
+    <h3>12: Remove duplicate item</h3>
+    <script>
+      const removeDuplicateELement = (elements) => {
+        const newArray = [];
+        elements.forEach((elem) => {
+          //reuse findElement function
+          if (!findElement(elem, newArray)) {
+            newArray.push(elem);
+          }
+        });
+        return newArray;
+      };
+      console.log(removeDuplicateELement([1, 2, 1, 3, 4, 2, 5, 3]));
+    </script>
+
+    <h3>13: Multiline patterns</h3>
+    <script>
+      for (let i = 0; i < 5; i++) {
+        console.log("for", i);
+        let pattern = "";
+        for (let j = 0; j <= 5; j++) {
+          pattern += " * ";
+        }
+        console.log(pattern);
+      }
+    </script>
+
+    <h3>14: Pyramid Patterns</h3>
+    <script>
+      for (let i = 0; i <= 3; i++) {
+        let pattern = "";
+        for (let j = 0; j <= 6; j++) {
+          if (j >= 3 - i && j <= 3 + i) {
+            pattern += " * ";
+          } else {
+            pattern += "   ";
+          }
+        }
+        console.log(pattern);
+      }
+    </script>
+
+    <h3>15: Reverse pyramid Patterns</h3>
+    <script>
+      for (let i = 0; i <= 3; i++) {
+        let pattern = "";
+        for (let j = 0; j <= 6; j++) {
+          if (j >= i && j <= 6 - i) {
+            pattern += " o ";
+          } else {
+            pattern += "   ";
+          }
+        }
+        console.log(pattern);
+      }
+    </script>
+
+    <h3>16: Double pyramid Patterns</h3>
+    <script>
+      for (let i = 0; i <= 3; i++) {
+        let pattern = "";
+        for (let j = 0; j <= 12; j++) {
+          if ((j >= 3 - i && j <= 3 + i) || (j >= 9 - i && j <= 9 + i)) {
+            pattern += " o ";
+          } else {
+            pattern += "   ";
+          }
+        }
+        console.log(pattern);
+      }
+    </script>
+
+    <h3>17: Heart Pattern</h3>
+    <script>
+      for (let i = 0; i <= 3; i++) {
+        let pattern = "";
+        for (let j = 0; j <= 12; j++) {
+          if ((j >= 3 - i && j <= 3 + i) || (j >= 9 - i && j <= 9 + i)) {
+            pattern += " o ";
+          } else {
+            pattern += "   ";
+          }
+        }
+        console.log(pattern);
+      }
+      for (let i = 0; i <= 6; i++) {
+        let pattern = "";
+        for (let j = 0; j <= 12; j++) {
+          if (j >= i && j <= 12 - i) {
+            pattern += " o ";
+          } else {
+            pattern += "   ";
+          }
+        }
+        console.log(pattern);
+      }
+    </script>
+
+    <h3>18: Class Inheritence</h3>
+    <script>
+      class Rectangle {
+        constructor(h, w) {
+          this.height = h;
+          this.width = w;
+        }
+        area() {
+          const a = this.height * this.width;
+          return a;
+        }
+        parameter() {
+          const p = 2 * (this.height + this.width);
+          return p;
+        }
+      }
+
+      class Square extends Rectangle {
+        constructor(a) {
+          super(a, a);
+          this.side = a;
+        }
+      }
+      const s1 = new Square(10);
+      console.log(s1.area());
+      console.log(s1.parameter());
+    </script>
+
+    <h3>19. Find longest word in a sentence</h3>
+    <script>
+      function findLongestWord(sentence) {
+        let words = sentence.split(" ");
+        let longestWord = "";
+        for (let word of words) {
+          if (word.length > longestWord.length) {
+            longestWord = word;
+          }
+        }
+        return longestWord;
+      }
+      console.log(findLongestWord("I love coding in JavaScript"));
+    </script>
+
+    <h3>20. Checks whether a given string is a palindrone or not</h3>
+    <script>
+      //A palindrone is word that reads the same forword as well as backword.
+      function isPalindrone(str) {
+        let reverse = str.split("").reverse().join("");
+        return str === reverse;
+      }
+      console.log(isPalindrone("racecar"));
+    </script>
+
+    <h3>21. Remove duplicate elements from an array</h3>
+    <script>
+      //Using Loop Method
+      function removeDuplicates(arr) {
+        const uniqueNumbers = [];
+        for (let i = 0; i < arr.length; i++) {
+          if (uniqueNumbers.indexOf(arr[i]) === -1) {
+            //here -1 is element not found.
+            uniqueNumbers.push(arr[i]);
+          }
+        }
+        return uniqueNumbers;
+      }
+      console.log(removeDuplicates([1, 2, 3, 4, 4, 5, 6, 6]));
+
+      //Using Set Method
+      function removeByUsingSet(arr) {
+        return [...new Set(arr)]; //...(spread) will convert to array
+      }
+      console.log(removeByUsingSet([1, 2, 3, 4, 4, 5, 6, 6]));
+    </script>
+
+    <h3>22. Checks whether two strings are anagrams or not</h3>
+    <script>
+      //An anagram is a word formed by rearranging the letters of another word.
+      function isAnagram(str1, str2) {
+        const sortedStr1 = str1.split("").sort().join("");
+        const sortedStr2 = str2.split("").sort().join("");
+        return sortedStr1 === sortedStr2;
+      }
+      console.log(isAnagram("listen", "silent"));
+    </script>
+
+    <h3>23. Returns the number of vowels in a string</h3>
+    <script>
+      function countVowels(str) {
+        const vowels = ["a", "e", "i", "o", "u"];
+        let count = 0;
+        for (let char of str.toLowerCase()) {
+          if (vowels.includes(char)) {
+            count++;
+          }
+        }
+        return count;
+      }
+      console.log(countVowels("Hello World"));
+    </script>
+
+    <h3>24. Find the largest number in an array</h3>
+    <script>
+      function findLargestNumber(arr) {
+        let largest = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] > largest) {
+            largest = arr[i];
+          }
+        }
+        return largest;
+      }
+      console.log(findLargestNumber([2, 4, 6, 9, 5, 3]));
+    </script>
+
+    <h3>25. Check the given number is prime or not</h3>
+    <script>
+      //A prime number is only divisible by 1 and itself.
+      //Number less than 2 are not prime number and any number more than half not divisible
+      //A prime number remainder must not be zero
+      function isPrimeNumber(num) {
+        for (let i = 2; i <= num / 2; i++) {
+          if (num % 2 === 0) {
+            return false;
+          }
+        }
+        return true;
+      }
+      console.log(isPrimeNumber(7));
+      console.log(isPrimeNumber(8));
+    </script>
+
+    <h3>26. Calculate the factorial of a number</h3>
+    <script>
+      function factorial(num) {
+        if (num === 0) {
+          return 1; //Handle 0 case
+        }
+        let factorial = 1;
+        for (let i = 1; i <= num; i++) {
+          factorial *= i;
+        }
+        return factorial;
+      }
+      console.log(factorial(5));
+    </script>
+
+    <h3>27. Remove all whitespace characters from a string</h3>
+    <script>
+      const inputString = "  Interview,    Happy  ";
+      function removeWhiteSpace(str) {
+        let result = str.replace(/\s/g, "");
+        return result;
+      }
+      console.log(removeWhiteSpace(inputString));
+    </script>
+
+    <h3>28. Print the true value property from an object</h3>
+    <script>
+      let isSkilled = {
+        JavaScript: true,
+        Python: true,
+        Java: false,
+        "C++": false,
+        SQL: true,
+      };
+
+      //First Method
+      let trueProperties = Object.keys(isSkilled).filter(
+        (key) => isSkilled[key] === true
+      );
+      console.log(trueProperties);
+
+      //Second Method
+      let skilledProperty = Object.entries(isSkilled);
+      let trueSkilled = skilledProperty.filter(
+        ([key, value]) => value === true
+      );
+      let trueProperty = trueSkilled.map(([key, value]) => key);
+      console.log(trueProperty);
+    </script>
+
+    <h3>29. Capitalize the first letter of each element in an array</h3>
+    <script>
+      let players = ["dhoni", "raina", "jadega", "virat", "iyer"];
+
+      //Create a Function/Method
+      const capFirstLetter = (name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      };
+
+      //Using Loop
+      let newNames = [];
+      for (let i = 0; i < players.length; i++) {
+        newNames.push(capFirstLetter(players[i]));
+      }
+      console.log(newNames);
+
+      //Using Map
+      let newPlayers = players.map((name) => capFirstLetter(name));
+      console.log(newPlayers);
+    </script>
+
+    <h3>30. Count the number of each character in a string</h3>
+    <script>
+      const str = "hare krishna here ram";
+      let characterNumber = {};
+      for (let char of str) {
+        if (characterNumber[char]) {
+          characterNumber[char] += 1;
+        } else {
+          characterNumber[char] = 1;
+        }
+      }
+      console.log(characterNumber);
+    </script>
+  </body>
+</html>

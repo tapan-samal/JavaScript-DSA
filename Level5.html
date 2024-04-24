@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Questions_5</title>
+  </head>
+  <body>
+    <h1>JavaScript Interview Questions</h1>
+    <h4>Source : Roadside Coder</h4>
+
+    <h2>1. var, let and const :</h2>
+    <script>
+      //Scope: Visibility and accessibility of variable and function
+      {
+        var a = 5;
+        let b = 7;
+        const c = 9;
+      }
+      console.log(a); //Global scope
+      //   console.log(b);      //Block scope
+      //   console.log(c);      //Block scope
+
+      //Shadow Variable: Variable declared in a local scope has the same name as a variable in an outer (enclosing) scope.
+      function test() {
+        let a = "Hello";
+
+        if (true) {
+          let a = "Hiiii"; //Local a shadow of global variable
+          console.log(a);
+        }
+        console.log(a);
+      }
+      test();
+
+      //Declaration: let and const not allowed to redeclare and const cannot declare without initializer.
+      var name;
+      var name;
+      let name1;
+      //   let name1;
+      //   const name3;
+      //   const name3;
+
+      //Initialization: Const does not allow to re-initialization.
+      var aa = 100;
+      aa = 111;
+      let aaa = 200;
+      aaa = 222;
+      const aaaa = 300;
+      // aaaa = 333;
+
+      //Hoisting
+      console.log(count); //Hoisted and initialised with undefined
+      var count = 1;
+
+      // console.log(count1); //Hoisted, but not initialized
+      let count1 = 5;
+
+      function abc() {
+        console.log(a);
+        var a = 10;
+        // let b = 20;
+        // const c = 30
+      }
+      abc();
+    </script>
+
+    <h2>2. forEach(), map(), filter() and reduce() :</h2>
+    <script>
+      //Map(): A method to iterate over an array and create a new array based on transformation of each element  without modify original array.
+      const nums = [1, 2, 3, 4, 5];
+
+      const multiplyThree = nums.map((n, i, arr) => n * 3 + i);
+      console.log(multiplyThree);
+
+      //Filter(): A higher-order array method that is used to filter the elements from original array according to given condition and contain in a new array without modify original array.
+      const moreThanTwo = nums.filter((n) => {
+        return n > 2;
+      });
+      console.log(moreThanTwo);
+
+      //Reduce(): A Reduce is a powerful array method that is used to iterate through an array and accumulate to a single value based on condition applied to that array.
+      //Syntax: array.reduce((accumulator, currentValue, Index, array) => {}, initialValue)
+      const sum = nums.reduce((acc, cur, i, arr) => {
+        return acc + cur;
+      }, 0);
+      console.log(sum);
+
+      //Polyfill for Map(): Polyfills are mainly used to add support for older environments.
+      Array.prototype.myMap = function (cb) {
+        let temp = [];
+        for (let i = 0; i < this.length; i++) {
+          temp.push(cb(this[i], i, this)); //current value, index, array
+        }
+        return temp;
+      };
+      const checkMyMap = nums.myMap((n) => n * 10);
+      console.log(checkMyMap);
+
+      //Polyfill for Filter():
+      Array.prototype.myFilter = function (cb) {
+        let temp = [];
+        for (let i = 0; i < this.length; i++) {
+          if (cb(this[i], i, this)) {
+            temp.push(this[i]);
+          }
+        }
+        return temp;
+      };
+      const checkMyFilter = nums.myFilter((n) => n < 4);
+      console.log(checkMyFilter);
+
+      //Polyfill for Reduce():
+      Array.prototype.myReduce = function (cb, initialValue) {
+        let accumulator = initialValue;
+        for (let i = 0; i < this.length; i++) {
+          accumulator = accumulator
+            ? cb(accumulator, this[i], i, this)
+            : this[i];
+        }
+        return accumulator;
+      };
+      const checkMyReducer = nums.myReduce((acc, cur) => {
+        return acc + cur;
+      }, 0);
+      console.log(checkMyReducer);
+
+      //ForEach(): A method to iterate over an array and perform an action for each element in the array.
+      //Map() vs ForEach()
+      const array = [2, 5, 7, 9];
+      const mapResult = array.map((n) => n + 3);
+      const forEachResult = array.forEach((n, i) => {
+        array[i] = n + 3;
+      });
+      console.log(mapResult, array, forEachResult); //forEach modified original array, but not create new.
+
+      //Output Based Questions
+      let students = [
+        { name: "Pragyan", rollNumber: 101, marks: 82 },
+        { name: "Tanu", rollNumber: 111, marks: 65 },
+        { name: "Ipsita", rollNumber: 122, marks: 54 },
+        { name: "Gayatri", rollNumber: 133, marks: 36 },
+      ];
+
+      //Qus_1: Return only name of students in capital letter...?
+      //Using Loop
+      let names = [];
+      for (let i = 0; i < students.length; i++) {
+        names.push(students[i].name.toUpperCase());
+      }
+      console.log(names);
+
+      //Using Map()
+      const capitalName = students.map((nam) => nam.name.toUpperCase());
+      console.log(capitalName);
+
+      //Qus_2: Return the candidate names who marked more than 60...?
+      const firstClass = students
+        .filter((student) => student.marks > 60)
+        .map((student) => student.name);
+      console.log(firstClass);
+
+      //Qus_3: Return the candidates who marked more than 60 and roll number less than 110...?
+      const firstClasName = students.filter(
+        (stud) => stud.marks > 60 && stud.rollNumber < 110
+      );
+      console.log(firstClasName);
+
+      //Qus_4: Sum of marks of all students...?
+      const sumOfMarks = students.reduce((acc, cur) => acc + cur.marks, 0);
+      console.log(sumOfMarks);
+
+      //Qus_5: Return total marks of the students who secured > 60 after adding 20, who secured < 60.
+      const madeFirstClass = students
+        .map((stu) => {
+          if (stu.marks < 60) {
+            stu.marks += 20;
+          }
+          return stu;
+        })
+        .filter((stu) => stu.marks > 60)
+        .reduce((acc, cur) => acc + cur.marks, 0);
+      console.log(madeFirstClass);
+    </script>
+
+    <h2>3. JavaScript Function :</h2>
+    <script>
+      // Qus_1: What is function declaration...?
+      //A function declaration is a way to define a reuseable block of code that can be executed when it called.
+      //Function declarations are hoisted in JavaScript.
+      //A function has "function" keyword, Function name, Parameter, Function body {} and "return" keyword also
+      function functionName(params) {
+        return params + params;
+      }
+
+      // Qus_2: What is Function Expression...?
+      //When an function assigned to a variable called function expression.
+      //Function expression not allow to hoisted, bcz only declaration allow to hoisted.
+      const myFunction = function (num) {
+        return num * num;
+      };
+      myFunction();
+
+      // Qus_3: What is first class function...?
+      //When function in programming language is treated as like variable.
+      //A function can be passed as an argument to other functions, returned by another function and assigned as a value to a variable.
+
+      //Assigning a function to a variable
+      const foo = () => {
+        console.log("Foobar");
+      };
+      foo(); //Invoke is using variable
+
+      //Passing a function as an argument like variable
+      function square(num) {
+        return num * num;
+      }
+      function displaySquare(fn) {
+        console.log("square is " + fn(5));
+      }
+      displaySquare(square);
+
+      // Qus_4: What is IIFE...?
+      //IIFE stands for Immediately Invoked Function Expression.
+      //IIFE executed immediately after function declaration.
+      (function squares(num) {
+        console.log(num * num);
+      })(6);
+
+      //Output based question
+      (function (x) {
+        return (function (y) {
+          console.log(x * y); //x access bcz of closure
+        })(2);
+      })(3);
+
+      // Qus_5: Function Scope
+      //Variables declared inside a function are in function scope.
+      //Function-scope variables are only accessible within the function in which they are defined.
+      //They are not visible to code outside of that function.
+      //Function scope avoid naming conflict.
+
+      //Following variables and function are defined in global scope
+      var num1 = 7;
+      num2 = 8;
+      name = "Tapan";
+      function multiply() {
+        return num1 * num2;
+      }
+      //Nested function
+      function getScore() {
+        var num1 = 10;
+        num2 = 8;
+        function add() {
+          console.log(name + " scored " + (num1 + num2));
+        }
+        return add();
+      }
+      getScore();
+
+      //Output Based Question
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          // console.log(i);
+        }, i * 1000);
+      }
+
+      // Qus_6: Function Hoisting
+      //Hoisting is the default behavior of moving all the declarations at the top of the scope before code execution.
+      //After ES6, only function can hoisted.
+      //only the declaration is hoisted, not the initialization (assignment).
+
+      functionNam();
+      function functionNam() {
+        console.log("Function Hoisting");
+      }
+
+      //Output Based Question
+      var d = 21;
+      var fun = function () {
+        console.log(d);
+        var d = 31;
+      };
+      fun();
+
+      // Qus_7: Params vs Arguments
+      //Parameters are variables listed in the function definition within the parentheses.
+      //Arguments are the actual values or expressions that are passed to a function when it is called within the parentheses.
+      function paramsFunction(num) {
+        //Here num is params
+        console.log(num * num);
+      }
+      paramsFunction(5); //Here 5 is argument
+
+      function multiplyFun(...nums) {
+        //Here parameter as rest operator
+        console.log(nums[0] * nums[1]);
+      }
+      var arr = [12, 6];
+      multiplyFun(...arr); //Here argument as spread operator
+
+      //Output based Question
+      const restFun = (a, x, y, ...nums) => {
+        console.log(a, nums);
+      };
+      restFun(2, 3, 4, 5, 6, 7);
+
+      // Qus_8: Callback Function
+      //A callback function is a function passed into another function as an argument.
+      function doSomething(callback) {
+        setTimeout(function () {
+          console.log("Task Done");
+          callback(); //Invoked the callback function
+        }, 1000);
+      }
+      function afterTask() {
+        console.log("Callback function executed.");
+      }
+      doSomething(afterTask);
+
+      document.addEventListener("click", function () {});
+
+      // Qus_8: Arrow Function vs Regular Function
+
+      // Syntax :
+      //Arrow functions use a concise syntax with the => arrow operator without using 'function' keyword.
+      const arrowFunction = () => {};
+
+      //Regular functions are defined using the 'function' keyword.
+      function regularFunction(params) {
+        return params;
+      }
+
+      // Single Expression :
+      //It allow to use single expression with an implicit(without) return keyword.
+      const arrFun = (a, b) => a + b; //without using retun
+      console.log(arrFun(5, 6));
+
+      //It is also allow single expression, but with explicit return (uses the return statement).
+      function regFun(a, b) {
+        return a + b;
+      }
+      console.log(regFun(5, 7));
+
+      // this Binding :
+      //Arrow functions do not have their own this context, so inherit from global context.
+      const person = {
+        name: "John",
+        sayHello: () => {
+          console.log(`Hello, ${this.name}`); //Access from global
+        },
+      };
+      person.sayHello();
+
+      //Regular functions have their own this context.
+      const person2 = {
+        name: "Janny",
+        sayHello: function () {
+          console.log(`Hello, ${this.name}`);
+        },
+      };
+      person2.sayHello(); // This will work as expected, 'this' is bound to 'person2'.
+
+      // arguments Object :
+      //Arrow functions do not have their own arguments object, so inherit from global scope.
+      const arrowFun = (a, b) => {
+        // console.log(arguments[0]); // ReferenceError
+        // console.log(arguments[1]);
+      };
+      arrowFun(12, 22);
+
+      //Regular functions have their own arguments object.
+      function regularFun(a, b) {
+        console.log(arguments[0]); //Accessing arguments using the arguments object
+        console.log(arguments[1]);
+      }
+      regularFun(15, 25);
+
+      // Constructor Function :
+      //Arrow functions cannot be used as constructor functions with the new keyword.
+      const ArrowFunction = () => {
+        this.property = "I'm a property";
+      };
+      try {
+        const arrowInstance = new ArrowFunction(); //Throw  TypeError
+        console.log(arrowInstance.property);
+      } catch (error) {
+        console.error(error);
+      }
+
+      //Regular functions can be used as constructor functions with new and allowing to create objects.
+      const RegularFunction = function () {
+        this.property = "I'm a property";
+      };
+      const regularInstance = new RegularFunction();
+      console.log(regularInstance.property);
+    </script>
+
+    <h2>4. Closures in JavaScript :</h2>
+    <script>
+      // Laxical Scope
+      //Lexical scope defines the accessibility and visibility of variables based on their location in nested(inner) functions.
+      var userName = "JavaScript"; //Global scope
+      function local() {
+        console.log(userName); //Local scope
+      }
+      local();
+
+      function local1() {
+        var userName1 = "React";
+      }
+      // console.log(userName1); //Cannot access due to variable in block scope
+      local();
+
+      function subscribe() {
+        let name = "Commerce Coder"; //Inner scope
+        function displayName() {
+          //This displayName is closure
+          console.log(name); //Inner Scope
+        }
+        return displayName();
+      }
+      subscribe();
+
+      // Closure scope chain
+      //3 scope of closure : Local, Outer and Global
+      var e = 10; //Global scope
+      function sums(a) {
+        return function (b) {
+          return function (c) {
+            //Outer function scope
+            return function (d) {
+              //local scope
+              return a + b + c + d + e;
+            };
+          };
+        };
+      }
+      console.log(sums(1)(2)(3)(4));
+
+      //Qus_1: What will be logged to console...?
+      let counts = 0;
+      (function printCount() {
+        if (counts === 0) {
+          let counts = 1; //Shadowing
+          console.log(counts);
+        }
+        console.log(counts); //Access global
+      })();
+
+      // Qus_2: Write a function that allow to evaluate between outer and inner function...?
+      function createBase(outerNum) {
+        return function (innerNum) {
+          console.log(outerNum + innerNum);
+        };
+      }
+      var addNums = createBase(6);
+      addNums(5);
+      addNums(9);
+
+      // Qus_3: Block scope and setTimeout
+      function a() {
+        for (var i = 0; i < 3; i++) {
+          setTimeout(() => {
+            // console.log(i);
+          }, i * 1000);
+        }
+      }
+      a(); //3 times 3
+      //Var has function scope, so after code executed, it will take the current/last value
+
+      //Use let
+      function ab() {
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+            // console.log(i);
+          }, i * 1000);
+        }
+      }
+      ab();
+      //let has block scope, so it store separately and print all block value
+
+      //Use Closures with var
+      for (var i = 0; i < 3; i++) {
+        function inner(i) {
+          setTimeout(function log() {
+            // console.log(i);
+          }, i * 1000);
+        }
+        inner(i);
+      }
+
+      // Qus_4: How would you use a closure to create a private counter...?
+      function counter() {
+        var _counter = 0;
+
+        function add(increment) {
+          _counter += increment;
+        }
+        function retrive() {
+          return "counter = " + _counter;
+        }
+        return { add, retrive };
+      }
+      const c = counter();
+      c.add(10);
+      c.add(20);
+      console.log(c.retrive());
+
+      //Qus_5: What is Module Pattern...?
+      //A Javascript design pattern, can access private variables/function via public function using closure.
+      var Module = (function () {
+        // Private variable
+        var privateVar = "Private Variable";
+
+        // Private function
+        function privateFunction() {
+          return "Private Function";
+        }
+
+        // Public members (exposed in the returned object)
+        return {
+          publicVar: "Public variable",
+          publicFunction: function () {
+            return "Public Function";
+          },
+          getPrivateValue: function () {
+            // return privateVar;
+            return privateFunction();
+          },
+        };
+      })();
+
+      console.log(Module.publicVar); // Access public variable
+      console.log(Module.publicFunction()); // Call public function
+      console.log(Module.getPrivateValue()); // Access private variable via a public function
+
+      // Qus_6: Make this run only once
+      let view;
+      function likeTheVideo() {
+        let called = 0;
+        return function () {
+          if (called > 0) {
+            console.log("Already Liked this Video");
+          } else {
+            console.log("Like the Video");
+            called++;
+          }
+        };
+      }
+      let isLiked = likeTheVideo();
+      isLiked();
+      isLiked();
+      isLiked();
+
+      // Qus_7: Time Optimization
+      function find(index) {
+        let a = [];
+        for (let i = 0; i < 1000000; i++) {
+          a[i] = i * i;
+        }
+        console.log(a[index]);
+      }
+      // console.time("6");
+      // find(6);
+      // console.timeEnd("6");
+      // console.time("12");
+      // find(50);
+      // console.timeEnd("12");
+
+      //Using Closures
+      function find1() {
+        let a = [];
+        for (let i = 0; i < 1000000; i++) {
+          a[i] = i * i;
+        }
+        return function (index) {
+          console.log(a[index]);
+        };
+      }
+      const closure = find1();
+      // console.time("6");
+      // closure(6);
+      // console.timeEnd("6");
+      // console.time("50");
+      // closure(50);
+      // console.timeEnd("50");
+
+      // Qus_8: Once Polyfill
+      function once(func, context) {
+        let ran;
+
+        return function () {
+          if (func) {
+            ran = func.apply(context || this, arguments);
+            func = null; //this will block the run code
+          }
+          return ran;
+        };
+      }
+      const hello = once((a, b) => console.log("Hello", a, b));
+      hello(1, 2);
+      hello(1, 2);
+      hello(1, 2);
+
+      // Qus_9: Momoize Polyfill
+      // Qus_10: Implement Caching/Momoize Function
+    </script>
+
+    <h2>5. Currying In JavaScript :</h2>
+    <h3 id="heading">Hello, Tapan</h3>
+    <script>
+      //Currying is the process of taking a function with multiple arguments and transformed into a sequence of functions, each taking a single argument.
+      //Example: fun(a, b, c) => fun(a)(b)(c)
+
+      function curFun(a) {
+        return function (b) {
+          return `${a}, ${b}`;
+        };
+      }
+      console.log(curFun(5)(6));
+
+      // Qus_1: Sum(2)(6)(4)
+      function normalFun(n1, n2, n3) {
+        return n1 + n2 + n3;
+      }
+      console.log(normalFun(2, 6, 4));
+
+      function curryingFun(a) {
+        return function (b) {
+          return function (c) {
+            return a + b + c;
+          };
+        };
+      }
+      console.log(curryingFun(2)(6)(4));
+
+      // Qus_2:
+      //evaluate ("sum")(6)(3) => 9
+      //evaluate ("multiply")(6)(3) => 18
+      //evaluate ("subtract")(6)(3) => 3
+      //evaluate ("divide")(6)(3) => 2
+      function evaluates(operation) {
+        return function (a) {
+          return function (b) {
+            if (operation === "sum") return a + b;
+            else if (operation === "multiply") return a * b;
+            else if (operation === "subtract") return a - b;
+            else if (operation === "divide") return a / b;
+            else return "Invalid Operator";
+          };
+        };
+      }
+      let s = evaluates("sum");
+      console.log(s(8)(7));
+      console.log(s(8)(12)); //Reuse
+      console.log(evaluates("multiply")(6)(3));
+      console.log(evaluates("subtract")(6)(3));
+      console.log(evaluates("divide")(6)(3));
+
+      // Qus_3: Infinite Currying -> sum(1)(2)(3)...(n)
+      function infiniteFun(a) {
+        return function (b) {
+          if (b) return infiniteFun(a + b); //Recursive function
+          return a;
+        };
+      }
+      console.log(infiniteFun(1)(2)(3)(4)(5)(6)(7)(8)(9)());
+
+      // Qus_4: Currying v/s Partial Application
+      //Partial application is a concept that fixing a subset of arguments in a function to create a new function.
+      //We can partially apply both curried and non-curried functions.
+      function partialFun(a) {
+        return function (b, c) {
+          return a + b + c;
+        };
+      }
+      const output = partialFun(10);
+      console.log(output(5, 6));
+      //Or
+      console.log(partialFun(20)(5, 6));
+
+      // Qus_5: Manipulating DOM
+      function updateHeading(id) {
+        return function (content) {
+          document.querySelector("#" + id).textContent = content;
+        };
+      }
+      const updateContent = updateHeading("heading");
+      updateContent("Morning Tapan");
+      updateContent("Night Tapan");
+
+      //Qus_6: Curry() Implementation = Convert fn(a, b, c) => fn(a)(b)(c)
+      function curry(func) {
+        return function curriedFun(...args) {
+          console.log(args.length, func.length);
+          if (args.length >= func.length) {
+            return func(...args);
+          } else {
+            return function (...next) {
+              return curriedFun(...args, ...next);
+            };
+          }
+        };
+      }
+      const _sums = (a, b, c, d) => a + b + c + d;
+      const totalSum = curry(_sums);
+      console.log(totalSum(1)(5)(6)(8));
+    </script>
+
+    <h2>6. Objects in JavaScript :</h2>
+    <script>
+      const user = {
+        name: "tapan",
+        age: 30,
+      };
+      console.log(user.name);
+      user.name = "Kumar"; //Modified
+      console.log(user.name);
+      console.log(user);
+      delete user.age; //Deleted
+      user.loaction = "Balasore"; //Add
+      console.log(user);
+
+      const delFun = (function (a) {
+        delete a; //This is local variable, not property of object
+        return a;
+      })(5);
+      console.log(delFun);
+
+      // Qus_1: How to add and access this kind of property( Do you like me) ...?
+      const user1 = {
+        name: "Tapan Samal",
+        "Do you like me": true,
+      };
+      console.log(user1["Do you like me"]);
+      delete user1["Do you like me"];
+      console.log(user1);
+
+      // Qus_2: How to add variables to property...?
+      const property = "firstName";
+      const name = "Kumar Tapan";
+      const user2 = {
+        [property]: name,
+      };
+      console.log(user2);
+
+      // Qus_3: Looping Object
+      const user3 = {
+        name: "Commerce Coder",
+        location: "Balasore",
+        isAwesome: true,
+      };
+      for (keys in user3) {
+        console.log(keys);
+        console.log(user3[keys]);
+      }
+
+      //Qus_4: What's the output...?
+      const obj = {
+        a: "one",
+        b: "two",
+        a: "three",
+      };
+      console.log(obj); //Replaced to last key
+
+      //Qus_5: Create a fn multiplyByTwo(obj) that multiplies all numeric property values of nums by 2..?
+      let num = {
+        a: 100,
+        b: 200,
+        title: "my nums",
+      };
+      multiplyByTwo(num);
+      function multiplyByTwo(obj) {
+        for (key in obj) {
+          if (typeof obj[key] === "number") {
+            obj[key] *= 2;
+          }
+        }
+      }
+      console.log(num);
+
+      // Qus_6: What's the output of following code ?
+      const p = {};
+      const q = { key: "q" };
+      const r = { key: "r" };
+
+      p[q] = 123; //p["[object object]"] = 123
+      p[r] = 246; //p["[object object]"] = 246
+
+      console.log(p[q]);
+      // console.log(p);
+
+      //Qus_7: What is JSON.stringify and JSON.parse...?
+      //Stringify method converts to string and parse method converts to object.
+      const user4 = {
+        name: "kumar",
+        age: 21,
+      };
+      console.log(user4);
+      const convertToString = JSON.stringify(user4);
+      console.log(convertToString);
+
+      localStorage.setItem("test", user4);
+      localStorage.setItem("test", convertToString);
+      console.log(localStorage.getItem("test"));
+
+      console.log(JSON.parse(convertToString));
+
+      //Qus_8: What is th output...?
+      console.log([..."India"]);
+      console.log(..."India");
+
+      //Qus_9: What is the output...?
+      const uiUser = { name: "Lilly", age: 21 };
+      const admin = { admin: true, ...uiUser };
+      console.log(admin);
+
+      //Qus_10: What is the output...?
+      const settings = {
+        username: "Tapan",
+        level: 15,
+        health: 90,
+      };
+      const data = JSON.stringify(settings, ["level", "health"]);
+      console.log(data);
+
+      //Qus_11: What is the output...?
+      const shape = {
+        radius: 10,
+        diameter() {
+          return this.radius * 2;
+        },
+        perimeter: () => 2 * Math.PI * this.radius, //Arrow fn dont have this function
+      };
+      console.log(shape.diameter());
+      console.log(shape.perimeter());
+
+      //Qus_12: What is the output...?
+      let user5 = {
+        lang: "JavaScript",
+        intro: 1995,
+        fullName: {
+          first: "tapan",
+          last: "samal",
+        },
+      };
+      const lang = "Python";
+      // const {lang} = user5;   //Access by destructure
+      const { lang: myLang } = user5; //Rename
+      console.log(lang);
+
+      const {
+        fullName: { first }, //Further destructure
+      } = user5;
+      console.log(first);
+
+      //Qus_13: What is the output...?
+      function getItems(fruitList, favFruit, ...args) {
+        //Rest operator always in last
+        return [...fruitList, ...args, favFruit]; //spread operator can anyplace
+      }
+      console.log(getItems(["banana", "apple"], "orange", "grapes"));
+
+      // Qus_14: what is the output...?
+      let m = { greeting: "Hey" };
+      let n;
+
+      n = m;
+      m.greeting = "Hello"; //Both cases change will apply
+      console.log(n.greeting);
+
+      // Qus_15: what is the output...?
+      console.log({ a: 1 } == { a: 1 });
+      console.log({ a: 1 } === { a: 1 });
+      //Both are different objects and reserve different location in memory.
+
+      // Qus_16: what is the output...?
+      let person1 = { name: "Kriti" };
+      const member1 = [person1];
+      person1 = null;
+      // person1.name = null;
+      console.log(member1);
+
+      // Qus_17: what is the output...?
+      const value = { number: 10 };
+
+      const multiple = (x = { ...value }) => {
+        console.log((x.number *= 2));
+      };
+
+      multiple(); //Create the clone of value
+      multiple();
+      multiple(value); //Modify the value,,, Not count the default value
+      multiple(value);
+
+      // Qus_18: what is the output...?
+      function changeAgeAndReference(person) {
+        person.age = 25;
+        person = {
+          name: "Jhon",
+          age: 50,
+        };
+        return person;
+      }
+
+      const personObj1 = {
+        name: "Alex",
+        age: 30,
+      };
+      const personObj2 = changeAgeAndReference(personObj1);
+      console.log(personObj1);
+      console.log(personObj2);
+
+      // Qus_19: what is Shallow copy and Deep copy...?
+      //Shallow copy = ref copy, deep copy = original copy
+      let user6 = {
+        name: "Commerce Coder",
+        age: 25,
+      };
+      // const objClone = Object.assign({}, user6);
+      // const objClone = JSON.parse(JSON.stringify(user6));
+      const objClone = { ...user6 };
+      objClone.name = "Tapan";
+
+      console.log(user6, objClone);
+    </script>
+
+    <h2>7. 'this' Keyword :</h2>
+    <script>
+      //Explain "this" keyword...?
+      //this keyword refers to the current context or scope in which code is being executed.
+      //this refers to global object
+      console.log(this);
+
+      let user7 = {
+        name: "Ajay",
+        age: 21,
+        getDetails() {
+          console.log(this);
+          console.log(this.name);
+        },
+      };
+      user7.getDetails();
+
+      let user8 = {
+        name: "Rajesh",
+        age: 25,
+        getDetails: () => {
+          console.log(this.name); //Access global object bcz of arrow fn
+        },
+      };
+      user8.getDetails();
+
+      let user9 = {
+        name: "Rajesh",
+        age: 25,
+        getDetails() {
+          const nestedArrow = () => console.log(this.name); //It works on current context
+          nestedArrow();
+        },
+      };
+      user9.getDetails();
+
+      //Qus_1: What is the output...?
+      const user10 = {
+        firstName: "Ronaldo",
+        getName() {
+          const firstName = "Messi"; //In this case undefined
+          return this.firstName;
+        },
+      };
+      console.log(user10.getName());
+
+      //Qus_2: What is the result of accessing its ref and why...?
+      function makeUser() {
+        return {
+          name: "Jhon",
+          ref: this,
+        };
+      }
+      let u1 = makeUser();
+      console.log(u1.ref.name); //access global
+      //sollution
+      function makeUsers() {
+        return {
+          name: "Jhon",
+          ref() {
+            return this;
+          },
+        };
+      }
+      let u2 = makeUsers();
+      console.log(u2.ref().name);
+
+      //Qus_3: Fix this code to get correct output...?
+      const user11 = {
+        name: "Oliver Queen",
+        logMessage() {
+          console.log(this.name);
+        },
+      };
+      // setTimeout(user11.logMessage, 1000);   //Ouput nothing
+      setTimeout(() => {
+        user11.logMessage();
+      }, 1000);
+
+      //Qus_4: What is the output...?
+      const user12 = {
+        name: "Anamika",
+        greet() {
+          return `Hello, ${this.name}`;
+        },
+        farewell: () => {
+          return `Goodbye, ${this.name}`; //Access global context bcz of arrow fn
+        },
+      };
+      console.log(user12.greet());
+      console.log(user12.farewell());
+
+      //Qus_5: Create an object calculator...?
+      let calculator = {
+        read() {
+          this.a = +prompt("a = ", 0);
+          this.b = +prompt("b = ", 0);
+        },
+        sum() {
+          return this.a + this.b;
+        },
+        mul() {
+          return this.a * this.b;
+        },
+      };
+      // calculator.read();
+      console.log(calculator.sum());
+      console.log(calculator.mul());
+
+      //Qus_6: What will b the output...?
+      var length = 5;
+      function callback() {
+        console.log(this.length);
+      }
+      const object = {
+        length: 6,
+        method(fn) {
+          fn();
+        },
+      };
+      object.method(callback);
+
+      //Make it tricky
+      const object1 = {
+        length: 6,
+        method() {
+          // console.log(arguments);
+          arguments[0]();
+        },
+      };
+      object1.method(callback, 2, 7);
+
+      //Qus_7: Implement this calculation
+
+      const calc = {
+        total: 0,
+        add(a) {
+          this.total += a;
+          return this;
+        },
+        multiply(a) {
+          this.total *= a;
+          return this;
+        },
+        subtract(a) {
+          this.total -= a;
+          return this;
+        },
+      };
+      const result = calc.add(10).multiply(7).subtract(30).add(10);
+      console.log(result.total);
+    </script>
+
+    <h2>8. Call, Apply and Bind :</h2>
+    <script>
+      //What is call, apply and bind...?
+      //A method used to invoke a function with a specified 'this' value and takes arguments individually.
+      //A Method used to invoke a function with a specified 'this' value, but it takes arguments as an array.
+      //A method used to create a new function with a specified 'this' value and potentially pre-set arguments.
+
+      //Use of this keyword
+      let obj1 = {
+        name: "Subrat",
+        sayHello1: function (age, text) {
+          return this.name + " is " + age + text;
+        },
+      };
+      console.log(obj1.sayHello1(25, " years old."));
+
+      //Use of call()
+      let obj2 = { name: "Umesh" };
+      function sayHello2(age, text) {
+        return this.name + " is " + age + text;
+      }
+      console.log(sayHello2.call(obj2, 24, " years old."));
+
+      //Use of apply()
+      let obj3 = { name: "Anup" };
+      function sayHello3(age, text) {
+        return this.name + " is " + age + text;
+      }
+      console.log(sayHello3.apply(obj3, [26, " years old."]));
+
+      //Use of bind()
+      let obj4 = { name: "Tapan" };
+      function sayHello4(age, text) {
+        return this.name + " is " + age + text;
+      }
+      const bindFun = sayHello4.bind(obj4); //Create new func
+      console.log(bindFun(28, " years oldie."));
+
+      //Qus_1: What will be the output...?
+      const me = { name: "Kumar" };
+      function sayHi(profession) {
+        return `${this.name} is a ${profession}`;
+      }
+      console.log(sayHi.call(me, "Developer."));
+      console.log(sayHi.bind(me, "Developer."));
+      //Doesn't invoke immediately. Instead, it returns a new function with the context and specified argument.
+
+      //Qus_2: Call with function inside object
+      const age = 15;
+      var persn = {
+        name: "Barish",
+        age: 16,
+        getAge: function (modify) {
+          return this.name + " is " + modify.age;
+        },
+      };
+      var changeAge = { age: 18 };
+      console.log(persn.getAge.call(persn, changeAge));
+      console.log(persn.getAge.apply(persn, [changeAge]));
+      console.log(persn.getAge.bind(persn, changeAge)());
+
+      //Qus_3: What is the output...?
+      var status = "Feeling Happy";
+
+      setTimeout(() => {
+        const status = "Feeling Sad";
+
+        const data = {
+          status: "Feeling Romantic",
+          getstatus() {
+            return this.status;
+          },
+        };
+        console.log(data.getstatus());
+        console.log(data.getstatus.call(this)); //Inside function not object
+      }, 0);
+
+      //Qus_4: Use call to print all animals in the object..?
+      const animals = [
+        { species: "Lion", name: "King" },
+        { species: "Whale", name: "Queen" },
+      ];
+      function printAnimals(i) {
+        console.log(i + "." + " " + this.species + ": " + this.name);
+      }
+      for (let i = 0; i < animals.length; i++) {
+        printAnimals.call(animals[i], i);
+      }
+
+      //Qus_5: Append an array to another array...?
+      const arry = ["a", "b", "c"];
+      const elem = [1, 2, 3];
+
+      arry.push.apply(arry, elem);
+      console.log(arry);
+
+      //Qus_6: Find min/max number in an array.
+      const numbers = [5, 7, 9, 3, 2, 6];
+
+      console.log(Math.max(3, 5, 4, 2)); //In general
+
+      console.log(Math.max.apply(null, numbers));
+
+      //Qus_7: Bound fn
+      function fn() {
+        console.log(this); //Access global fn
+      }
+      let useer = {
+        g: fn.bind(null),
+      };
+      useer.g();
+
+      //Qus_8: Bind Chaining
+      //A function is bound by bind keyword, cannot be rebound.
+      function f() {
+        console.log(this.name);
+      }
+      f = f.bind({ name: "John" }).bind({ name: "Anny" });
+      f();
+
+      //Qus_9: Fix this code to work properly
+      function checkPassword(success, failed) {
+        // let password = prompt("Password?", "");
+        // if (password == "CommerceCoder") success();
+        // else failed();
+      }
+      let myUser = {
+        name: "Tapan Samal",
+        loginSuccessful() {
+          console.log(`${this.name} logged in Sucessfully.`);
+        },
+        loginFailed() {
+          console.log(`${this.name} failed to login.`);
+        },
+      };
+      checkPassword(
+        myUser.loginSuccessful.bind(myUser),
+        myUser.loginFailed.bind(myUser)
+      );
+
+      //Qus_10: Fix this code to work properly
+      function checkPasswords(okay, fail) {
+        // let password = prompt("Password?", "");
+        // if (password == "CCoder") okay();
+        // else fail();
+      }
+      let mUser = {
+        name: "Tapan Samal",
+        login(result) {
+          console.log(
+            this.name + (result ? " Login Sucessfull" : " Login Failed")
+          );
+        },
+      };
+      checkPasswords(
+        mUser.login.bind(mUser, true),
+        mUser.login.bind(mUser, false)
+      );
+
+      //Qus_11: Explicit Binding with Arrow Fn
+      //Result will be undefined and access the global context
+
+      //Qus_12: Polyfill for call, apply and bind method (Mostly asked to Senior Developer)
+    </script>
+
+    <h2>9. Promises :</h2>
+    <script>
+      //A Promise is an object in JavaScript represents the eventual completion or failure of an asynchronous operations.
+      //Promise can be in one of 3 states : pending, resolved or rejected.
+      //JavaScript execute synchronous code first then asynchronous code
+      //Synchronous  vs Asynchronous code
+
+      //Sync Code : Execute one by one(JS is a single threaded language)
+      console.log("Start Sync Code");
+      console.log("Learn Sync Code");
+      console.log("End Sync Code");
+
+      //Asycn code : Execute all code without waiting current task to complete
+      console.log("Start Async Code");
+      setTimeout(() => {
+        console.log("Learn Async Code");
+      }, 0);
+      console.log("End Async Code");
+
+      //Using Callback function
+      console.log("Start Callback Functon");
+
+      function importantAction(username, cb) {
+        setTimeout(() => {
+          cb(`Subscribe to ${username}`);
+        }, 0);
+      }
+      const mssg = importantAction("Callback", (mssg) => {
+        console.log(mssg);
+      });
+
+      console.log("Stop Callback Functon");
+
+      //Callback Hell
+      //multiple nested callbacks make the code difficult to read and maintain during asynchronous operations.
+
+      function subscribeAction(username, cb) {
+        setTimeout(() => {
+          cb(`Subscribe to ${username}`);
+        }, 0);
+      }
+
+      function likeAction(video, cb) {
+        setTimeout(() => {
+          cb(`Like to ${video}`);
+        }, 0);
+      }
+      function shareAction(share, cb) {
+        setTimeout(() => {
+          cb(`Share to ${share}`);
+        }, 0);
+      }
+      const messg = subscribeAction("Callback Hell", (messg) => {
+        console.log(messg);
+        likeAction("Hell Videos", (action) => {
+          console.log(action);
+          shareAction("Hell Videos", (action) => {
+            console.log(action);
+          });
+        });
+      });
+
+      //Promises : Sollution for callback hell
+      const prom = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const result = true;
+          if (result) resolve("Subscribe to Commerce Coder");
+          else reject(new Error("Something went wrong"));
+        }, 0);
+      });
+      console.log(prom); //Pending status
+      prom
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+        const promis = Promise.resolve("Yes");
+        console.log(promis);
+        promis.then((res) => console.log(res));
+        console.log("Is the above code Asynchrinous ?");
+    </script>
+
+    <h2>10. Event Propagation :</h2>
+    <div style="border: 2px solid blue; padding: 10px">
+      DIV
+      <form action="" style="border: 2px solid green; padding: 10px">
+        FORM
+        <button style="margin: 10px">BUTTON</button>
+      </form>
+    </div>
+    <script>
+      //Event Propagation: Defining the element order when an event occurs in a web page.
+      //Event Bubbling : In bubbling the inner most element's event is handled first and then the outer.
+      //Event Capturing : In capturing the outer most element's event is handled first and then the inner.
+      //Evevts not bubble: focus, blur, load, unload.
+
+      // const div = document.querySelector("div");
+      // const form = document.querySelector("form");
+      // const button = document.querySelector("button");
+
+      // div.addEventListener("click", function () {
+      //   alert("Div: Outer most");
+      // });
+      // div.addEventListener("click", function () {
+      //   alert("Form: Middle Element");
+      // });
+      // div.addEventListener("click", function () {
+      //   alert("Button: Inner most");
+      // });
+
+      //event.target vs this.target vs event.currentTarget..?
+      const div = document.querySelector("div");
+      const form = document.querySelector("form");
+      const button = document.querySelector("button");
+
+      div.addEventListener("click", func);
+      div.addEventListener("click", func);
+      div.addEventListener("click", func);
+
+      function func(event) {
+        alert("CurrentTarget = " + event.currentTarget.tagName);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>50 JS Questions</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">50+ JavaScript Practice Exercise</h1>
+    <p>Source Code : Drop-X-Out</p>
+
+    <h3>1. Console: Print "Hello World"</h3>
+    <script>
+      console.log("Welcome to New Lecture");
+      let greet = "Hello World";
+      console.log(greet);
+    </script>
+
+    <h3>2. Loop: Print 1 to 5</h3>
+    <script>
+        //Using For Loop
+        for (let i = 1; i <= 5; i++) {
+          // console.log(i);
+        }
+
+        //Using While Loop
+        let i = 1;
+        while (i <= 5) {
+          // console.log(i);
+          i++;
+        }
+
+        //Using Do While Loop
+        let j = 1;
+        do {
+          // console.log(j);
+          j++;
+        } while (j <= 5);
+    </script>
+
+    <h3>3. Operator: Add two number using</h3>
+    <script>
+        let addValue = (x, y) => x + y;
+        console.log(addValue(5, 6));
+    </script>
+
+    <h3>4. Function: Calculate area of rectangle</h3>
+    <script>
+        function calculateArea(width, height) {
+          return width * height;
+        }
+        let totalArea = calculateArea(7, 5);
+        console.log("Area of Rectangle : " + totalArea);
+    </script>
+
+    <h3>5. Reverse: Reverse the String</h3>
+    <script>
+      let str = "ABCD XYZ";
+      function reverseStr(str) {
+        return str.split("").reverse().join("");
+      }
+      console.log(reverseStr(str));
+    </script>
+
+    <h3>6. Conditional: Check number even or odd</h3>
+    <script>
+      function checkEvenOdd(num) {
+        if (num % 2 == 0) {
+          return "Even Number";
+        } else {
+          return "Odd Number";
+        }
+      }
+      console.log(checkEvenOdd(16));
+    </script>
+
+    <h3>7. Conditional: Check Leap year</h3>
+    <script>
+      let year = 1400;
+      let isLeapYear = (year) => {
+        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 == 0) {
+          return `${year} is a leap year`;
+        } else {
+          return `${year} is not a leap year`;
+        }
+      };
+      console.log(isLeapYear(year));
+    </script>
+
+    <h3>8. Loop: Sum all elements in an array</h3>
+    <script>
+      let arr = [20, 30, 40, 50, 60];
+      let sum = 0;
+      for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+      }
+      console.log(sum);
+    </script>
+
+    <h3>9. Object: Create a car obj and Add a method to startEngine</h3>
+    <script>
+      let car = {
+        make: "Honda",
+        model: "i 20",
+        year: 2015,
+      };
+      car.startEngine = function () {
+        return "Engine Statred";
+      };
+      console.log(car.startEngine);
+      console.log(car.startEngine());
+    </script>
+
+    <h3>10. DOM: Change the paragraph content</h3>
+    <p id="myPara">This is a Paragraph.</p>
+    <script>
+      let para = document.getElementById("myPara");
+      console.log(para);
+      para.textContent = "Pragraph content changed by JavaScript.";
+    </script>
+
+    <h3>11. DOM: Create a button dynamically and add to webpage</h3>
+    <div id="btnCreate"></div>
+    <script>
+      let container = document.getElementById("btnCreate");
+      let button = document.createElement("button");
+      button.textContent = "Click Me";
+      container.appendChild(button);
+    </script>
+
+    <h3>12. Event: Add event to a button that displays an alert</h3>
+    <button id="alertBtn">Alert Me</button>
+    <script>
+      let buttn = document.querySelector("#alertBtn");
+      buttn.addEventListener("click", () => {
+        alert("Button Clicked");
+      });
+    </script>
+
+    <h3>13. Loop: Calculate the factorial of given number:</h3>
+    <script>
+      //Facorial means: let number is 5, then factorial will be 5*4*3*2*1
+      //Factorial of 0 = 1 and Factorial of 1 = 1.
+      let fact = 1;
+      for (let i = 1; i <= 5; i++) {
+        fact *= i;
+      }
+      console.log(fact);
+    </script>
+
+    <h3>14. Random: Generate a random number between a range</h3>
+    <script>
+      function randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      console.log(randomNum(21, 60));
+    </script>
+
+    <h3>15. Filter: Make a new array with even numbers</h3>
+    <script>
+      let nums = [1, 2, 3, 4, 5, 6, 7];
+
+      function evenNums(num) {
+        return nums.filter((num) => num % 2 === 0);
+      }
+      console.log(evenNums(nums));
+
+      function oddNums(num) {
+        return nums.filter((num) => num % 2 !== 0);
+      }
+      console.log(oddNums(nums));
+      console.log(nums); //Original as it is
+    </script>
+
+    <h3>16. Map: Double all elements in an arrray</h3>
+    <script>
+      let numbers = [5, 7, 9, 6, 8];
+      function doubleTheNumbers(num) {
+        return numbers.map((num) => num * num);
+      }
+      console.log(doubleTheNumbers(numbers));
+    </script>
+
+    <h3>17. Reduce: Find the largest element in an array</h3>
+    <script>
+      function largestNumbers(num) {
+        return num.reduce((max, cur) => {
+          return cur > max ? cur : max;
+        });
+      }
+      console.log(largestNumbers(numbers));
+    </script>
+
+    <h3>
+      18. Filter: Remove all occurrences of a specific element fom an array
+    </h3>
+    <script>
+      let arry = [10, 20, 10, 30, 20, 10, 10, 50];
+      let target = 10;
+      function removeElement() {
+        return arry.filter((item) => item !== target);
+      }
+      console.log(removeElement(arr, target));
+    </script>
+
+    <h3>19. Date & Time: Display the current date and time</h3>
+    <script>
+      function getCurrentDateAndTime() {
+        let currentDate = new Date();
+        return currentDate.toLocaleString();
+      }
+      console.log(getCurrentDateAndTime());
+    </script>
+
+    <h3>20. Async/await: Handle error during API data fetch using try catch</h3>
+    <script>
+      async function fetchData() {
+        try {
+          let response = await fetch(
+            "https://official-joke-api.appspot.com/random_joke"
+          );
+          let data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error Fetching Data:" + error);
+        }
+      }
+      console.log(fetchData());
+    </script>
+
+    <h3>21. Recursive Function: Calculate the factorial</h3>
+    <script>
+      function factorial(n) {
+        if (n === 1) {
+          return 1;
+        } else {
+          return n * factorial(n - 1);
+        }
+      }
+      console.log(factorial(6));
+    </script>
+
+    <h3>22. Recursive Function: Find the nth Fibonacci number</h3>
+    <script>
+      function fibonacci(n) {
+        if (n <= 1) {
+          return n;
+        } else {
+          return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+      }
+      console.log(fibonacci(3));
+    </script>
+
+    <h3>23. Closure: Create a counter function</h3>
+    <script>
+      function createCounter() {
+        let count = 0;
+        return function () {
+          return ++count;
+        };
+      }
+      let counter = createCounter();
+      console.log(counter());
+      console.log(counter());
+      console.log(counter());
+    </script>
+
+    <h3>24. Closure: Implement a private variable using closure</h3>
+    <script>
+      function counterFun() {
+        let count = 0; //Private Variable
+
+        //Inner Function(closure)
+        function increment() {
+          count++;
+          console.log("count:", count);
+        }
+        return {
+          incrementCounter: function () {
+            increment();
+          },
+          getCount: function () {
+            return count;
+          },
+        };
+      }
+      const countr = counterFun();
+      countr.incrementCounter();
+      countr.incrementCounter();
+      console.log(countr.getCount());
+    </script>
+
+    <h3>
+      25. Prototype: Create a prototype method to calculate the total value of
+      product
+    </h3>
+    <script>
+      //Constructor function
+      function Product(name, price, quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+      }
+
+      //Define calculateTotalValue method on the prototype
+      Product.prototype.calculateTotalValue = function () {
+        return this.price * this.quantity;
+      };
+      console.log(Product.prototype);
+
+      //Create a Product instance
+      const product1 = new Product("Phone", 20, 5);
+      console.log(product1);
+
+      //Call the calculateTotalValue method on the instance
+      const product1Value = product1.calculateTotalValue();
+      console.log(`Total Value of ${product1.name} in IND : ${product1Value}k`);
+
+      const product2 = new Product("Laptop", 30, 4);
+      const product2Value = product2.calculateTotalValue();
+      console.log(`Total Value of ${product2.name} in USA : $${product2Value}`);
+    </script>
+
+    <h3>26. Callback: Multiple API calls and processes the data</h3>
+    <script>
+      function makeAPICall(url, cb) {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => cb(data))
+          .catch((error) =>
+            console.error("Error during API call:", error.message)
+          );
+      }
+      function handleData(data) {
+        console.log("Processed Data", data);
+      }
+
+      function main() {
+        const apiUrl_1 = "https://jsonplaceholder.typicode.com/todos/1";
+        const apiUrl_2 = "https://jsonplaceholder.typicode.com/todos/2";
+
+        makeAPICall(apiUrl_1, handleData);
+        makeAPICall(apiUrl_2, handleData);
+      }
+      main();
+    </script>
+
+    <h3>27. Promise: Multiple API calls and processes the data</h3>
+    <script>
+      function makeAPICalls(url) {
+        return fetch(url)
+          .then((response) => response.json())
+          .catch((error) => {
+            console.error("Error during API call:", error.message);
+          });
+      }
+      function mainFunction() {
+        const apiUrl_1 = "https://jsonplaceholder.typicode.com/todos/1";
+        const apiUrl_2 = "https://jsonplaceholder.typicode.com/todos/2";
+
+        //Make the API calls and store promises in an array
+        const apiCallPromises = [
+          makeAPICalls(apiUrl_1),
+          makeAPICalls(apiUrl_2),
+        ];
+
+        //Use Promise.all to wait complete all API call to complete
+        Promise.all(apiCallPromises)
+          .then((dataArray) => {
+            console.log("Process Data 1:", dataArray[0]);
+            console.log("Process Data 2:", dataArray[1]);
+          })
+          .catch((error) => {
+            console.error("Error During API calls");
+          });
+      }
+      mainFunction();
+    </script>
+
+    <h3>28. Promise: Load multiple images asynchronously and display on web</h3>
+    <div
+      id="imgContainer"
+      style="display: flex; height: 100px; width: 70px"
+    ></div>
+    <script>
+      function loadImage(src) {
+        return new Promise((resolve, reject) => {
+          let img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = (error) => reject(error);
+          img.src = src;
+        });
+      }
+
+      let imageContainer = document.getElementById("imgContainer");
+
+      let imgURLs = ["/tapan5.jpeg", "/tapan4.jpeg", "/tapan3.jpeg"];
+      Promise.all(imgURLs.map(loadImage))
+        .then((images) => {
+          images.forEach((image) => imageContainer.appendChild(image));
+        })
+        .catch((error) => console.log(error));
+      // Image path recheck
+    </script>
+
+    <h3>29. Async: Fetch data from API and handle errors using try/catch</h3>
+    <script>
+      async function fetchData(url) {
+        try {
+          let response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTp error! Status: ${response.status}`);
+          }
+          const data = await response.json();
+          console.log("Data from API", data);
+          return data;
+        } catch (error) {
+          console.error("Error fetching data : ", error.message);
+          throw error;
+        }
+      }
+      const apiURL = "https://jsonplaceholder.typicode.com/todos/1";
+      fetchData(apiURL);
+    </script>
+
+    <h3>
+      30. DOM: Create an image gallery using dynamically generated elements
+    </h3>
+    <div id="gallery" style="display: flex; height: 100px"></div>
+    <script>
+      function createImgElement(srcImg) {
+        let img = document.createElement("img");
+        img.src = srcImg;
+        img.width = 80;
+        return img;
+      }
+      let gallery = document.getElementById("gallery");
+      let imgUrls = ["/tapan1.jpeg", "/tapan2.jpeg", "/tapan3.jpeg"];
+      imgUrls.forEach((url) => gallery.appendChild(createImgElement(url)));
+    </script>
+
+    <h3>
+      31.DOM: Form validation function that check requird fields are filled out
+    </h3>
+    <form id="myForm">
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="submit" value="submit" />
+    </form>
+    <script>
+      function formValidity() {
+        let form = document.getElementById("myForm");
+        if (form.checkValidity) {
+          alert("Form Submitted Successfully.");
+        } else {
+          alert("Please enter required fields.");
+        }
+      }
+      let form = document.getElementById("myForm");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        formValidity();
+      });
+    </script>
+
+    <h3>
+      32. Event Propagation: Create multiple nested elements and observe the
+      event bubbling and capturing behavior
+    </h3>
+    <div id="div">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      <strong>Reprehenderit</strong>, vero quaerat iusto at accusantium
+      consequatur sit optio vel nobis veritatis laboriosam.
+    </div>
+    <script>
+      let parent = document.querySelector("#div");
+      let child = document.querySelector("strong");
+      parent.addEventListener("click", () => {
+        console.log("Parent Element");
+      });
+      child.addEventListener("click", () => {
+        console.log("Child Element");
+      });
+    </script>
+
+    <h3>
+      33. Event Propagation: Implement a click event on a parent element that
+      triggers different actions based on which child element was Clicked
+    </h3>
+    <ul id="myList">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+    <script>
+      let list = document.getElementById("myList");
+      list.addEventListener("click", () => {
+        let clickedElement = event.target;
+        if (clickedElement.tagName === "LI") {
+          console.log("List item clicked", clickedElement.textContent);
+        } else {
+          console.log("Other element clicked");
+        }
+      });
+    </script>
+
+    <h3>
+      34. Set Interval: Creating a countdown timer and atrt after 2 seconds
+    </h3>
+    <h4>CountDown Timer</h4>
+    <h3 id="timer">00 : 00</h3>
+    <script>
+      function startCountDown(minutes, seconds) {
+        let timerElement = document.querySelector("#timer");
+        let totalSeconds = minutes * 60 + seconds;
+
+        function updateTimerDisplay() {
+          let minutes = Math.floor(totalSeconds / 60);
+          let seconds = totalSeconds % 60;
+
+          let formattedMinutes = minutes.toString().padStart(2, "0");
+          let formattedSeconds = seconds.toString().padStart(2, "0");
+
+          timerElement.textContent = `${formattedMinutes} : ${formattedSeconds}`;
+          totalSeconds--;
+
+          if (totalSeconds < 0) {
+            clearInterval(timerInterval);
+            alert("Time's Up!");
+          }
+        }
+        let timerInterval = setInterval(updateTimerDisplay, 1000);
+      }
+      startCountDown(5, 60);
+    </script>
+
+    <h3>
+      35. Set Timeout: Write JavaScript code to implement the quote-changing
+      feature
+    </h3>
+    <h4>Motivational Quotes</h4>
+    <div id="quoteDisplay">Loading...</div>
+    <script>
+      const quotes = [
+        "Nothing is PerFect",
+        "My Dad My Hero",
+        "Everything is Possible",
+        "Keep Learning",
+        "Nothing is Permanent",
+      ];
+      function displayRandomQuotes() {
+        let quotesDisplay = document.getElementById("quoteDisplay");
+        const randomQuotes = Math.floor(Math.random() * quotes.length);
+        quotesDisplay.textContent = quotes[randomQuotes];
+      }
+
+      function changeQuoteInterval() {
+        displayRandomQuotes();
+        setTimeout(changeQuoteInterval, 1000);
+      }
+      changeQuoteInterval();
+    </script>
+
+    <h3>36. Regular Expression: Validate an email address</h3>
+    <script>
+      function emailValidate(email) {
+        const emailRegExp = /^[a-z_.-0-9]+@[a-z0-9]+\.[a-z]{2,}$/;
+        return emailRegExp.test(email);
+      }
+
+      const email1 = "Atapan@abc.com";
+      console.log(emailValidate(email1));
+    </script>
+
+    <h3>37. Array: Multidimensioal Array</h3>
+    <script>
+      function createMultidimentionalArray(row, col) {
+        let arr = [];
+
+        // for (let i = 0; i < row; i++) {
+        //   arr.push(new Array(col));
+        //   for (let j = 0; j < col; j++) {
+        //     arr[i][j] = i + j;
+        //   }
+        // }
+        // return arr;
+
+        for (let i = 0; i < row; i++) {
+          let row = [];
+          for (let j = 0; j < col; j++) {
+            row.push(i + j);
+          }
+          arr.push(row);
+        }
+        return arr;
+      }
+
+      function display(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          console.log(arr[i].join(" "));
+        }
+      } //We Can use forEach Method
+
+      function reverseDisplay(arr) {
+        for (let i = arr.length - 1; i >= 0; i--) {
+          console.log(arr[i].reverse().join(" "));
+        }
+      } //We Can use forEach Method
+
+      const rows = 3;
+      const colmns = 4;
+      const multiArray = createMultidimentionalArray(rows, colmns);
+
+      console.log("Original Array");
+      display(multiArray);
+
+      console.log("Reverse Array");
+      reverseDisplay(multiArray);
+    </script>
+
+    <h3>38. Destructuring: Destructuring an object to get its properties</h3>
+    <script>
+      const person = {
+        fname: "Jhon",
+        lname: "Deo",
+        age: 21,
+        city: "Balasore",
+        occupation: "Developer",
+      };
+      console.log(person);
+      console.log(person.fname);
+      const { fname, lname, age, ...remain } = person;
+      console.log(fname, lname);
+      console.log(age);
+      console.log(remain); //Rest
+    </script>
+
+    <h3>
+      39. Class: Create a Book class with properties and method(ageOfBook)
+    </h3>
+    <script>
+      class Book {
+        constructor(title, author, year) {
+          this.title = title;
+          this.author = author;
+          this.year = year;
+        }
+        getAge() {
+          const currentYear = new Date().getFullYear();
+          return currentYear - this.year;
+        }
+      }
+      const book1 = new Book("The Reality", "Tapan Samal", 2015);
+
+      console.log(book1.title);
+      console.log(book1.author);
+      const ageOfBook1 = book1.getAge();
+      console.log(ageOfBook1);
+    </script>
+
+    <h3>
+      40. Class Inheritance: Create a subclass 'Megazine' that extends the
+      'Book' class with an additional property 'issue'. Add a method to the
+      'Megazine' class to get the megazine's issue number
+    </h3>
+    <script>
+      //Book class already created in last question
+      class MagaZine extends Book {
+        constructor(title, author, year, issue) {
+          super(title, author, year);
+          this.issue = issue;
+        }
+        getIssueNumber() {
+          return this.issue;
+        }
+      }
+      const myMagazine = new MagaZine("The Mind", "Tapan Samal", 2030, 5);
+      console.log(myMagazine.title);
+      console.log(myMagazine.getIssueNumber());
+    </script>
+
+    <h3>
+      41. Prototype Inheritance: Create two objects 'persn' and 'student' with
+      properties and add a method to 'person' and demonstrate 'student' has
+      access to 'person'.
+    </h3>
+    <script>
+      const persn = {
+        name: "Zayn",
+        age: 30,
+        introduce: function () {
+          return `Hi my name is ${this.name} and ${this.age} years old.`;
+        },
+      };
+      const student = Object.create(persn);
+      student.id = "12345";
+
+      console.log(student.name);
+      console.log(student.id);
+      console.log(student.introduce());
+      console.log(persn.id); //persn connot access to student
+    </script>
+
+    <h3>
+      42. Array: Create function that determines whether a number is Oddish or
+      Evenish. A number is Oddish if the sum of all of its digits is odd and a
+      number is Evenish if the sum of all of its digit is even. If the number is
+      Oddish, return 'Oddish'. Otherwise, return 'Evenish'.
+    </h3>
+    <script>
+      function oddishOrEvenish(num) {
+        const digits = num.toString().split("").map(Number);
+        console.log(digits);
+        const sum = digits.reduce((acc, digit) => acc + digit, 0);
+        return sum % 2 === 0 ? "Evenish" : "Oddish";
+      }
+      console.log(oddishOrEvenish(4141));
+    </script>
+
+    <h3>
+      43. String: Given a string, reverse all the words which have odd length.
+      The even length words are not changed.
+    </h3>
+    <script>
+      function reverseOdd(str) {
+        function reverseString(str) {
+          // console.log(str);
+          return str.split("").reverse().join("");
+        }
+        const words = str.split(" ");
+        console.log(words);
+
+        for (let i = 0; i < words.length; i++) {
+          if (words[i].length % 2 !== 0) {
+            words[i] = reverseString(words[i]);
+          }
+        }
+        return words.join(" ");
+      }
+      console.log(reverseOdd("One Two Five Nine"));
+    </script>
+
+    <h3>
+      44. Array: Create a function that takes an array of objects which
+      calculates the total price and returns it as a number.
+    </h3>
+    <script>
+      function getTotalPrice(groceries) {
+        let total = 0;
+
+        for (const item of groceries) {
+          console.log(item);
+          const itemPrice = item.quantity * item.price;
+          total += itemPrice;
+        }
+        return total;
+      }
+      let groceriesProduct = [
+        { product: "Milk", quantity: 3, price: 50 },
+        { product: "Cereals", quantity: 2, price: 80 },
+      ];
+      console.log(getTotalPrice(groceriesProduct));
+    </script>
+
+    <h3>
+      45. Create a function that takes an array of numbers and return 'Boom!' if
+      the digit 7 appears in the array.
+    </h3>
+    <script>
+      function sevenBoom(array) {
+        for (const num of array) {
+          if (num.toString().includes("7")) {
+            return "Boom!";
+          }
+        }
+        return "There is no 7 in this array.";
+      }
+      console.log(sevenBoom([5, 6, 7, 8, 9]));
+      console.log(sevenBoom([1, 2, 3, 4, 5, 6]));
+    </script>
+
+    <h3>
+      46. String: Create a function that takes a string as an argument. The
+      function must return a string containing 1s and 0s based on the string
+      argument's words. If any word in the argument is not equal to zero or one
+      , just ignore it. The return string's length should be a multiple of 6,
+      otherwise remove the excess numbers.
+    </h3>
+    <script>
+      function textToNumberBinary(str) {
+        const words = str
+          .split(" ")
+          .filter(
+            (word) =>
+              word.toLowerCase() === "zero" || word.toLowerCase() === "one"
+          );
+        console.log(words);
+
+        let binaryString = words
+          .map((word) => {
+            return word.toLowerCase() === "one" ? "1" : "0";
+          })
+          .join("");
+
+        const excessLength = binaryString.length % 6;
+        if (excessLength !== 0) {
+          binaryString = binaryString.split(0, 0);
+        }
+        return binaryString;
+        console.log(binaryString);
+      }
+      console.log(textToNumberBinary("Zero one zero One ZERO "));
+    </script>
+
+    <h3>
+      47. String: Create a function that takes in a sentence and returns a
+      running list of consonants per word and vowels per word.
+    </h3>
+    <script>
+      function stringCode(sentence) {
+        // function isConsonant(char) {
+        //   const consonants = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
+        //   return consonants.includes(char);
+        // }
+
+        function countConsonantAndVowel(word) {
+          let consonants = 0;
+          let vowels = 0;
+          for (const char of word) {
+            if ("bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ".includes(char)) {
+              consonants++;
+            } else if ("aeiouAEIOU".includes(char)) {
+              vowels++;
+            }
+          }
+          return "C " + consonants + " : " + "V " + vowels;
+        }
+        const words = sentence.split(" ");
+        console.log(words);
+        const consonentCount = words.map((word) =>
+          countConsonantAndVowel(word)
+        );
+        return consonentCount;
+      }
+      console.log(stringCode("Happy Birthday To Me"));
+    </script>
+
+    <h3>
+      48. Create a function that takes the month and year(as integers) and
+      returns the number of days in the month.
+    </h3>
+    <script>
+      function isItLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+      }
+      function days(month, year) {
+        if (month === 2) {
+          return isItLeapYear(year) ? "29 days month" : "28 days month";
+        } else if ([4, 6, 9, 11]) {
+          return "30 days Month";
+        } else {
+          return "31 days month";
+        }
+      }
+      console.log(days(2, 2023));
+      console.log(days(4, 2018));
+      console.log(days(12, 2018));
+    </script>
+
+    <h3>49. Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</h3>
+    <script>
+      function fraction(numerator, denominator) {
+        const res = numerator/denominator;
+        return res.toString();
+      }
+      console.log(fraction(1, 2));  
+    </script>
+
+    <h3>50.</h3>
+    <script></script>
+  </body>
+</html>
