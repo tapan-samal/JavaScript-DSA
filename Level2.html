@@ -3,541 +3,416 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interview Questions</title>
+    <title>JavaScript Exercises</title>
   </head>
   <body>
-    <h1 style="text-align: center">JavaScript Interview Questions</h1>
+    <h1 style="text-align: center">JavaScript Exercises</h1>
 
-    <h3>
-      1: Loop: Print the numbers from 1 to 5 on the console by using loop.
-    </h3>
+    <h3>1. Print the numbers from 1 to 5.</h3>
     <script>
-      //Using for loop
+      //for loop
       for (let i = 1; i <= 5; i++) {
         // console.log(i);
       }
 
-      //Using while loop
-      let i = 1;
-      while (i <= 5) {
-        // console.log(i);
-        i++;
+      //while loop
+      let ii = 1;
+      while (ii <= 5) {
+        // console.log(ii);
+        ii++;
       }
 
-      //Using do while loop
-      let j = 1;
+      //do while loop
+      let iii = 1;
       do {
-        // console.log(j);
-        j++;
-      } while (j <= 5);
+        // console.log(iii);
+        iii++;
+      } while (iii <= 5);
     </script>
 
-    <h3>2: Write a function to add two numbers and return the result.</h3>
+    <h3>2. Calculate the area of a rectangle, given its width and height.</h3>
     <script>
-      //Arrow Functionf
-      var sum = (n1, n2) => n1 + n2;
-      console.log(sum(4, 3));
+      //Arrow Function
+      const arrFun = (width, height) => width + height;
+      console.log(arrFun(5, 6));
 
-      //Regular function
-      function sum(n1, n2) {
-        return n1 + n2;
+      //Regular Function
+      function regFun(width, height) {
+        return width + height;
       }
-      console.log(sum(5, 3));
+      console.log(regFun(7, 5));
     </script>
 
-    <h3>
-      3: Create a function to calculate the area of a rectangle, given its width
-      and height .
-    </h3>
+    <h3>3. Reverse a string.</h3>
     <script>
-      function calculateArea(width, height) {
-        return width * height;
-      }
-      let totalArea = calculateArea(7, 5);
-      console.log("Area of Rectangle : " + totalArea);
-    </script>
-
-    <h3>
-      4: String: Write a function that takes a string and returns the reversed
-      version of it.
-    </h3>
-    <script>
-      //By reverse method
       let word = "StresseD";
-      let reversed = () => {
+      //Using reverse method
+      const reverseStr = () => {
         return word.split("").reverse().join("");
       };
-      console.log(reversed());
+      console.log(reverseStr());
 
-      //By loop
-      let reverse = "";
+      //Using loop
+      let revStr = "";
       for (let i = word.length - 1; i >= 0; i--) {
-        reverse += word[i];
+        revStr += word[i];
       }
-      console.log(reverse);
+      console.log(revStr);
     </script>
 
-    <h3>5. Write a JavaScript function that reverse a number...?</h3>
+    <h3>4. Reverse a numbers.</h3>
     <script>
-      function reverseKara(num) {
+      //Using reverse method
+      const reverseNum = (num) => {
         return Number(num.toString().split("").reverse().join(""));
+      };
+      console.log(reverseNum(12345));
+
+      //Using for loop
+      let num = 56789;
+      let numStr = num.toString();
+      let revNum = "";
+      for (let i = numStr.length - 1; i >= 0; i--) {
+        revNum += numStr[i];
       }
-      console.log(reverseKara(12));
-      console.log(reverseKara(12345));
-      //Or
+      console.log(Number(revNum));
+
+      //Using while loop
       function reverseKaro(num) {
         var rev = 0;
         while (num > 0) {
           var rem = num % 10;
           rev = rev * 10 + rem;
+          //   console.log(rev);
           num = Math.floor(num / 10);
         }
         return rev;
       }
-      console.log(reverseKaro(1500));
       console.log(reverseKaro(123456));
     </script>
 
-    <h3>
-      6. Write a JavaScript function that checks whether a passed string is
-      palindrome or not...?
-    </h3>
+    <h3>5. Write a functioon that return data types.</h3>
     <script>
-      function stringPalChecker(str) {
-        var reversed = str.split("").reverse().join("");
-        return reversed === str;
-      }
-      console.log(stringPalChecker("poop"));
-      console.log(stringPalChecker("loop"));
-    </script>
-
-    <h3>
-      7. Write a JavaScript function that returns a passed string with letters
-      in alphabetical order...?
-    </h3>
-    <script>
-      function stringAlphabeticalOrder(str) {
-        return str.split("").sort().join(" ");
-      }
-      console.log(stringAlphabeticalOrder("JAVASCRIPT"));
-    </script>
-
-    <h3>
-      8. Write a JavaScript function that accepts a string as a parameter and
-      converts the first letter of each word of the string in upper case...?
-    </h3>
-    <script>
-      function strCapitalize(str) {
-        var allWords = str.split(" ").map(function (word) {
-          return word.charAt(0).toUpperCase() + word.substring(1);
-        });
-        return allWords.join(" ");
-      }
-      console.log(strCapitalize("tapan samal"));
-      console.log(strCapitalize("really, are you happy ?"));
-    </script>
-
-    <h3>
-      9. Write a JavaScript function which accepts an argument and returns the
-      type(object, boolean, function, number, string and undefined)...?
-    </h3>
-    <script>
-      function typeTeller(elem) {
-        return typeof elem;
-      }
-      console.log(typeTeller([]));
-      console.log(typeTeller(12));
-      console.log(typeTeller(" JS "));
-      console.log(typeTeller(true));
-      console.log(typeTeller(undefined));
-      console.log(typeTeller(function () {}));
-    </script>
-
-    <h3>
-      10. If/Else: Write a function that checks and return if a number is even
-      or odd.
-    </h3>
-    <script>
-      //By if/else
-      let number = 15;
-      let oddEven = () => {
-        if (number % 2 === 0) {
-          console.log(`The Number ${number} is Even`);
-        } else {
-          console.log(`The Number ${number} is Odd`);
-        }
+      const showDataTypes = (data) => {
+        return typeof data;
       };
-      oddEven();
-
-      //By ternary
-      let status = () => (number % 2 === 0 ? "Even Number" : "Odd Number");
-      console.log(status());
+      console.log(showDataTypes(10));
+      console.log(showDataTypes("India"));
+      console.log(showDataTypes(true));
+      console.log(showDataTypes([]));
+      console.log(showDataTypes());
     </script>
 
-    <h3>11. How to empty an array without reset or loop in JavaScript...?</h3>
+    <h3>6. Return even or odd number.</h3>
     <script>
-      var arr = [1, 2, 3, 4, 5];
+      //If statement
+      const checkOddEven = (num) => {
+        if (num % 2 === 0) {
+          return "Even";
+        }
+        return "Odd";
+      };
+      console.log(checkOddEven(13));
 
-      console.log(arr.length);
-      arr.length = 0;
-      console.log(arr.length);
+      //Ternary operator
+      const checkOddOrEven = (num) => (num % 2 === 0 ? "Even" : "Odd");
+      console.log(checkOddOrEven(15));
     </script>
 
-    <h3>12. How would you check if a number is an integer...?</h3>
+    <h3>7. Check integer number.</h3>
     <script>
-      console.log(Number.isInteger(1));
-      console.log(Number.isInteger(1.5));
-      //Or
-      var num = 12.2;
-      if (num % 1 === 0) {
-        console.log("Integer");
-      } else {
-        console.log("Not Integer");
+      //Method
+      console.log(Number.isInteger(10));
+      console.log(Number.isInteger(10.2));
+      console.log(Number.isInteger("css"));
+
+      //If statement
+      const checkInteger = (val) => {
+        if (val % 1 === 0) {
+          return "Integer";
+        }
+        return "Not a integer";
+      };
+      console.log(checkInteger(2));
+      console.log(checkInteger(2.5));
+    </script>
+
+    <h3>8. Loop an array and add all elements of it.</h3>
+    <script>
+      let arrNum = [2, 4, 5, 6, 8, 7, 3];
+      //Using reduce method
+      let sumArr = arrNum.reduce((cur, acc) => cur + acc);
+      console.log(sumArr);
+
+      //Using loop
+      let sumOfArr = 0;
+      arrNum.forEach((num) => {
+        sumOfArr = sumOfArr + num;
+      });
+      console.log(sumOfArr);
+
+      //Using for loop
+      let sumOfNum = 0;
+      for (let i = 0; i < arrNum.length; i++) {
+        sumOfNum += arrNum[i];
       }
+      console.log(sumOfNum);
     </script>
 
-    <h3>
-      13. Write a JavaScript function to get number of occurrances of each
-      letter in specified string...?
-    </h3>
+    <h3>9. Sum the number from array.</h3>
     <script>
-      function occ(str) {
-        var occurrance = {};
-        str.split("").forEach(function (elem) {
-          if (occurrance.hasOwnProperty(elem) === false) {
-            occurrance[elem] = 1;
-          } else {
-            occurrance[elem]++;
-          }
-        });
-        return occurrance;
-      }
-      console.log(occ("JavaScript"));
-      console.log(occ("Indian always love India"));
-    </script>
-
-    <h3>14. Loop an array and add all elements of it.</h3>
-    <script>
-      var numbers = [2, 4, 6, 8, 5, 9];
-      var sum = 0;
-      numbers.forEach(function (elem) {
-        sum = sum + elem;
+      let array = [450, 250, "abc", "kumar", 360, "xyz", 140];
+      let sum = 0;
+      array.forEach((num) => {
+        if (typeof num === "number") {
+          sum = sum + num;
+        }
       });
       console.log(sum);
     </script>
 
-    <h3>
-      15. An array have numbers and strings, only add those numbers which are
-      not string.
-    </h3>
+    <h3>10. Check all elements in an array satisfy a condition.</h3>
     <script>
-      var array = [450, 250, "abc", "kumar", 360, "xyz", 140];
-      var sums = 0;
-      array.forEach(function (elem) {
-        if (typeof elem === "number") {
-          sums = sums + elem;
-        }
-      });
-      console.log(sums);
-    </script>
-
-    <h3>
-      16. Loop an array of objects and remove all objects which don't have
-      gender's value male.
-    </h3>
-    <script>
-      var arr = [
-        { name: "tapan", gender: "male" },
-        { name: "barish", gender: "female" },
-        { name: "sapan", gender: "male" },
-        { name: "akash", gender: "male" },
-        { name: "rishu", gender: "female" },
-      ];
-
-      var maleGroup = arr.filter(function (elem) {
-        return elem.gender === "male";
-      });
-      console.log(maleGroup);
-      //Or
-      var removeNonMale = 0;
-      arr.forEach(function (elem) {
-        if (elem.gender !== "male") removeNonMale++; //total non-male
-      });
-
-      for (var h = 1; h <= removeNonMale; h++) {
-        //loop for count times
-        for (var i = 0; i < arr.length; i++) {
-          //remove one non-male
-          if (arr[i].gender !== "male") {
-            arr.splice(i, 1);
-            break;
-          }
-        }
-      }
-      console.log(removeNonMale);
-      console.log(arr);
-    </script>
-
-    <h3>17. Write a JavaScript function to clone an array...?</h3>
-    <script>
-      function cloneArr(arr) {
-        return [...arr];
-      }
-      console.log(cloneArr([1, 2, 3, 4, 5]));
-      //Or
-      function clonArr(arr) {
-        var newArr = [];
-        arr.forEach(function (e) {
-          newArr.push(e);
-        });
-        return newArr;
-      }
-      var ab = [5, 7, 8, 9];
-      console.log(clonArr(ab));
-      //Or
-      function cloneArry(arr) {
-        var newarr = arr.map(function (e) {
-          return e;
-        });
-        console.log(newarr);
-      }
-      cloneArry([3, 5, 7, 9]);
-    </script>
-
-    <h3>
-      18. Write a JS program to find the most frequent item of an array...?
-    </h3>
-    <script>
-      function freqNum(arr) {
-        var freqNum = {};
-        arr.forEach(function (elem) {
-          if (freqNum.hasOwnProperty(elem)) freqNum[elem]++;
-          else freqNum[elem] = 1;
-        });
-        var ans = Object.keys(freqNum).reduce(function (acc, next) {
-          return freqNum[acc] > freqNum[next] ? acc : next;
-        });
-        console.log(freqNum);
-        console.log(ans);
-      }
-      freqNum([1, 4, 6, 8, 5, 6, 2, 1, 6, 5]);
-    </script>
-
-    <h3>19. Write a JS program to shuffle an array...?</h3>
-    <script>
-      function shuffleKaro(arr) {
-        var totalShuffleArea = arr.length; //define shuffle area length
-
-        while (totalShuffleArea > 0) {
-          totalShuffleArea--;
-          var exchangedIndex = Math.floor(Math.random() * totalShuffleArea); //select random number
-          var temp = arr[totalShuffleArea];
-          arr[totalShuffleArea] = arr[exchangedIndex];
-          arr[exchangedIndex] = temp;
-        }
-        return arr;
-      }
-      console.log(shuffleKaro([1, 2, 3, 4, 5, 6]));
-    </script>
-
-    <h3>20. Write a JS program to compute the union of arrays...?</h3>
-    <script>
-      function unionArry(arr1, arr2) {
-        return [...new Set(arr1.concat(arr2))]; //set will remove repeated data and ... used for convert data to array
-      }
-      console.log(unionArry([1, 2, 3, 4, 5], [1, 5, 6, 7]));
-    </script>
-
-    <h3>21. Make groups by type of language..?</h3>
-    <script>
-      const courses = [
-        { name: "React", type: "FrontEnd" },
-        { name: "MySQL", type: "Database" },
-        { name: "NextJS", type: "FrontEnd" },
-        { name: "NodeJS", type: "BackEnd" },
-        { name: "MongoDB", type: "Database" },
-        { name: "Python", type: "BackEnd" },
-      ];
-      function groupBy(arr) {
-        let list = {};
-
-        arr.forEach((item) => {
-          if (!list[item.type]) {
-            list[item.type] = [item];
-          } else {
-            list[item.type].push(item);
-          }
-        });
-        return list;
-      }
-      console.log(groupBy(courses));
-    </script>
-
-    <h3>
-      22: If/Else: Create a program that checks if a given year ia a leap year.
-    </h3>
-    <script>
-      let year = 2015;
-      let checkLeapYear = () => {
-        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-          console.log(`${year} is a leap year.`);
-        } else {
-          console.log(`${year} is not a leap year.`);
-        }
+      let arry = [2, 4, 6, 8];
+      //Using every method
+      const checkAllElements = (arr) => {
+        const checkEvenNums = arr.every((item) => item % 2 === 0);
+        return checkEvenNums;
       };
-      checkLeapYear();
+      console.log(checkAllElements(arry));
+
+      //Using loop
+      const checkEvenElements = (arr) => {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] % 2 !== 0) {
+            return false;
+          }
+        }
+        return true;
+      };
+      console.log(checkEvenElements(arry));
     </script>
 
-    <h3>23: Reduce:Find the sum of all elements in an array.</h3>
+    <h3>11. Check an object empty or not ?</h3>
     <script>
-      let array = [1, 2, 4, 8];
+      const isObjectEmpty = (obj) => Object.keys(obj).length === 0;
+      console.log(isObjectEmpty({ key: 1 }));
+    </script>
+
+    <h3>12. Find Max, min and avg value from an array</h3>
+    <script>
+      ///Max value
+      const maxNumber = (arr) => Math.max(...arr);
+      console.log(maxNumber([2, 5, 7, 9, 3]));
 
       //By loop
-      let sumArray = 0;
-      for (let num of array) {
-        sumArray += num;
-      }
-      console.log(sumArray);
-
-      //By Reduce
-      let sumOfArray = (nums) => {
-        return nums.reduce((acc, cur) => acc + cur);
-      };
-      console.log(sumOfArray(array));
-    </script>
-
-    <h3>
-      24: Class: Create an object representing a car with properties like
-      company, model and year. Add a method to the car object to start the
-      engine.
-    </h3>
-    <script>
-      //By Regular Object
-      let car = {
-        company: "Honda",
-        model: "Honda City",
-        year: 1992,
-        startEngine() {
-          console.log("The Engine has started");
-        },
-      };
-      car.startEngine();
-
-      //By Class method
-      class Car {
-        constructor(company, model, year) {
-          this.company = company;
-          this.model = model;
-          this.year = year;
+      const maxNum = (arr) => {
+        if (arr.length === 0) {
+          return 0;
         }
-        startEngine() {
-          console.log("The Engine has started");
-        }
-      }
-      let newCar = new Car("Honda", "Honda Amaze", 1992);
-      newCar.startEngine();
-    </script>
-
-    <h3>1. Flatten array of array...?</h3>
-    <script>
-      //Approach_1: Loop and Recursive function
-      var arr = [1, 2, [3, 4, 5], 6, 7, [8, 9, [10, [11], 12], 13], 14, 15];
-
-      let output = "";
-      function flatten(arr) {
-        for (let i = 0; i < arr.length; i++) {
-          if (Array.isArray(arr[i])) {
-            flatten(arr[i]); //Recusive call
-          } else {
-            output += arr[i];
+        let max = arr[0];
+        for (let i = 1; i <= arr.length; i++) {
+          if (max < arr[i]) {
+            max = arr[i];
           }
         }
-        return output;
-      }
-      console.log(flatten(arr));
+        return max;
+      };
+      console.log(maxNum([2, 5, 7, 9, 3]));
 
-      //Approach_2: Flat Method
-      let simpleArr = arr.flat(Infinity).join(" ");
-      console.log(simpleArr);
+      ///Min Value
+      const minNumber = (arr) => Math.min(...arr);
+      console.log(minNumber([2, 5, 7, 1, 9]));
+
+      //By loop
+      const minNum = (arr) => {
+        if (arr.length === 0) {
+          return 0;
+        }
+        let min = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+          if (min > arr[i]) {
+            min = arr[i];
+          }
+        }
+        return min;
+      };
+      console.log(minNum([9, 6, 3, 7]));
+
+      ///Avg Value
+      const avgValue = (arr) => {
+        if (arr.length === 0) {
+          return 0;
+        }
+        const sum = arr.reduce((acc, num) => acc + num);
+        const avg = sum / arr.length;
+        return avg;
+      };
+      console.log(avgValue([3, 6, 7, 9, 5]));
     </script>
 
-    <h3>8. Evaluate square value of elements...?</h3>
+    <h3>13: Square all the elements in an array.</h3>
     <script>
-      var nums = [1, 2, 3, 4, 5];
+      let ary = [4, 5, 6, 7, 9];
 
       //Using loop
       var sqNums = "";
-      for (let i = 0; i < nums.length; i++) {
-        sqNums = nums[i] * nums[i];
+      for (let i = 0; i < ary.length; i++) {
+        sqNums = ary[i] * ary[i];
         console.log(sqNums);
       }
 
-      //Using Push()
-      var sqNums = [];
-      for (let i = 0; i < nums.length; i++) {
-        sqNums.push(nums[i] * nums[i]);
-      }
-      console.log(sqNums);
+      //Using Map() method
+      const convertElementsToDouble = (arr) => {
+        return (doubleELement = arr.map((num) => num * num));
+      };
+      console.log(convertElementsToDouble(ary));
+
+      //Using loop
+      const convertElemsToDouble = (arr) => {
+        let elemsToDouble = [];
+        for (let i = 0; i < arr.length; i++) {
+          elemsToDouble.push(arr[i] * arr[i]);
+        }
+        return elemsToDouble;
+      };
+      console.log(convertElemsToDouble(ary));
+    </script>
+
+    <h3>14. Generate an array of number from 1 to n.</h3>
+    <script>
+      const generateArrNum = (n) => [...Array(n).keys()].map((i) => i + 1);
+      console.log(generateArrNum(5));
+
+      //Using loop
+      const generateArrNums = (n) => {
+        const nums = [];
+        for (let i = 1; i <= n; i++) {
+          nums.push(i);
+        }
+        return nums;
+      };
+      console.log(generateArrNums(5));
+    </script>
+
+    <h3>15. Merge two array and remove duplicate.</h3>
+    <script>
+      let arr1 = [1, 2, 3, 4, 5];
+      let arr2 = [4, 5, 6, 7, 5];
+
+      //Using Set method
+      const mergeArray = (arr1, arr2) => [...new Set([...arr1, ...arr2])];
+      console.log(mergeArray(arr1, arr2));
+
+      //Using forEach method
+      let combineArr = arr1.concat(arr2);
+      let unionArr = [];
+      combineArr.forEach((num) => {
+        if (!unionArr.includes(num)) {
+          unionArr.push(num);
+        }
+      });
+      console.log(unionArr);
+
+      //Using reduce method
+      let uniqueArr = combineArr.reduce((acc, cur) => {
+        if (!acc.includes(cur)) {
+          acc.push(cur);
+        }
+        return acc;
+      }, []);
+      console.log(uniqueArr);
+    </script>
+
+    <h3>16. Clone an array.</h3>
+    <script>
+      const arrr = [1, 3, 4, 6];
+      //Using spread operator
+      const cloneArray = (arr) => {
+        console.log([...arr]);
+      };
+      cloneArray(arrr);
 
       //Using forEach()
-      var sqNums = [];
-      nums.forEach((n) => {
-        sqNums = n * n;
-        console.log(sqNums);
-      });
+      const clonArr = (arr) => {
+        let newArr = [];
+        arr.forEach((element) => newArr.push(element));
+        console.log(newArr);
+      };
+      clonArr(arrr);
 
       //Using map()
-      var sqNums = nums.map((n) => {
-        return n * n;
-      });
-      console.log(sqNums);
-    </script>
-
-    <h3>9. Count duplicate element in array...?</h3>
-    <script>
-      const items = ["a", "b", "c", "a", "b", "b", "c", "d"];
-
-      function countDuplicate(item) {
-        const output = {};
-        item.map((item) => {
-          output[item] = (output[item] || 0) + 1;
+      const cloneArrr = (arr) => {
+        let newArr = arr.map((element) => {
+          return element;
         });
-        return output;
-      }
-      console.log(countDuplicate(items));
+        console.log(newArr);
+      };
+      cloneArrr(arrr);
     </script>
-    <h3>10. Generate random value from Array..?</h3>
+
+    <h3>17. Display current date and time in a specific format.</h3>
+    <script>
+      let currentDateAndTime = () => {
+        let currentdate = new Date();
+        return currentdate.toLocaleString();
+      };
+      console.log(currentDateAndTime());
+    </script>
+
+    <h3>18. Generate a random value from an Array.</h3>
     <script>
       let values = ["React", "NextJS", "JavaScript", "NodeJS"];
-      const index = Math.floor(Math.random() * values.length);
-      console.log(values[index]);
+      let randomIndex = Math.floor(Math.random() * values.length);
+      console.log(values[randomIndex]);
     </script>
 
-    <h3>9: DOM: Create a button dynamically and add it to the webpage.</h3>
-    <div id="container"></div>
+    <h3>19. Generate a random number between specific range.</h3>
     <script>
-      let container = document.getElementById("container");
-      let button = document.createElement("button");
-      button.textContent = "Click Me";
-      container.appendChild(button);
+      const randomNumber = (max, min) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
+      console.log(randomNumber(10, 5));
     </script>
 
-    <h3>
-      10: Event: Add a click event listener to a button that displays an alert
-      when clicked.
-    </h3>
-    <button id="bttn">Click Here</button>
+    <h3>20. Check Leap year.</h3>
     <script>
-      let bttn = document.querySelector("#bttn");
-      bttn.addEventListener("click", () => {
-        alert("Button Clicked!!");
-      });
+      let year = 2004;
+      const checkLeapYear = (year) => {
+        if (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) {
+          return `${year} is a leap year!`;
+        }
+        return `${year} is not a leap year!`;
+      };
+      console.log(checkLeapYear(year));
     </script>
 
-    <h3>
-      11: Recusive: Write a function that calculates the factorial of given
-      number.
-    </h3>
+    <h3>21. Remove specific element from an array.</h3>
+    <script>
+      let arr = [10, 10, 20, 30, 10, 40, 10, 50];
+
+      //Using filter method
+      let removeSpecificElement = (nums) => {
+        let target = 10;
+        let newNums = nums.filter((num) => num !== target);
+        return newNums;
+      };
+      console.log(removeSpecificElement(arr));
+
+      //Using loop
+      let removtargetedElement = (nums) => {
+        let newNums = [];
+        for (let i = 1; i < nums.length; i++) {
+          if (nums[i] !== 10) {
+            newNums.push(nums[i]);
+          }
+        }
+        return newNums;
+      };
+      console.log(removtargetedElement(arr));
+    </script>
+
+    <h3>22. Calculates the factorial of given number.</h3>
     <script>
       //Facorial means: let number is 5, then factorial will be 5*4*3*2*1
       //Factorial of 0 = 1 and Factorial of 1 = 1.
@@ -563,138 +438,7 @@
       console.log(factorial(5));
     </script>
 
-    <h3>
-      12: Math: Create a function that generates a random number between a given
-      range.
-    </h3>
-    <script>
-      let getRandomNumber = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1));
-      };
-      console.log(getRandomNumber(1, 5));
-    </script>
-
-    <h3>
-      13: Filter: Write a function that takes an array of numbers and returns a
-      new array with only the even/odd numbers.
-    </h3>
-    <script>
-      let arry = [2, 3, 4, 5, 6, 7, 8];
-
-      //By filter method
-      function getEvenNumbers(nums) {
-        return nums.filter((num) => num % 2 === 0);
-      }
-      console.log(getEvenNumbers(arry));
-
-      //By loop
-      let evenArry = [];
-      for (let num of arry) {
-        if (num % 2 !== 0) {
-          evenArry.push(num);
-        }
-      }
-      console.log(evenArry);
-    </script>
-
-    <h3>14: Map: Double all the elements in an array.</h3>
-    <script>
-      //Using map method
-      let getSquareElements = (num) => {
-        return arry.map((num) => num * num);
-      };
-      console.log(getSquareElements(arry));
-
-      //By loop
-      let squareArray = [];
-      for (let num of arry) {
-        squareArray.push(num * num);
-      }
-      console.log(squareArray);
-    </script>
-
-    <h3>
-      15: Reduce: Find the largest element in an array using the reduce method.
-    </h3>
-    <script>
-      //By reduce method
-      let findLargestNum = (nums) => {
-        const max = nums.reduce((n1, n2) => Math.max(n1, n2));
-        return max;
-      };
-      console.log(findLargestNum([2, 5, 9, 6, 7]));
-
-      //By loop
-      let findlargstNum = (nums) => {
-        if (nums.length === 0) {
-          return "Undefined";
-        }
-        let max = nums[0];
-        for (let i = 1; i < nums.length; i++) {
-          if (nums[i] > max) {
-            max = nums[i];
-          }
-        }
-        return max;
-      };
-      console.log(findlargstNum([2, 5, 9, 6, 7]));
-    </script>
-
-    <h3>
-      16: Filter: Remove all occurrences of a specific element fom an array.
-    </h3>
-    <script>
-      //Using filter method
-      let removetargetedElement = (nums) => {
-        let target = 10;
-        let newNums = nums.filter((num) => num !== target);
-        return newNums;
-      };
-      console.log(removetargetedElement([10, 10, 20, 30, 10, 40, 10, 50]));
-
-      //Using loop
-      let removtargetedElement = (nums) => {
-        let newNums = [];
-        for (let i = 1; i < nums.length; i++) {
-          if (nums[i] !== 10) {
-            newNums.push(nums[i]);
-          }
-        }
-        return newNums;
-      };
-      console.log(removtargetedElement([10, 10, 20, 30, 10, 40, 10, 50]));
-    </script>
-
-    <h3>
-      17: Date & Time: Create a function that displays the current date and time
-      in a specific format.
-    </h3>
-    <script>
-      let currentDateAndTime = () => {
-        let currentdate = new Date();
-        return currentdate.toLocaleString();
-      };
-      console.log(currentDateAndTime());
-    </script>
-
-    <h3>
-      18: Async/await: Handle error during API data fetch using try catch block.
-    </h3>
-    <script>
-      const fetchData = async () => {
-        let apiUrl = "https://jsonplaceholder.typicode.com/users";
-        try {
-          let response = await fetch(apiUrl);
-          let data = await response.json();
-          console.log(data[0].username);
-        } catch (error) {
-          console.log("Error fetch data", error);
-        }
-      };
-      fetchData();
-    </script>
-
-    <h3>19: Recursive: Find the nth Fibonacci number.</h3>
+    <h3>23. Find the nth Fibonacci number.</h3>
     <script>
       let fibonacci = (n) => {
         if (n <= 1) {
@@ -706,9 +450,7 @@
       console.log(fibonacci(5));
     </script>
 
-    <h3>
-      20. Variable: Find the difference between var and let using loop method.
-    </h3>
+    <h3>24. Difference between var and let using loop method.</h3>
     <script>
       for (var k = 1; k <= 3; k++) {
         setTimeout(() => {
@@ -722,9 +464,7 @@
       }
     </script>
 
-    <h3>
-      50. Map/Filter: Array of name from array of users and filter if avtive.
-    </h3>
+    <h3>25. Array of name from array of users and filter if avtive.</h3>
     <script>
       const users = [
         { id: 1, name: "Ram", age: 32, isActive: true },
@@ -739,26 +479,28 @@
       //Using ForEach()
       let namArry = [];
       users.forEach((user) => {
-        namArry.push(user.name)
-      })
+        namArry.push(user.name);
+      });
       console.log(namArry);
 
       //Using Loop
       let nmArry = [];
-      for(let i = 0; i < users.length; i++) {
-        nmArry.push(users[i].name)
+      for (let i = 0; i < users.length; i++) {
+        nmArry.push(users[i].name);
       }
       console.log(nmArry);
 
       //Using Filter()
-      const activeName = users.filter(user => user.isActive).map((user) => user.name);
+      const activeName = users
+        .filter((user) => user.isActive)
+        .map((user) => user.name);
       console.log(activeName);
 
       //Using Sort()
-      const namesOldToYoung = users.sort((user1, user2) => user1.age < user2.age ? 1 : -1);
+      const namesOldToYoung = users.sort((user1, user2) =>
+        user1.age < user2.age ? 1 : -1
+      );
       console.log(namesOldToYoung);
-
-      
     </script>
   </body>
 </html>

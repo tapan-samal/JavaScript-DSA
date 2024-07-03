@@ -1,227 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interview QUestions</title>
-</head>
-<body>
-    <h1 style="text-align: center">JavaScript Interview Questions</h1>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Level 3</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">JavaScript Exercises</h1>
 
+    <h3>1. Checks whether a string is palindrome or not ?</h3>
+    <script>
+      const checkPalindrome = (str) => {
+        let reverseStr = str.split("").reverse().join("");
+        return reverseStr === str;
+      };
+      console.log(checkPalindrome("Loop"));
+      console.log(checkPalindrome("LooL"));
+    </script>
 
-    <h3>
-        20: Closure: Create a counter function that increments and returns the
-        count on each call.
-      </h3>
-      <script>
-        let createCount = () => {
-          let count = 0;
-          return function () {
-            return ++count;
-          };
-        };
-        let counter = createCount();
-        console.log(counter());
-        console.log(counter());
-      </script>
-      <h3>21: Closure: Implement a private variable using closure.</h3>
-      <script>
-        let createCounter = () => {
-          let count = 0; //Private variable
-  
-          //Inner Function(closure)
-          function increment() {
-            count++;
-            console.log("count:", count);
-          }
-          return {
-            incrementCounter: function () {
-              increment();
-            },
-            getCount: function () {
-              return count;
-            },
-          };
-        };
-        let storeCounter = createCounter();
-        storeCounter.incrementCounter();
-        storeCounter.incrementCounter();
-        console.log(storeCounter.getCount());
-      </script>
-  
-      <h3>
-        22: Callback: Implement a function that makes multiple API calls processes
-        the data.
-      </h3>
-      <script>
-        let apiCall = (url, cb) => {
-          fetch(url)
-            .then((response) => response.json())
-            .then((data) => cb(data))
-            .catch((error) =>
-              console.error("Error during API call", error.message)
-            );
-        };
-  
-        const handleData = (data) => {
-          console.log("Processed Data:", data);
-        };
-  
-        let main = () => {
-          const apiUrl1 = "https://jsonplaceholder.typicode.com/todos/1";
-          const apiUrl2 = "https://jsonplaceholder.typicode.com/todos/2";
-          apiCall(apiUrl1, handleData);
-          apiCall(apiUrl2, handleData);
-        };
-        main();
-      </script>
-  
-      <h3>23: Promises: Multiple API calls and Processed the data.</h3>
-      <script>
-        const makeApiCall = (url) => {
-          return fetch(url)
-            .then((response) => response.json())
-            .catch((error) => {
-              console.error("Error during API call", error.message);
-            });
-        };
-        const mainFunction = () => {
-          const apiUrl_1 = "https://jsonplaceholder.typicode.com/todos/1";
-          const apiUrl_2 = "https://jsonplaceholder.typicode.com/todos/2";
-  
-          //Make the API calls and store promises in an array
-          const apiCallPromises = [makeApiCall(apiUrl_1), makeApiCall(apiUrl_2)];
-  
-          //Use Promise.all to wait complete all API call to complete
-          Promise.all(apiCallPromises)
-            .then((dataArray) => {
-              console.log("Process Data 1: ", dataArray[0]);
-              console.log("Process Data 2: ", dataArray[1]);
-            })
-            .catch((error) => {
-              console.error("Error during API calls");
-            });
-        };
-        mainFunction();
-      </script>
-  
-      <h3>24: Async/await: Multiple API calls and Processed the data..</h3>
-      <script>
-        const makeAPICalls = async (url) => {
-          try {
-            let response = await fetch(url);
-            return await response.json();
-          } catch (error) {
-            console.error("Error during API calls", error.message);
-          }
-        };
-        const mainFunctions = async () => {
-          const apiUrl1 = "https://jsonplaceholder.typicode.com/todos/1";
-          const apiUrl2 = "https://jsonplaceholder.typicode.com/todos/2";
-  
-          try {
-            const data1 = await makeAPICalls(apiUrl1);
-            const data2 = await makeAPICalls(apiUrl2);
-  
-            console.log("Processed Data 1: ", data1);
-            console.log("Processed Data 2: ", data2);
-          } catch (error) {
-            console.error("Error during API calls");
-          }
-        };
-        mainFunctions();
-      </script>
-      <h3>
-        25: Promise: Load multiple images asynchronously and display on web.
-      </h3>
-      <div
-        id="imgContainer"
-        style="display: flex; height: 100px; width: 100px; gap: 12px"
-      ></div>
-      <script>
-        const loadImage = (src) =>
-          new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(img);
-            img.onerror = reject;
-            img.src = src;
-          });
-  
-        const imgContainer = document.getElementById("imgContainer");
-        const imgUrls = [
-          "../image/tapan1.jpeg",
-          "../image/tapan2.jpeg",
-          "../image/tapan3.jpeg",
-        ];
-  
-        Promise.all(imgUrls.map(loadImage))
-          .then((images) => {
-            images.forEach((image) => imgContainer.appendChild(image));
-          })
-          .catch((error) => console.error(error));
-      </script>
-  
-      <h3>
-        26: Async/await: Load multiple images asynchronously and display on web.
-      </h3>
-      <div
-        id="imgContainers"
-        style="display: flex; height: 100px; width: 100px; gap: 12px"
-      ></div>
-      <script>
-        const loadImages = async (src) => {
-          return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve(img);
-            img.error = reject;
-            img.src = src;
-          });
-        };
-  
-        const loadImageAsync = async () => {
-          try {
-            const imgUrls = [
-              "../image/tapan3.jpeg",
-              "../image/tapan4.jpeg",
-              "../image/tapan5.jpeg",
-            ];
-            const images = await Promise.all(imgUrls.map(loadImages));
-  
-            const imgContainer = document.querySelector("#imgContainers");
-            images.forEach((image) => imgContainer.appendChild(image));
-          } catch (error) {
-            console.error(error);
-          }
-        };
-        loadImageAsync();
-      </script>
-      <h3>
-        29: Async/await: Implement an async functuion to fetch data from an API
-        and handle errors using try/catch black.
-      </h3>
-      <script>
-        const fetchApiData = async (url) => {
-          try {
-            let response = await fetch(url);
-            if (!response.ok) {
-              throw new Error("Request Failed " + response.status);
+    <h3>2. Convert the first letter of each word to uppercase.</h3>
+    <script>
+      const firstLetterCapitalized = (str) => {
+        let capitalizedStr = str.split(" ").map((word) => word[0].toUpperCase() + word.slice(1));
+        return capitalizedStr.join(" ");
+      };
+      console.log(firstLetterCapitalized("tapan samal"));
+      console.log(firstLetterCapitalized("realy, are you happy"));
+    </script>
+
+    <h3>3. Check number of occurrence in a string.</h3>
+    <script>
+      const checkOccurrence = (str) => {
+        let occurranceObj = {};
+        str.toUpperCase().split("").forEach((val) => {
+            if (occurranceObj.hasOwnProperty(val) === false) {
+              occurranceObj[val] = 1;
+            } else {
+              occurranceObj[val]++;
             }
-            const data = await response.json();
-            console.log("fetch Data :", data[0].title);
-            return data;
-          } catch (error) {
-            console.error("Error while fetching data", error);
+          });
+        return occurranceObj;
+      };
+      console.log(checkOccurrence("Tapan"));
+    </script>
+
+    <h3>4. Create odd and even group from an array.</h3>
+    <script>
+      let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      const groupByOddEven = nums.reduce((acc, num) => {
+        let key = num % 2 === 0 ? "Even" : "Odd";
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(num);
+        return acc;
+      }, {});
+      console.log(groupByOddEven);
+    </script>
+
+    <h3>5. Create a group by property value.</h3>
+    <script>
+      const products = [
+        { id: 1, category: "Electronics", brand: "Apple" },
+        { id: 2, category: "Electronics", brand: "Samsung" },
+        { id: 3, category: "Clothing", brand: "Nike" },
+        { id: 4, category: "Clothing", brand: "Adidas" },
+      ];
+
+      //Using reduce()
+      const groupedByCategoryAndBrand = products.reduce((acc, obj) => {
+        const key = obj.category + "-" + obj.brand;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(obj);
+        return acc;
+      }, {});
+
+      console.log(groupedByCategoryAndBrand);
+
+      //Using forEach() by category
+      function groupByCategory(arr) {
+        let list = {};
+
+        arr.forEach((item) => {
+          if (!list[item.category]) {
+            list[item.category] = [item];
+          } else {
+            list[item.category].push(item);
           }
+        });
+        return list;
+      }
+      console.log(groupByCategory(products));
+    </script>
+
+    <h3>6. Loop an array of objects and print names and remove non-male.</h3>
+    <script>
+      var arr = [
+        { name: "tapan", gender: "male" },
+        { name: "barish", gender: "female" },
+        { name: "sapan", gender: "male" },
+        { name: "akash", gender: "male" },
+        { name: "rishu", gender: "female" },
+      ];
+      let maleGender = arr.filter((prop) => prop.gender === "male");
+      let maleNames = maleGender.map((nam) => nam.name);
+      console.log(...maleNames);
+
+      //Remove non-male
+      let nonMale = [];
+      arr.forEach((prop) => {
+        if (prop.gender !== "male") {
+          nonMale.push(prop.name);
+        }
+      });
+      console.log(...nonMale);
+    </script>
+
+    <h3>7. find all pairs in an array that sum up to 6.</h3>
+    <script>
+      const array = [1, 5, 7, -1, 3, 2, 6, 4];
+      const sum = 6;
+
+      //Using for loop
+      const pairElements = (arr, sum) => {
+        let pairs = [];
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] + arr[j] === sum) {
+              pairs.push([arr[i], arr[j]]);
+            }
+          }
+        }
+        return pairs;
+      };
+
+      console.log(pairElements(array, sum));
+
+      //Using for of loop & map
+      function findPairsWithSum(arr, sum) {
+        const pairs = [];
+        const numMap = new Map();
+
+        for (const num of arr) {
+          const complement = sum - num;
+          if (numMap.has(complement)) {
+            pairs.push([num, complement]);
+          }
+          numMap.set(num, true);
+        }
+        return pairs;
+      }
+      const result = findPairsWithSum(array, sum);
+      console.log(result);
+    </script>
+
+    <h3>8. Find the most frequent element from an array...?</h3>
+    <script>
+      const findMostFreqNum = (arr) => {
+        let freqNum = {};
+        arr.forEach((element) => {
+          if (freqNum.hasOwnProperty(element)) {
+            freqNum[element]++;
+          } else {
+            freqNum[element] = 1;
+          }
+        });
+        console.log(freqNum);
+
+        let mostFreqNum = Object.keys(freqNum).reduce((acc, cur) => {
+          return freqNum[acc] > freqNum[cur] ? acc : cur;
+        });
+        console.log("Most Frequesnt Num: ", mostFreqNum);
+      };
+
+      findMostFreqNum([1, 4, 6, 8, 5, 6, 2, 1, 6, 5]);
+    </script>
+
+    <h3>9. Write a JS program to shuffle an array...?</h3>
+    <script>
+      const arry = [1, 2, 3, 4, 5, 6];
+
+      //Using loop
+      function shuffleArr(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          let s = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[s]] = [arr[s], arr[i]];
+        }
+        return arr;
+      }
+      const shuffledArr = shuffleArr(arry);
+      console.log(shuffledArr);
+
+      //Using sort() method
+      function shuffleArry(arr) {
+        return arr.sort(() => Math.random() - 0.5);
+      }
+      const shuffledArry = shuffleArry(arry);
+      console.log(shuffledArry);
+    </script>
+
+    <h3>10. Flatten array of array...?</h3>
+    <script>
+      //Approach_1: Loop and Recursive function
+      var arr = [1, 2, [3, 4, 5], 6, 7, [8, 9, [10, [11], 12], 13], 14, 15];
+
+      let output = "";
+      function flatten(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          if (Array.isArray(arr[i])) {
+            flatten(arr[i]); //Recusive call
+          } else {
+            output += arr[i];
+          }
+        }
+        return output;
+      }
+      console.log(flatten(arr));
+
+      //Approach_2: Flat Method
+      let simpleArr = arr.flat(Infinity).join(" ");
+      console.log(simpleArr);
+    </script>
+
+    <h3>11. Count duplicate element in array...?</h3>
+    <script>
+      const items = ["a", "b", "c", "a", "b", "b", "c", "d"];
+
+      function countDuplicate(items) {
+        const output = {};
+        items.map((item) => {
+          output[item] = (output[item] || 0) + 1;
+        });
+        return output;
+      }
+      console.log(countDuplicate(items));
+    </script>
+
+    <h3>12. </h3>
+    <h3>25. Define a function that return 143545000</h3>
+    <script>
+      function computeAmout() {
+        let totalAmount = 0;
+
+        const lacs = (amount) => {
+          totalAmount += amount * 100000;
+          return { lacs, crore, thousand, value };
         };
-        fetchApiData("https://jsonplaceholder.typicode.com/posts");
-      </script>
-      <h3>30: .</h3>
-      <h3>
-        31: Prototype: Create a prototype method to calculate the total value
-        ofproduct..
-      </h3>
-  
-    
-</body>
+
+        const crore = (amount) => {
+          totalAmount += amount * 10000000;
+          return { lacs, crore, thousand, value };
+        };
+
+        const thousand = (amount) => {
+          totalAmount += amount * 1000;
+          return { lacs, crore, thousand, value };
+        };
+
+        const value = () => {
+          return totalAmount;
+        };
+
+        return { lacs, crore, thousand, value };
+      }
+
+      console.log(
+        computeAmout()
+          .lacs(15)
+          .crore(5)
+          .crore(2)
+          .lacs(20)
+          .thousand(45)
+          .crore(7)
+          .value()
+      );
+    </script>
+  </body>
 </html>

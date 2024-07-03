@@ -3,25 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercise</title>
+    <title>JavaScript Exercises</title>
   </head>
   <body>
     <h1 style="text-align: center">JavaScript Interview Exercises</h1>
 
-    <h3>1: Check Leap year</h3>
-    <script>
-      let year = 1900;
-      const checkLeapYear = (year) => {
-        if (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) {
-          console.log(`${year} is a leap year`);
-        } else {
-          console.log(`${year} is not a leap year`);
-        }
-      };
-      checkLeapYear(year);
-    </script>
-
-    <h3>2: Get file extension type</h3>
+    <h3>1. Get file extension type</h3>
     <script>
       let fileName = "resume.pdf";
       const getExtension = (file) => {
@@ -31,7 +18,7 @@
       getExtension(fileName);
     </script>
 
-    <h3>3: Add titile to any name</h3>
+    <h3>2. Add titile to any name</h3>
     <script>
       let myName = "Tapan Samal";
       const addTitleToName = (name) => {
@@ -44,7 +31,7 @@
       addTitleToName(myName);
     </script>
 
-    <h3>4: Find sum of divisible numbers from a range of number</h3>
+    <h3>3. Find sum of divisible numbers from a range of number</h3>
     <script>
       let sum = 0;
       const sumOfDivisibleNum = (x, y) => {
@@ -61,7 +48,7 @@
       console.log(`Sum of divisible numbers: ${sumOfDivisibleNum(5, 10)}`);
     </script>
 
-    <h3>5: Find the numbers from an array and sum them</h3>
+    <h3>4. Find the numbers from an array and sum them</h3>
     <script>
       const myArray = ["js", 9, "react", 7, 4, "css", "html"];
       let sumArray = 0;
@@ -82,7 +69,7 @@
       console.log("Sum of array numbers: ", sumArray);
     </script>
 
-    <h3>6: Flatten array of array</h3>
+    <h3>5. Flatten array of array</h3>
     <script>
       var nestedArray = [
         1,
@@ -111,7 +98,7 @@
       console.log(flatArray);
     </script>
 
-    <h3>7: Total cost of product</h3>
+    <h3>6. Total cost of product</h3>
     <script>
       const product = [
         { name: "Laptop", price: 72000 },
@@ -125,7 +112,7 @@
       console.log("Total cost of product: ", productSum);
     </script>
 
-    <h3>8: Category wise total product/cost</h3>
+    <h3>7. Category wise total product/cost</h3>
     <script>
       const productList = [
         { company: "HP", category: "Laptop", quantity: 7 },
@@ -148,7 +135,7 @@
       console.log(totalProductList);
     </script>
 
-    <h3>9: Remove vowels from text</h3>
+    <h3>8. Remove vowels from text</h3>
     <script>
       const vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
       const removeVowels = (text) => {
@@ -163,7 +150,7 @@
       removeVowels("tapan kumar samal");
     </script>
 
-    <h3>10: Count vowels from text</h3>
+    <h3>9. Count vowels from text</h3>
     <script>
       const countVowels = (text) => {
         let counts = 0;
@@ -177,7 +164,7 @@
       countVowels("tapan kumar samal");
     </script>
 
-    <h3>11: Find element and return true or false</h3>
+    <h3>10. Find element and return true or false</h3>
     <script>
       const findElement = (data, arr) => {
         // arr.forEach((element) => {  //forEach not work, Bcz function create local scope
@@ -195,7 +182,7 @@
       console.log(findElement(5, [2, 3, 5, 7]));
     </script>
 
-    <h3>12: Remove duplicate item</h3>
+    <h3>11. Remove duplicate item</h3>
     <script>
       const removeDuplicateELement = (elements) => {
         const newArray = [];
@@ -210,7 +197,7 @@
       console.log(removeDuplicateELement([1, 2, 1, 3, 4, 2, 5, 3]));
     </script>
 
-    <h3>13: Multiline patterns</h3>
+    <h3>12. Multiline patterns</h3>
     <script>
       for (let i = 0; i < 5; i++) {
         console.log("for", i);
@@ -222,7 +209,7 @@
       }
     </script>
 
-    <h3>14: Pyramid Patterns</h3>
+    <h3>13. Pyramid Patterns</h3>
     <script>
       for (let i = 0; i <= 3; i++) {
         let pattern = "";
@@ -237,7 +224,7 @@
       }
     </script>
 
-    <h3>15: Reverse pyramid Patterns</h3>
+    <h3>14. Reverse pyramid Patterns</h3>
     <script>
       for (let i = 0; i <= 3; i++) {
         let pattern = "";
@@ -252,7 +239,7 @@
       }
     </script>
 
-    <h3>16: Double pyramid Patterns</h3>
+    <h3>15. Double pyramid Patterns</h3>
     <script>
       for (let i = 0; i <= 3; i++) {
         let pattern = "";
@@ -267,7 +254,7 @@
       }
     </script>
 
-    <h3>17: Heart Pattern</h3>
+    <h3>16. Heart Pattern</h3>
     <script>
       for (let i = 0; i <= 3; i++) {
         let pattern = "";
@@ -293,7 +280,7 @@
       }
     </script>
 
-    <h3>18: Class Inheritence</h3>
+    <h3>17. Class Inheritence</h3>
     <script>
       class Rectangle {
         constructor(h, w) {
@@ -321,7 +308,7 @@
       console.log(s1.parameter());
     </script>
 
-    <h3>19. Find longest word in a sentence</h3>
+    <h3>18. Find longest word in a sentence</h3>
     <script>
       function findLongestWord(sentence) {
         let words = sentence.split(" ");
@@ -336,7 +323,7 @@
       console.log(findLongestWord("I love coding in JavaScript"));
     </script>
 
-    <h3>20. Checks whether a given string is a palindrone or not</h3>
+    <h3>19. Checks whether a given string is a palindrone or not</h3>
     <script>
       //A palindrone is word that reads the same forword as well as backword.
       function isPalindrone(str) {
@@ -346,7 +333,7 @@
       console.log(isPalindrone("racecar"));
     </script>
 
-    <h3>21. Remove duplicate elements from an array</h3>
+    <h3>20. Remove duplicate elements from an array</h3>
     <script>
       //Using Loop Method
       function removeDuplicates(arr) {
@@ -368,7 +355,7 @@
       console.log(removeByUsingSet([1, 2, 3, 4, 4, 5, 6, 6]));
     </script>
 
-    <h3>22. Checks whether two strings are anagrams or not</h3>
+    <h3>21. Checks whether two strings are anagrams or not</h3>
     <script>
       //An anagram is a word formed by rearranging the letters of another word.
       function isAnagram(str1, str2) {
@@ -379,7 +366,7 @@
       console.log(isAnagram("listen", "silent"));
     </script>
 
-    <h3>23. Returns the number of vowels in a string</h3>
+    <h3>22. Returns the number of vowels in a string</h3>
     <script>
       function countVowels(str) {
         const vowels = ["a", "e", "i", "o", "u"];
@@ -394,7 +381,7 @@
       console.log(countVowels("Hello World"));
     </script>
 
-    <h3>24. Find the largest number in an array</h3>
+    <h3>23. Find the largest number in an array</h3>
     <script>
       function findLargestNumber(arr) {
         let largest = arr[0];
@@ -408,7 +395,7 @@
       console.log(findLargestNumber([2, 4, 6, 9, 5, 3]));
     </script>
 
-    <h3>25. Check the given number is prime or not</h3>
+    <h3>24. Check the given number is prime or not</h3>
     <script>
       //A prime number is only divisible by 1 and itself.
       //Number less than 2 are not prime number and any number more than half not divisible
@@ -425,7 +412,7 @@
       console.log(isPrimeNumber(8));
     </script>
 
-    <h3>26. Calculate the factorial of a number</h3>
+    <h3>25. Calculate the factorial of a number</h3>
     <script>
       function factorial(num) {
         if (num === 0) {
@@ -440,7 +427,7 @@
       console.log(factorial(5));
     </script>
 
-    <h3>27. Remove all whitespace characters from a string</h3>
+    <h3>26. Remove all whitespace characters from a string</h3>
     <script>
       const inputString = "  Interview,    Happy  ";
       function removeWhiteSpace(str) {
@@ -450,7 +437,7 @@
       console.log(removeWhiteSpace(inputString));
     </script>
 
-    <h3>28. Print the true value property from an object</h3>
+    <h3>27. Print the true value property from an object</h3>
     <script>
       let isSkilled = {
         JavaScript: true,
@@ -475,7 +462,7 @@
       console.log(trueProperty);
     </script>
 
-    <h3>29. Capitalize the first letter of each element in an array</h3>
+    <h3>28. Capitalize the first letter of each element in an array</h3>
     <script>
       let players = ["dhoni", "raina", "jadega", "virat", "iyer"];
 
@@ -496,7 +483,7 @@
       console.log(newPlayers);
     </script>
 
-    <h3>30. Count the number of each character in a string</h3>
+    <h3>29. Count the number of each character in a string</h3>
     <script>
       const str = "hare krishna here ram";
       let characterNumber = {};
@@ -508,6 +495,32 @@
         }
       }
       console.log(characterNumber);
+    </script>
+
+    <h3>30. Find missing number from array...?</h3>
+    <script>
+      let array = [1, 2, 3, 4, 6, 7, 8, 9];
+      // Step_1
+      function findMissingNumber(arr) {
+        const expectedSum = (9 * (9 + 1)) / 2;
+        const actualSum = arr.reduce((sum, num) => sum + num, 0);
+        const missedNumber = expectedSum - actualSum;
+        return missedNumber;
+      }
+      const result = findMissingNumber(array);
+      console.log("The missing number is: " + result);
+
+      //Step_2
+      function findMissingNumbr(arr) {
+        let missedNum = [];
+        for (let i = 1; i <= arr.length + 1; i++) {
+          if (!arr.includes(i)) {
+            missedNum.push(i);
+          }
+        }
+        return missedNum;
+      }
+      console.log(findMissingNumbr(array));
     </script>
   </body>
 </html>

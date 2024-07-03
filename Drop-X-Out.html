@@ -3,115 +3,133 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>50 JS Questions</title>
+    <title>Drop-X-Out</title>
   </head>
   <body>
     <h1 style="text-align: center">50+ JavaScript Practice Exercise</h1>
     <p>Source Code : Drop-X-Out</p>
 
-    <h3>1. Console: Print "Hello World"</h3>
+    <h3>1. Console "Hello, World".</h3>
     <script>
-      console.log("Welcome to New Lecture");
-      let greet = "Hello World";
+      let greet = "Hello, World!";
       console.log(greet);
+      // console.log("Hello, World!");
     </script>
 
-    <h3>2. Loop: Print 1 to 5</h3>
+    <h3>2. Print number 1 to 5.</h3>
     <script>
-        //Using For Loop
-        for (let i = 1; i <= 5; i++) {
-          // console.log(i);
-        }
-
-        //Using While Loop
-        let i = 1;
-        while (i <= 5) {
-          // console.log(i);
-          i++;
-        }
-
-        //Using Do While Loop
-        let j = 1;
-        do {
-          // console.log(j);
-          j++;
-        } while (j <= 5);
-    </script>
-
-    <h3>3. Operator: Add two number using</h3>
-    <script>
-        let addValue = (x, y) => x + y;
-        console.log(addValue(5, 6));
-    </script>
-
-    <h3>4. Function: Calculate area of rectangle</h3>
-    <script>
-        function calculateArea(width, height) {
-          return width * height;
-        }
-        let totalArea = calculateArea(7, 5);
-        console.log("Area of Rectangle : " + totalArea);
-    </script>
-
-    <h3>5. Reverse: Reverse the String</h3>
-    <script>
-      let str = "ABCD XYZ";
-      function reverseStr(str) {
-        return str.split("").reverse().join("");
+      //For Loop
+      for (let i = 1; i <= 5; i++) {
+        console.log(i);
       }
-      console.log(reverseStr(str));
+
+      //While loop
+      let i = 1;
+      while (i <= 5) {
+        console.log(i);
+        i++;
+      }
     </script>
 
-    <h3>6. Conditional: Check number even or odd</h3>
+    <h3>3. Write function to add two numbers.</h3>
     <script>
-      function checkEvenOdd(num) {
-        if (num % 2 == 0) {
+      const sumOfTwoNums = (n1, n2) => {
+        return n1 + n2;
+      };
+      console.log(sumOfTwoNums(7, 5));
+    </script>
+
+    <h3>4. Calculate area of rectange.</h3>
+    <script>
+      const areaOfRectangle = (w, h) => {
+        return w * h;
+      };
+      console.log(areaOfRectangle(15, 12));
+    </script>
+
+    <h3>5. Reverse a string.</h3>
+    <script>
+      const reverseString = (str) => {
+        return str.split("").reverse().join("");
+      };
+      console.log(reverseString("kumar"));
+    </script>
+
+    <h3>6. Check even or odd.</h3>
+    <script>
+      const checkEvenOrOdd = (num) => {
+        if (num % 2 === 0) {
           return "Even Number";
         } else {
           return "Odd Number";
         }
-      }
-      console.log(checkEvenOdd(16));
+      };
+      console.log(checkEvenOrOdd(5));
     </script>
 
-    <h3>7. Conditional: Check Leap year</h3>
+    <h3>7. Check Leap year.</h3>
     <script>
-      let year = 1400;
-      let isLeapYear = (year) => {
-        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 == 0) {
-          return `${year} is a leap year`;
+      const checkLeapYear = (year) => {
+        if ((year % 4 === 0 && year !== 100) || year % 400 === 0) {
+          return `${year} is Leap Year!`;
         } else {
-          return `${year} is not a leap year`;
+          return `${year} is not Leap year!`;
         }
       };
-      console.log(isLeapYear(year));
+      console.log(checkLeapYear(2004));
     </script>
 
-    <h3>8. Loop: Sum all elements in an array</h3>
+    <h3>8. Sum of all elements in an array.</h3>
     <script>
-      let arr = [20, 30, 40, 50, 60];
-      let sum = 0;
-      for (let i = 0; i < arr.length; i++) {
-        sum += arr[i];
-      }
-      console.log(sum);
+      const sumOfElements = (arr) => {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+          // console.log(arr.length);
+          sum += arr[i];
+        }
+        return sum;
+      };
+      console.log(sumOfElements([2, 3, 4, 5, 6]));
+
+      const sumOfElement = (arr) => {
+        let sum = 0;
+        for (let elem of arr) {
+          sum += elem;
+        }
+        return sum;
+      };
+      console.log(sumOfElement([2, 3, 4, 5, 6]));
     </script>
 
-    <h3>9. Object: Create a car obj and Add a method to startEngine</h3>
+    <h3>9. Object: Create a car obj and Add a method startEngine to car.</h3>
     <script>
+      //By Regular Object
       let car = {
-        make: "Honda",
-        model: "i 20",
-        year: 2015,
+        company: "Honda",
+        model: "Honda City",
+        year: 1992,
+        startEngine() {
+          console.log("The Engine has started");
+        },
       };
-      car.startEngine = function () {
-        return "Engine Statred";
-      };
-      console.log(car.startEngine);
-      console.log(car.startEngine());
+      car.startEngine();
+
+      //By Class method
+      class Car {
+        constructor(company, model, year) {
+          this.company = company;
+          this.model = model;
+          this.year = year;
+        }
+        startEngine() {
+          console.log("The Engine has started");
+        }
+      }
+      let newCar = new Car("Honda", "Honda Amaze", 1992);
+      newCar.startEngine();
     </script>
 
-    <h3>10. DOM: Change the paragraph content</h3>
+    <h3>10. DOM: Change the paragraph content.</h3>
     <p id="myPara">This is a Paragraph.</p>
     <script>
       let para = document.getElementById("myPara");
@@ -119,7 +137,7 @@
       para.textContent = "Pragraph content changed by JavaScript.";
     </script>
 
-    <h3>11. DOM: Create a button dynamically and add to webpage</h3>
+    <h3>11. DOM: Create a button dynamically and add to webpage.</h3>
     <div id="btnCreate"></div>
     <script>
       let container = document.getElementById("btnCreate");
@@ -128,7 +146,7 @@
       container.appendChild(button);
     </script>
 
-    <h3>12. Event: Add event to a button that displays an alert</h3>
+    <h3>12. Event: Add event to a button that displays an alert.</h3>
     <button id="alertBtn">Alert Me</button>
     <script>
       let buttn = document.querySelector("#alertBtn");
@@ -137,7 +155,7 @@
       });
     </script>
 
-    <h3>13. Loop: Calculate the factorial of given number:</h3>
+    <h3>13. Loop: Calculate the factorial of given number.</h3>
     <script>
       //Facorial means: let number is 5, then factorial will be 5*4*3*2*1
       //Factorial of 0 = 1 and Factorial of 1 = 1.
@@ -148,15 +166,15 @@
       console.log(fact);
     </script>
 
-    <h3>14. Random: Generate a random number between a range</h3>
+    <h3>14. Random: Generate a random number between a range.</h3>
     <script>
       function randomNum(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
-      console.log(randomNum(21, 60));
+      console.log(randomNum(20, 60));
     </script>
 
-    <h3>15. Filter: Make a new array with even numbers</h3>
+    <h3>15. Filter: Make a new array with even numbers.</h3>
     <script>
       let nums = [1, 2, 3, 4, 5, 6, 7];
 
@@ -172,7 +190,7 @@
       console.log(nums); //Original as it is
     </script>
 
-    <h3>16. Map: Double all elements in an arrray</h3>
+    <h3>16. Map: Double all elements in an arrray.</h3>
     <script>
       let numbers = [5, 7, 9, 6, 8];
       function doubleTheNumbers(num) {
@@ -181,7 +199,7 @@
       console.log(doubleTheNumbers(numbers));
     </script>
 
-    <h3>17. Reduce: Find the largest element in an array</h3>
+    <h3>17. Reduce: Find the largest element in an array.</h3>
     <script>
       function largestNumbers(num) {
         return num.reduce((max, cur) => {
@@ -191,19 +209,17 @@
       console.log(largestNumbers(numbers));
     </script>
 
-    <h3>
-      18. Filter: Remove all occurrences of a specific element fom an array
-    </h3>
+    <h3>18. Filter: Return all occurrences except a specific element.</h3>
     <script>
       let arry = [10, 20, 10, 30, 20, 10, 10, 50];
       let target = 10;
-      function removeElement() {
+      function removeElement(arr) {
         return arry.filter((item) => item !== target);
       }
-      console.log(removeElement(arr, target));
+      console.log(removeElement(arry, target));
     </script>
 
-    <h3>19. Date & Time: Display the current date and time</h3>
+    <h3>19. Date & Time: Display the current date and time.</h3>
     <script>
       function getCurrentDateAndTime() {
         let currentDate = new Date();
@@ -212,7 +228,7 @@
       console.log(getCurrentDateAndTime());
     </script>
 
-    <h3>20. Async/await: Handle error during API data fetch using try catch</h3>
+    <h3>20. Async/await: Handle error during API using try & catch.</h3>
     <script>
       async function fetchData() {
         try {
@@ -225,22 +241,22 @@
           console.error("Error Fetching Data:" + error);
         }
       }
-      console.log(fetchData());
+      fetchData();
     </script>
 
-    <h3>21. Recursive Function: Calculate the factorial</h3>
+    <h3>21. Recursive Function: Calculate the factorial.</h3>
     <script>
-      function factorial(n) {
+      const factorial = (n) => {
         if (n === 1) {
           return 1;
         } else {
           return n * factorial(n - 1);
         }
-      }
+      };
       console.log(factorial(6));
     </script>
 
-    <h3>22. Recursive Function: Find the nth Fibonacci number</h3>
+    <h3>22. Recursive Function: Find the nth Fibonacci number.</h3>
     <script>
       function fibonacci(n) {
         if (n <= 1) {
@@ -249,10 +265,11 @@
           return fibonacci(n - 1) + fibonacci(n - 2);
         }
       }
-      console.log(fibonacci(3));
+      console.log(fibonacci(7));
+      0, 1, 2, 3, 5, 8, 13;
     </script>
 
-    <h3>23. Closure: Create a counter function</h3>
+    <h3>23. Closure: Create a counter function.</h3>
     <script>
       function createCounter() {
         let count = 0;
@@ -266,7 +283,7 @@
       console.log(counter());
     </script>
 
-    <h3>24. Closure: Implement a private variable using closure</h3>
+    <h3>24. Closure: Implement a private variable using closure.</h3>
     <script>
       function counterFun() {
         let count = 0; //Private Variable
@@ -293,7 +310,7 @@
 
     <h3>
       25. Prototype: Create a prototype method to calculate the total value of
-      product
+      product.
     </h3>
     <script>
       //Constructor function
@@ -322,7 +339,7 @@
       console.log(`Total Value of ${product2.name} in USA : $${product2Value}`);
     </script>
 
-    <h3>26. Callback: Multiple API calls and processes the data</h3>
+    <h3>26. Callback: Multiple API calls and processes the data.</h3>
     <script>
       function makeAPICall(url, cb) {
         fetch(url)
@@ -332,6 +349,7 @@
             console.error("Error during API call:", error.message)
           );
       }
+
       function handleData(data) {
         console.log("Processed Data", data);
       }
@@ -346,7 +364,7 @@
       main();
     </script>
 
-    <h3>27. Promise: Multiple API calls and processes the data</h3>
+    <h3>27. Promise: Multiple API calls and processes the data.</h3>
     <script>
       function makeAPICalls(url) {
         return fetch(url)
@@ -378,7 +396,36 @@
       mainFunction();
     </script>
 
-    <h3>28. Promise: Load multiple images asynchronously and display on web</h3>
+    <h3>
+      28. Multiple API calls and Processed the data using async and await.
+    </h3>
+    <script>
+      const makeAPICalls = async (url) => {
+        try {
+          let response = await fetch(url);
+          return await response.json();
+        } catch (error) {
+          console.error("Error during API calls", error.message);
+        }
+      };
+      const mainFunctions = async () => {
+        const apiUrl1 = "https://jsonplaceholder.typicode.com/todos/1";
+        const apiUrl2 = "https://jsonplaceholder.typicode.com/todos/2";
+
+        try {
+          const data1 = await makeAPICalls(apiUrl1);
+          const data2 = await makeAPICalls(apiUrl2);
+
+          console.log("Processed Data 1: ", data1);
+          console.log("Processed Data 2: ", data2);
+        } catch (error) {
+          console.error("Error during API calls");
+        }
+      };
+      mainFunctions();
+    </script>
+
+    <h3>29. Promise: Load multiple images asynchronously and display on web.</h3>
     <div
       id="imgContainer"
       style="display: flex; height: 100px; width: 70px"
@@ -404,7 +451,7 @@
       // Image path recheck
     </script>
 
-    <h3>29. Async: Fetch data from API and handle errors using try/catch</h3>
+    <h3>30. Async: Fetch data from API and handle errors using try/catch.</h3>
     <script>
       async function fetchData(url) {
         try {
@@ -425,7 +472,7 @@
     </script>
 
     <h3>
-      30. DOM: Create an image gallery using dynamically generated elements
+      31. DOM: Create an image gallery using dynamically generated elements.
     </h3>
     <div id="gallery" style="display: flex; height: 100px"></div>
     <script>
@@ -441,7 +488,7 @@
     </script>
 
     <h3>
-      31.DOM: Form validation function that check requird fields are filled out
+      32.DOM: Form validation function that check requird fields are filled out.
     </h3>
     <form id="myForm">
       <input type="text" name="name" required />
@@ -465,8 +512,8 @@
     </script>
 
     <h3>
-      32. Event Propagation: Create multiple nested elements and observe the
-      event bubbling and capturing behavior
+      33. Event Propagation: Create multiple nested elements and observe the
+      event bubbling and capturing behavior.
     </h3>
     <div id="div">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -485,8 +532,8 @@
     </script>
 
     <h3>
-      33. Event Propagation: Implement a click event on a parent element that
-      triggers different actions based on which child element was Clicked
+      34. Event Propagation: Implement a click event on a parent element that
+      triggers different actions based on which child element was Clicked.
     </h3>
     <ul id="myList">
       <li>HTML</li>
@@ -506,7 +553,7 @@
     </script>
 
     <h3>
-      34. Set Interval: Creating a countdown timer and atrt after 2 seconds
+      35. Set Interval: Creating a countdown timer and atrt after 2 seconds.
     </h3>
     <h4>CountDown Timer</h4>
     <h3 id="timer">00 : 00</h3>
@@ -536,8 +583,8 @@
     </script>
 
     <h3>
-      35. Set Timeout: Write JavaScript code to implement the quote-changing
-      feature
+      36. Set Timeout: Write JavaScript code to implement the quote-changing
+      feature.
     </h3>
     <h4>Motivational Quotes</h4>
     <div id="quoteDisplay">Loading...</div>
@@ -562,7 +609,7 @@
       changeQuoteInterval();
     </script>
 
-    <h3>36. Regular Expression: Validate an email address</h3>
+    <h3>37. Regular Expression: Validate an email address.</h3>
     <script>
       function emailValidate(email) {
         const emailRegExp = /^[a-z_.-0-9]+@[a-z0-9]+\.[a-z]{2,}$/;
@@ -573,7 +620,7 @@
       console.log(emailValidate(email1));
     </script>
 
-    <h3>37. Array: Multidimensioal Array</h3>
+    <h3>38. Array: Multidimensioal Array.</h3>
     <script>
       function createMultidimentionalArray(row, col) {
         let arr = [];
@@ -619,7 +666,7 @@
       reverseDisplay(multiArray);
     </script>
 
-    <h3>38. Destructuring: Destructuring an object to get its properties</h3>
+    <h3>39. Destructuring: Destructuring an object to get its properties.</h3>
     <script>
       const person = {
         fname: "Jhon",
@@ -637,7 +684,7 @@
     </script>
 
     <h3>
-      39. Class: Create a Book class with properties and method(ageOfBook)
+      40. Class: Create a Book class with properties and method(ageOfBook).
     </h3>
     <script>
       class Book {
@@ -660,9 +707,9 @@
     </script>
 
     <h3>
-      40. Class Inheritance: Create a subclass 'Megazine' that extends the
+      41. Class Inheritance: Create a subclass 'Megazine' that extends the
       'Book' class with an additional property 'issue'. Add a method to the
-      'Megazine' class to get the megazine's issue number
+      'Megazine' class to get the megazine's issue number.
     </h3>
     <script>
       //Book class already created in last question
@@ -681,7 +728,7 @@
     </script>
 
     <h3>
-      41. Prototype Inheritance: Create two objects 'persn' and 'student' with
+      42. Prototype Inheritance: Create two objects 'persn' and 'student' with
       properties and add a method to 'person' and demonstrate 'student' has
       access to 'person'.
     </h3>
@@ -703,7 +750,7 @@
     </script>
 
     <h3>
-      42. Array: Create function that determines whether a number is Oddish or
+      43. Array: Create function that determines whether a number is Oddish or
       Evenish. A number is Oddish if the sum of all of its digits is odd and a
       number is Evenish if the sum of all of its digit is even. If the number is
       Oddish, return 'Oddish'. Otherwise, return 'Evenish'.
@@ -719,7 +766,7 @@
     </script>
 
     <h3>
-      43. String: Given a string, reverse all the words which have odd length.
+      44. String: Given a string, reverse all the words which have odd length.
       The even length words are not changed.
     </h3>
     <script>
@@ -742,7 +789,7 @@
     </script>
 
     <h3>
-      44. Array: Create a function that takes an array of objects which
+      45. Array: Create a function that takes an array of objects which
       calculates the total price and returns it as a number.
     </h3>
     <script>
@@ -764,7 +811,7 @@
     </script>
 
     <h3>
-      45. Create a function that takes an array of numbers and return 'Boom!' if
+      46. Create a function that takes an array of numbers and return 'Boom!' if
       the digit 7 appears in the array.
     </h3>
     <script>
@@ -781,7 +828,7 @@
     </script>
 
     <h3>
-      46. String: Create a function that takes a string as an argument. The
+      47. String: Create a function that takes a string as an argument. The
       function must return a string containing 1s and 0s based on the string
       argument's words. If any word in the argument is not equal to zero or one
       , just ignore it. The return string's length should be a multiple of 6,
@@ -814,7 +861,7 @@
     </script>
 
     <h3>
-      47. String: Create a function that takes in a sentence and returns a
+      48. String: Create a function that takes in a sentence and returns a
       running list of consonants per word and vowels per word.
     </h3>
     <script>
@@ -847,7 +894,7 @@
     </script>
 
     <h3>
-      48. Create a function that takes the month and year(as integers) and
+      49. Create a function that takes the month and year(as integers) and
       returns the number of days in the month.
     </h3>
     <script>
@@ -868,16 +915,16 @@
       console.log(days(12, 2018));
     </script>
 
-    <h3>49. Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</h3>
+    <h3>
+      50. Given two integers representing the numerator and denominator of a
+      fraction, return the fraction in string format.
+    </h3>
     <script>
       function fraction(numerator, denominator) {
-        const res = numerator/denominator;
+        const res = numerator / denominator;
         return res.toString();
       }
-      console.log(fraction(1, 2));  
+      console.log(fraction(1, 2));
     </script>
-
-    <h3>50.</h3>
-    <script></script>
   </body>
 </html>
