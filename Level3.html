@@ -8,31 +8,213 @@
   <body>
     <h1 style="text-align: center">JavaScript Exercises</h1>
 
-    <h3>1. Checks whether a string is palindrome or not ?</h3>
+    <h3>1. Calculates the factorial of given number.</h3>
     <script>
-      const checkPalindrome = (str) => {
-        let reverseStr = str.split("").reverse().join("");
-        return reverseStr === str;
+      //Facorial means: let number is 5, then factorial will be 5*4*3*2*1
+      //Factorial of 0 = 1 and Factorial of 1 = 1.
+
+      //By recursive function
+      let factorialNums = (num) => {
+        if (num === 0) {
+          return 1;
+        } else {
+          return num * factorialNums(num - 1);
+        }
       };
-      console.log(checkPalindrome("Loop"));
-      console.log(checkPalindrome("LooL"));
+      console.log(factorialNums(5));
+
+      //By loop
+      let factorial = (num) => {
+        let facto = 1;
+        for (let i = 1; i <= num; i++) {
+          facto *= i;
+        }
+        return facto;
+      };
+      console.log(factorial(5));
     </script>
 
-    <h3>2. Convert the first letter of each word to uppercase.</h3>
+    <h3>2. Find the nth Fibonacci number.</h3>
+    <script>
+      // Sequence of numbers where each number is the sum of the two preceding ones.
+      // Usually starting with 0 and 1 : 0, 1, 1, 2, 3, 5, 8, 13, 21, and so on.
+
+      //Using recursive function
+      let fibonacci = (n) => {
+        if (n <= 1) {
+          return n;
+        } else {
+          return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+      };
+      console.log(fibonacci(5));
+
+      //Using loop
+      const fibonaci = (n) => {
+        if (n <= 1) {
+          return n;
+        } else {
+          let n1 = 0,
+            n2 = 1,
+            temp;
+          for (let i = 2; i <= n; i++) {
+            temp = n1 + n2;
+            n1 = n2;
+            n2 = temp;
+          }
+          return n2;
+        }
+      };
+      console.log(fibonaci(6));
+    </script>
+
+    <h3>3. Check Palindrome of a string.</h3>
+    <script>
+      //Palindrome is a word or number that reads the same forward and backward.
+      //Examples: "madam" "racecar"
+
+      //Using reverse method
+      const checkPalindrome = (str) => {
+        const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+        const newStr = cleanedStr.split("").reverse().join("");
+        return newStr === cleanedStr;
+      };
+      const response = checkPalindrome("Race Car");
+      console.log(response);
+
+      //Using loop
+      const checkPalindrom = (str) => {
+        let reverse = "";
+        for (let i = str.length - 1; i >= 0; i--) {
+          reverse += str[i];
+        }
+        return reverse.toLowerCase() === str.toLowerCase();
+      };
+      const respnse = checkPalindrom("Madam");
+      console.log(respnse);
+    </script>
+
+    <h3>4. Check Anagram</h3>
+    <script>
+      // Anagram is a word formed by rearranging the letters of a different word, typically using all the original letters exactly once.
+      // Examples: "listen" and "silent," "evil" and "vile."
+
+      //Using sort method
+      const checkAnagram = (str1, str2) => {
+        const convertedString = (str) =>
+          str
+            .toLowerCase()
+            .replace(/[^a-zA-Z0-9]/g, "")
+            .split("")
+            .sort()
+            .join("");
+        return convertedString(str1) === convertedString(str2);
+      };
+
+      console.log(checkAnagram("Sea son", "Season")); // Output: true
+      console.log(checkAnagram("LIsten", "Silent")); // Output: true
+      console.log(checkAnagram("Scissor", "Seasonsss")); // Output: false
+
+      //Using loop
+      const checkAnagrams = (str1, str2) => {
+        let str11 = str1.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+        let str12 = str2.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+
+        if (str11.length !== str12.length) {
+          return false;
+        }
+
+        // Create character count objects
+        let count1 = {};
+        let count2 = {};
+
+        // Count characters in the first string
+        for (let i = 0; i < str11.length; i++) {
+          let char = str11[i];
+          count1[char] = (count1[char] || 0) + 1;
+        }
+
+        // Count characters in the second string
+        for (let i = 0; i < str12.length; i++) {
+          let char = str12[i];
+          count2[char] = (count2[char] || 0) + 1;
+        }
+
+        // Compare character counts
+        for (let char in count1) {
+          if (count1[char] !== count2[char]) {
+            return false;
+          }
+        }
+
+        return true;
+      };
+      console.log(checkAnagrams("Listen", "Silent"));
+      console.log(checkAnagrams("Evil", "Vile"));
+    </script>
+
+    <h3>5. Flatten array of array...?</h3>
+    <script>
+      var arr = [1, 2, [3, 4, 5], 6, 7, [8, 9, [10, [11], 12], 13], 14, 15];
+
+      //Approach_1: Flat Method
+      let simpleArr = arr.flat(Infinity).join(" ");
+      console.log(simpleArr);
+
+      //Approach_2: Loop and Recursive function
+      let results = [];
+      function flatten(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          if (Array.isArray(arr[i])) {
+            flatten(arr[i]); // Recursive call
+          } else {
+            results.push(arr[i]);
+          }
+        }
+        return results;
+      }
+      console.log(flatten(arr));
+
+      //Approach_3: Array methods
+      function flatFunc(arr) {
+        let flattenResult = [];
+        let stack = [...arr];
+        // console.log(stack.length);
+
+        while (stack.length) {
+          let current = stack.shift();
+
+          if (Array.isArray(current)) {
+            stack.push(...current);
+          } else {
+            flattenResult.push(current);
+          }
+        }
+        return flattenResult;
+      }
+      console.log(flatFunc(arr));
+    </script>
+
+    <h3>6. Convert the first letter of each word to uppercase.</h3>
     <script>
       const firstLetterCapitalized = (str) => {
-        let capitalizedStr = str.split(" ").map((word) => word[0].toUpperCase() + word.slice(1));
+        let capitalizedStr = str
+          .split(" ")
+          .map((word) => word[0].toUpperCase() + word.slice(1));
         return capitalizedStr.join(" ");
       };
       console.log(firstLetterCapitalized("tapan samal"));
       console.log(firstLetterCapitalized("realy, are you happy"));
     </script>
 
-    <h3>3. Check number of occurrence in a string.</h3>
+    <h3>7. Check number of occurrence in a string.</h3>
     <script>
       const checkOccurrence = (str) => {
         let occurranceObj = {};
-        str.toUpperCase().split("").forEach((val) => {
+        str
+          .toUpperCase()
+          .split("")
+          .forEach((val) => {
             if (occurranceObj.hasOwnProperty(val) === false) {
               occurranceObj[val] = 1;
             } else {
@@ -44,7 +226,7 @@
       console.log(checkOccurrence("Tapan"));
     </script>
 
-    <h3>4. Create odd and even group from an array.</h3>
+    <h3>8. Create odd and even group from an array.</h3>
     <script>
       let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       const groupByOddEven = nums.reduce((acc, num) => {
@@ -58,7 +240,7 @@
       console.log(groupByOddEven);
     </script>
 
-    <h3>5. Create a group by property value.</h3>
+    <h3>9. Create a group by property value.</h3>
     <script>
       const products = [
         { id: 1, category: "Electronics", brand: "Apple" },
@@ -95,30 +277,7 @@
       console.log(groupByCategory(products));
     </script>
 
-    <h3>6. Loop an array of objects and print names and remove non-male.</h3>
-    <script>
-      var arr = [
-        { name: "tapan", gender: "male" },
-        { name: "barish", gender: "female" },
-        { name: "sapan", gender: "male" },
-        { name: "akash", gender: "male" },
-        { name: "rishu", gender: "female" },
-      ];
-      let maleGender = arr.filter((prop) => prop.gender === "male");
-      let maleNames = maleGender.map((nam) => nam.name);
-      console.log(...maleNames);
-
-      //Remove non-male
-      let nonMale = [];
-      arr.forEach((prop) => {
-        if (prop.gender !== "male") {
-          nonMale.push(prop.name);
-        }
-      });
-      console.log(...nonMale);
-    </script>
-
-    <h3>7. find all pairs in an array that sum up to 6.</h3>
+    <h3>10. find all pairs in an array that sum up to 6.</h3>
     <script>
       const array = [1, 5, 7, -1, 3, 2, 6, 4];
       const sum = 6;
@@ -156,7 +315,7 @@
       console.log(result);
     </script>
 
-    <h3>8. Find the most frequent element from an array...?</h3>
+    <h3>10. Find the most frequent element from an array...?</h3>
     <script>
       const findMostFreqNum = (arr) => {
         let freqNum = {};
@@ -178,7 +337,7 @@
       findMostFreqNum([1, 4, 6, 8, 5, 6, 2, 1, 6, 5]);
     </script>
 
-    <h3>9. Write a JS program to shuffle an array...?</h3>
+    <h3>11. Write a JS program to shuffle an array...?</h3>
     <script>
       const arry = [1, 2, 3, 4, 5, 6];
 
@@ -201,30 +360,7 @@
       console.log(shuffledArry);
     </script>
 
-    <h3>10. Flatten array of array...?</h3>
-    <script>
-      //Approach_1: Loop and Recursive function
-      var arr = [1, 2, [3, 4, 5], 6, 7, [8, 9, [10, [11], 12], 13], 14, 15];
-
-      let output = "";
-      function flatten(arr) {
-        for (let i = 0; i < arr.length; i++) {
-          if (Array.isArray(arr[i])) {
-            flatten(arr[i]); //Recusive call
-          } else {
-            output += arr[i];
-          }
-        }
-        return output;
-      }
-      console.log(flatten(arr));
-
-      //Approach_2: Flat Method
-      let simpleArr = arr.flat(Infinity).join(" ");
-      console.log(simpleArr);
-    </script>
-
-    <h3>11. Count duplicate element in array...?</h3>
+    <h3>12. Count duplicate element in array...?</h3>
     <script>
       const items = ["a", "b", "c", "a", "b", "b", "c", "d"];
 
@@ -238,7 +374,38 @@
       console.log(countDuplicate(items));
     </script>
 
-    <h3>12. </h3>
+    <h3>13. Sort array of numbers.</h3>
+    <script>
+      //Using sort method
+      const sortedNums = (nums) => {
+        return nums.sort((a, b) => a - b);
+      };
+      console.log(sortedNums([20, 5, 31, 7, 9, 7, 11]));
+
+      //Using Loop
+      const sortedArray = (arr) => {
+        let n = arr.length;
+        for (let i = 0; i < n - 1; i++) {
+          for (let j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+              // Swap the elements
+              let temp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = temp;
+            }
+          }
+        }
+        return arr;
+      };
+
+      console.log(sortedArray([20, 5, 31, 7, 5, 9, 11]));
+      console.log(sortedArray(["F", "A", "E", "D", "B", "C"]));
+    </script>
+    
+    <h3>22. Write polyfill of map method.</h3>
+    <h3>23. Write polyfill of filter method.</h3>
+    <h3>24. Write polyfill of reduce method.</h3>
+    
     <h3>25. Define a function that return 143545000</h3>
     <script>
       function computeAmout() {
