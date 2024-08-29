@@ -151,11 +151,20 @@
     <script>
       let array = [450, 250, "abc", "kumar", 360, "xyz", 140];
       let sum = 0;
+      //ForEach method
       array.forEach((num) => {
         if (typeof num === "number") {
           sum = sum + num;
         }
       });
+      console.log(sum);
+
+      //Loop
+      for (let num of array) {
+        if (typeof num === "number") {
+          sum = sum + num;
+        }
+      }
       console.log(sum);
     </script>
 
@@ -183,8 +192,29 @@
 
     <h3>10. Check an object empty or not ?</h3>
     <script>
-      const isObjectEmpty = (obj) => Object.keys(obj).length === 0;
+      //Object.keys()
+      const isObjectEmpty = (obj) => Object.keys(obj).length >= 1;
       console.log(isObjectEmpty({ key: 1 }));
+
+      //Object.entries()
+      const checkObj = (obj) => Object.entries(obj).length >= 1;
+      console.log(checkObj({ name: "object" }));
+
+      //JSON.stringify()
+      const checkLength = (obj) =>
+        JSON.stringify(obj) !== "{}" ? "Not empty" : "Empty";
+      console.log(checkLength({ name: "" }));
+
+      //Loop
+      const checkObjLength = (obj) => {
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            return "Not Empty!";
+          }
+        }
+        return "Empty!";
+      };
+      console.log(checkObjLength({ name: "JS" }));
     </script>
 
     <h3>11. Find Max, min and avg value from an array</h3>
@@ -255,16 +285,6 @@
         return (doubleELement = arr.map((num) => num * num));
       };
       console.log(convertElementsToDouble(ary));
-
-      //Using loop
-      const convertElemsToDouble = (arr) => {
-        let elemsToDouble = [];
-        for (let i = 0; i < arr.length; i++) {
-          elemsToDouble.push(arr[i] * arr[i]);
-        }
-        return elemsToDouble;
-      };
-      console.log(convertElemsToDouble(ary));
     </script>
 
     <h3>13. Generate an array of number from 1 to n.</h3>
@@ -285,12 +305,30 @@
 
     <h3>14. Merge two array and remove duplicate.</h3>
     <script>
-      let arr1 = [1, 2, 3, 4, 5];
+      let arr1 = [1, 2, 3, 4, 5, 2, 4];
       let arr2 = [4, 5, 6, 7, 5];
+
+      //Remove from single array
+      let uniqueItems = (arr) => [...new Set(arr)];
+      console.log(uniqueItems(arr1));
 
       //Using Set method
       const mergeArray = (arr1, arr2) => [...new Set([...arr1, ...arr2])];
       console.log(mergeArray(arr1, arr2));
+
+      //Using Loop
+      let uniqueNum = [];
+      for (let ele of arr1) {
+        if (!uniqueNum.includes(ele)) {
+          uniqueNum.push(ele);
+        }
+      }
+      for (let ele of arr2) {
+        if (!uniqueNum.includes(ele)) {
+          uniqueNum.push(ele);
+        }
+      }
+      console.log(uniqueNum);
 
       //Using forEach method
       let combineArr = arr1.concat(arr2);
@@ -352,6 +390,7 @@
     <script>
       let values = ["React", "NextJS", "JavaScript", "NodeJS"];
       let randomIndex = Math.floor(Math.random() * values.length);
+      console.log(randomIndex);
       console.log(values[randomIndex]);
     </script>
 
@@ -402,155 +441,154 @@
 
     <h3>21. Difference between var and let using loop method.</h3>
     <script>
-      for (var k = 1; k <= 3; k++) {
+      for (var i = 1; i < 5; i++) {
         setTimeout(() => {
-          console.log(k);
+          console.log(i);
         });
       }
-      for (let k = 1; k <= 3; k++) {
+      for (let i = 1; i < 5; i++) {
         setTimeout(() => {
-          console.log(k);
+          console.log(i);
         });
       }
     </script>
 
-    <h3>22. Calculates the factorial of given number.</h3>
+    <h3>22. Concate two objects.</h3>
     <script>
-      //Facorial means: let number is 5, then factorial will be 5*4*3*2*1
-      //Factorial of 0 = 1 and Factorial of 1 = 1.
+      //Concat two objects
+      var data = { name: "tapan", age: 30 };
+      var moreData = { city: "Bls", skill: "JS" };
 
-      //By recursive function
-      let factorialNums = (num) => {
-        if (num === 0) {
-          return 1;
-        } else {
-          return num * factorialNums(num - 1);
-        }
-      };
-      console.log(factorialNums(5));
+      //By Loop
+      let concatData = {};
+      for (let key in data) {
+        concatData[key] = data[key];
+      }
+      for (let key in moreData) {
+        concatData[key] = moreData[key];
+      }
+      console.log(concatData);
 
-      //By loop
-      let factorial = (num) => {
-        let facto = 1;
-        for (let i = 1; i <= num; i++) {
-          facto *= i;
-        }
-        return facto;
-      };
-      console.log(factorial(5));
+      //By Spread Operator
+      var concatInfo = { ...data, ...moreData };
+      console.log(concatInfo);
+
+      //By Object.assign()
+      let mergeData = Object.assign({}, data, moreData);
+      console.log(mergeData);
     </script>
 
-    <h3>23. Find the nth Fibonacci number.</h3>
+    <h3>23. Create a Generator function.</h3>
     <script>
-      // Sequence of numbers where each number is the sum of the two preceding ones.
-      // Usually starting with 0 and 1 : 0, 1, 1, 2, 3, 5, 8, 13, 21, and so on.
-
-      //Using recursive function
-      let fibonacci = (n) => {
-        if (n <= 1) {
-          return n;
-        } else {
-          return fibonacci(n - 1) + fibonacci(n - 2);
-        }
-      };
-      console.log(fibonacci(5));
-
-      //Using loop
-      const fibonaci = (n) => {
-        if (n <= 1) {
-          return n;
-        } else {
-          let n1 = 0,
-            n2 = 1,
-            temp;
-          for (let i = 2; i <= n; i++) {
-            temp = n1 + n2;
-            n1 = n2;
-            n2 = temp;
-          }
-          return n2;
-        }
-      };
-      console.log(fibonaci(6));
+      function* generatorNumber() {
+        yield "First";
+        yield "Second";
+        yield "Third";
+      }
+      const generator = generatorNumber();
+      console.log(generator.next());
+      console.log(generator.next().value);
+      console.log(generator.next().done);
+      console.log(generator.next());
     </script>
 
-    <h3>24. Check Palindrome of a string.</h3>
+    <h3>24. Create a Debounce functionality in search bar.</h3>
+    <form>
+      <input type="text" id="searchItem" />
+    </form>
     <script>
-      //Palindrome is a word or number that reads the same forward and backward.
-      //Examples: "madam" "racecar"
-
-      //Using reverse method
-      const checkPalindrome = (str) => {
-        const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
-        const newStr = cleanedStr.split("").reverse().join("");
-        return newStr === cleanedStr;
+      const debounce = (func, delay) => {
+        let timeoutId;
+        return function (...args) {
+          let context = this;
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            func.apply(context, args);
+          }, delay);
+        };
       };
-      const response = checkPalindrome("Race Car");
-      console.log(response);
 
-      //Using loop
-      const checkPalindrom = (str) => {
-        let reverse = "";
-        for (let i = str.length - 1; i >= 0; i--) {
-          reverse += str[i];
-        }
-        return reverse.toLowerCase() === str.toLowerCase();
-      };
-      const respnse = checkPalindrom("Madam");
-      console.log(respnse);
+      const handleSearch = debounce(() => {
+        console.log("Function executed after 2000ms!");
+      }, 2000);
+
+      document
+        .getElementById("searchItem")
+        .addEventListener("input", handleSearch);
     </script>
 
-    <h3>25. Check Anagram</h3>
+    <h3>25. Create a simple countdown.</h3>
     <script>
-      // Anagram is a word formed by rearranging the letters of a different word, typically using all the original letters exactly once.
-      // Examples: "listen" and "silent," "evil" and "vile."
-
-      //Using sort method
-      const checkAnagram = (str1, str2) => {
-        const cleanString = (str) =>
-          str.toLowerCase().replace(/[^a-zA-Z0-9]/g, "").split("").sort().join("");
-        return cleanString(str1) === cleanString(str2);
-      };
-
-      console.log(checkAnagram("Sea son", "Season")); // Output: true
-      console.log(checkAnagram("LIsten", "Silent")); // Output: true
-      console.log(checkAnagram("Scissor", "Seasonsss")); // Output: false
-
-      //Using loop
-      const checkAnagrams = (str1, str2) => {
-        let str11 = str1.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-        let str12 = str2.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-
-        if (str11.length !== str12.length) {
-          return false;
+      let seconds = 1;
+      const countDown = setInterval(() => {
+        console.log(seconds);
+        seconds++;
+        if (seconds > 5) {
+          clearInterval(countDown);
+          console.log("Countdown Finished!");
         }
+      }, 1000);
+    </script>
 
-        // Create character count objects
-        let count1 = {};
-        let count2 = {};
+    <h3>26. Print names with gradeA and male category.</h3>
+    <script>
+      var students = [
+        { name: "Tapan", gender: "male", marks: 58 },
+        { name: "Barish", gender: "female", marks: 84 },
+        { name: "Sapan", gender: "male", marks: 52 },
+        { name: "Nandini", gender: "male", marks: 66 },
+      ];
+      let maleGender = arr.filter((prop) => prop.gender === "male");
+      let maleNames = maleGender.map((nam) => nam.name);
+      console.log(...maleNames);
 
-        // Count characters in the first string
-        for (let i = 0; i < str11.length; i++) {
-          let char = str11[i];
-          count1[char] = (count1[char] || 0) + 1;
+      //Remove non-male
+      let nonMale = [];
+      arr.forEach((prop) => {
+        if (prop.gender !== "male") {
+          nonMale.push(prop.name);
         }
+      });
+      console.log(...nonMale);
+    </script>
 
-        // Count characters in the second string
-        for (let i = 0; i < str12.length; i++) {
-          let char = str12[i];
-          count2[char] = (count2[char] || 0) + 1;
-        }
+    <h3>27. Array of name from array of users and filter if avtive.</h3>
+    <script>
+      const users = [
+        { id: 1, name: "Ram", age: 32, isActive: true },
+        { id: 1, name: "Laxman", age: 26, isActive: false },
+        { id: 1, name: "Sita", age: 28, isActive: true },
+      ];
 
-        // Compare character counts
-        for (let char in count1) {
-          if (count1[char] !== count2[char]) {
-            return false;
-          }
-        }
-        return true;
-      };
-      console.log(checkAnagrams("Listen", "Silent")); 
-      console.log(checkAnagrams("Evil", "Vile"));
+      //Using Map()
+      const nameArry = users.map((user) => user.name);
+      console.log(nameArry);
+
+      //Using ForEach()
+      let namArry = [];
+      users.forEach((user) => {
+        namArry.push(user.name);
+      });
+      console.log(namArry);
+
+      //Using Loop
+      let nmArry = [];
+      for (let i = 0; i < users.length; i++) {
+        nmArry.push(users[i].name);
+      }
+      console.log(nmArry);
+
+      //Using Filter()
+      const activeName = users
+        .filter((user) => user.isActive)
+        .map((user) => user.name);
+      console.log(activeName);
+
+      //Using Sort()
+      const namesOldToYoung = users.sort((user1, user2) =>
+        user1.age < user2.age ? 1 : -1
+      );
+      console.log(namesOldToYoung);
     </script>
   </body>
 </html>
