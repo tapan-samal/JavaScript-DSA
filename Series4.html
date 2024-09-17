@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Data Structure</title>
+  </head>
+  <body>
+    <h2>1. Sum of all natural number from 1 to n.</h2>
+
+    <script>
+      //Using loop
+      const sumOfNumber = (num) => {
+        let sum = 0;
+        for (let i = 0; i <= num; i++) {
+          sum += i;
+        }
+
+        return sum;
+      };
+      console.log(sumOfNumber(5));
+
+      //Using formula
+      const sumOfNums = (num) => {
+        return (num * (num + 1)) / 2;
+      };
+      console.log(sumOfNums(6));
+
+      //Using recursive
+      const sumOfNaturalNum = (num) => {
+        if (num === 1) {
+          return 1;
+        }
+        return num + sumOfNaturalNum(num - 1);
+      };
+      console.log(sumOfNaturalNum(10));
+    </script>
+
+    <h2>2. Sum of digits of a number.</h2>
+    <script>
+      //Using for loop
+      const sumOfDigit = (num) => {
+        let sum = 0;
+        let string = String(num);
+        for (let i = 0; i < string.length; i++) {
+          sum = sum + Number(string[i]);
+        }
+        return sum;
+      };
+      console.log(sumOfDigit(12345));
+
+      //Using while loop
+      const sumOfDigits = (num) => {
+        let sum = 0;
+        while (num > 0) {
+          sum += num % 10;
+          num = Math.floor(num / 10);
+        }
+        return sum;
+      };
+      console.log(sumOfDigits(123456));
+
+      //Using Reduce
+      const sumsOfDigit = (num) => {
+        let toArray = String(num).split("");
+        return toArray.reduce((sum, dig) => sum + Number(dig), 0);
+      };
+      console.log(sumsOfDigit(1234567));
+    </script>
+
+    <h2>3. Count the digits of a number.</h2>
+    <script>
+      //Using do while loop
+      const countDigits = (num) => {
+        num = Math.abs(num);
+        let count = 0;
+        do {
+          count++;
+          num = Math.floor(num / 10);
+        } while (num > 0);
+        return count;
+      };
+      console.log(countDigits(125));
+      console.log(countDigits(-12345));
+
+      //Using string method
+      const countDigit = (num) => {
+        num = Math.abs(num);
+        return String(num).length;
+      };
+      console.log(countDigit(-1234567));
+      console.log(countDigit(123456789));
+    </script>
+
+    <h2>4. Check the number is palindrome or not.</h2>
+    <script>
+      //Using reverse method
+      const checkPalindromeNum = (number) => {
+        if (number < 0) return false;
+        let reverse = Number(String(number).split("").reverse().join(""));
+        return number === reverse;
+      };
+      console.log(checkPalindromeNum(1234321));
+
+      //Using for loop
+      const checkPalindrome = (number) => {
+        if (number < 0) return false;
+        let str = String(number);
+        let reverse = "";
+        for (let i = str.length - 1; i >= 0; i--) {
+          reverse += str[i];
+        }
+        return number === Number(reverse);
+      };
+      console.log(checkPalindrome(78987));
+
+      //Using while loop
+      const checksPalindrome = (number) => {
+        if (number < 0) return false;
+
+        let reverse = 0;
+        let original = number;
+
+        while (number > 0) {
+          let lastDigit = number % 10;
+          reverse = reverse * 10 + lastDigit;
+          number = Math.floor(number / 10);
+        }
+        return original === reverse;
+      };
+      console.log(checksPalindrome(34543));
+    </script>
+
+    <h2>5. Fibonacci of nth number.</h2>
+    <script>
+      //Using loop
+      const findFibonacci = (num) => {
+        if (num <= 0) return num;
+        let prev = 0,
+          curr = 1,
+          next;
+        for (let i = 2; i <= num; i++) {
+          next = prev + curr;
+          prev = curr;
+          curr = next;
+        }
+        return curr;
+      };
+      console.log(findFibonacci(6));
+    </script>
+
+    <h2>6. Find missing number from array.</h2>
+    <script>
+      //Using formula
+      const findMissingNum = (arr) => {
+        let n = arr.length;
+        let expectedSum = (n * (n + 1)) / 2;
+        let actualSum = 0;
+
+        for (let i = 0; i < n; i++) {
+          actualSum += arr[i];
+        }
+        return expectedSum - actualSum;
+      };
+      console.log(findMissingNum([0, 1, 4, 2]));
+
+      //Using sort method
+      const findMissedNum = (arr) => {
+        arr.sort((a, b) => a - b);
+
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] !== i) {
+            return i;
+          }
+        }
+        return arr.length;
+      };
+      console.log(findMissedNum([1, 2, 3, 4]));
+
+      //Using set
+      const findMissNum = (arr) => {
+        const set = new Set(arr);
+
+        for (let i = 0; i <= arr.length; i++) {
+          if (!set.has(i)) {
+            return i;
+          }
+        }
+      };
+
+      console.log(findMissNum([0, 1, 3, 2]));
+    </script>
+
+    <h2>7. Check element exits in array or not.</h2>
+    <script>
+      let arry = [12, 15, "HTML", 21, "JS", "CSS"];
+
+      const checkExitance = (arr, target) => {
+        for (let elem of arr) {
+          if (elem === target) {
+            return true;
+          }
+        }
+        return false;
+      };
+      console.log(checkExitance(arry, "JS"));
+    </script>
+
+    <h2>8. Find the index element if exits in an array.</h2>
+    <script>
+      const findIndex = (arr, target) => {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === target) {
+            return i;
+          }
+        }
+        return false;
+      };
+      console.log(findIndex(arry, "CSS"));
+      console.log(arry.indexOf("HTML"));
+    </script>
+
+    <h2>9. Check two array are equal or not.</h2>
+    <script>
+      const checkEqualArray = (arr1, arr2) => {
+        if (arr1.length !== arr2.length) {
+          return "Length not equal!";
+        }
+
+        for (let i = 0; i < arr1.length; i++) {
+          if (arr1[i] !== arr2[i]) {
+            return "Length equal but element not same!";
+          }
+        }
+        return "Arrays are equal!";
+      };
+      console.log(checkEqualArray([1, 2, 5], [1, 2, 3]));
+
+      //Using every method
+      const checkEqualArry = (arr1, arr2) => {
+        return (
+          arr1.length === arr2.length &&
+          arr1.every((e, i) => arr1[i] === arr2[i])
+        );
+      };
+      console.log(checkEqualArry([1, 2, 3], [1, 2, 3]));
+    </script>
+    <h2>10. Find the index of character if exits in a string.</h2>
+    <script>
+      const findCharIndex = (str, char) => {
+        str = str.toLowerCase();
+        char = char.toLowerCase();
+
+        for (let i = 0; i <= str.length - char.length; i++) {
+          if (str.slice(i, i + char.length) === char) {
+            return i;
+          }
+        }
+        return -1;
+      };
+
+      console.log(findCharIndex("I Love My India", "Ove"));
+    </script>
+
+    <h2>11. Check valid Anagram</h2>
+    <script>
+      //Using Method
+      const checkAnagram = (str1, str2) => {
+        return (
+          str1.split("").sort().join("") === str2.split("").sort().join("")
+        );
+      };
+      console.log(checkAnagram("anagram", "nagaram"));
+    </script>
+
+    <h2>12. Find longest prefix in word.</h2>
+    <script>
+      const findCommonPrefix = (arr) => {
+        let commonPrefix = "";
+        commonPrefix = arr[0];
+
+        for (let i = 1; i < arr.length; i++) {
+          let j = 0;
+          console.log(j);
+
+          while (
+            j < commonPrefix.length &&
+            j < arr[i].length &&
+            commonPrefix[j] === arr[i][j]
+          ) {
+            j++;
+          }
+          commonPrefix = commonPrefix.substring(0, j);
+        }
+        return commonPrefix;
+      };
+
+      console.log(findCommonPrefix(["flower", "flow", "flight"]));
+    </script>
+
+    <h2>13. Merge string alternatively.</h2>
+    <script>
+      //Using loop
+      const mergeAlternatively = (str1, str2) => {
+        let mergeString = "";
+        let maxLength = Math.max(str1.length, str2.length);
+        for (let i = 0; i < maxLength; i++) {
+          if (i < str1.length) {
+            mergeString += str1[i];
+          }
+          if (i < str2.length) {
+            mergeString += str2[i];
+          }
+        }
+        return mergeString;
+      };
+      console.log(mergeAlternatively("12345", "abcd"));
+
+      //Using recursive
+      function mergeStringsRecursively(str1, str2, index = 0) {
+        if (index >= str1.length && index >= str2.length) {
+          return "";
+        }
+        console.log(str1[index]);
+
+        return (
+          (str1[index] || "") +
+          (str2[index] || "") +
+          mergeStringsRecursively(str1, str2, index + 1)
+        );
+      }
+      console.log(mergeStringsRecursively("abcde", "12345"));
+    </script>
+
+    <h2>14. Length of last word.</h2>
+    <script>
+      const lengthOfLastWord = (str) => {
+        let words = str.trimEnd().split(" ");
+        return words[words.length - 1].length;
+      };
+      console.log(lengthOfLastWord("   I Love   My India  "));
+
+      //Using loop
+
+      const lengthOFLastWd = (str) => {
+        let length = 0;
+        let i = str.length - 1;
+
+        while (i >= 0 && str[i] === " ") {
+          i--;
+        }
+
+        while (i >= 0 && str[i] !== " ") {
+          length++;
+          i--;
+        }
+        return length;
+        console.log(str[i]);
+      };
+      console.log(lengthOFLastWd("Practicing JavaScript questions"));
+    </script>
+
+    <h2>15. Factorial of certain number</h2>
+    <script>
+      const factorial = (n) => {
+        if (n === 0) return 1;
+        return n * factorial(n - 1);
+      };
+      console.log(factorial(5));
+    </script>
+
+    <h2>16. Find the Fibonacci.</h2>
+    <script>
+      const findFibo = (n) => {
+        if (n <= 1) return n;
+        return findFibo(n - 1) + findFibo(n - 2);
+      };
+      console.log(findFibo(7));
+    </script>
+
+    <h2>17. Check element index in an array.</h2>
+    <script>
+      const checkELement = (arr, target) => {
+        //Using indexOf
+        console.log(arr.indexOf(target));
+
+        //Using loop
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === target) return i;
+        }
+        return "Not found!";
+      };
+      console.log(checkELement([1, 2, 3, 4, 5], 5));
+
+      //Applicable to only sorted number
+      const binarySearch = (arr, target) => {
+        let start = 0,
+          end = arr.length - 1;
+
+        while (start <= end) {
+          let mid = Math.floor((start + end) / 2);
+          if (arr[mid] === target) {
+            return mid;
+          } else if (arr[mid] < target) {
+            start = mid + 1;
+          } else {
+            end = mid - 1;
+          }
+        }
+        return -1;
+      };
+      console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
+    </script>
+
+    <h2>18. find the index of first occurrence in a string.</h2>
+    <script>
+      const indexOfOccurance = (string, subString) => {
+        for (let i = 0; i < string.length; i++) {
+          if (string[i] === subString[0]) return i;
+        }
+      };
+      console.log(indexOfOccurance("javascript", "cript"));
+    </script>
+
+    <script>
+
+    </script>
+
+    <h2>19.</h2>
+    <script></script>
+
+    <h2>20.</h2>
+    <script></script>
+    <h4>Source : Vishal Rajput</h4>
+  </body>
+</html>

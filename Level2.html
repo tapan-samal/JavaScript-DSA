@@ -590,5 +590,17 @@
       );
       console.log(namesOldToYoung);
     </script>
+
+    <h3>28. Convert the first letter of each word to uppercase.</h3>
+    <script>
+      const firstLetterCapitalized = (str) => {
+        let capitalizedStr = str
+          .split(" ")
+          .map((word) => word[0].toUpperCase() + word.slice(1));
+        return capitalizedStr.join(" ");
+      };
+      console.log(firstLetterCapitalized("tapan samal"));
+      console.log(firstLetterCapitalized("realy, are you happy"));
+    </script>
   </body>
 </html>

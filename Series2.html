@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>JavaScript Interview Questions</h1>
-    <h4>Source : Roadside Coder</h4>
+    
 
     <h2>1. var, let and const :</h2>
     <script>
@@ -67,7 +67,7 @@
 
     <h2>2. forEach(), map(), filter() and reduce() :</h2>
     <script>
-      //Map(): A method to iterate over an array and create a new array based on transformation of each element  without modify original array.
+      //Map(): A method to iterate over an array and create a new array based on transformation of each element without modify original array.
       const nums = [1, 2, 3, 4, 5];
 
       const multiplyThree = nums.map((n, i, arr) => n * 3 + i);
@@ -81,6 +81,7 @@
 
       //Reduce(): A Reduce is a powerful array method that is used to iterate through an array and accumulate to a single value based on condition applied to that array.
       //Syntax: array.reduce((accumulator, currentValue, Index, array) => {}, initialValue)
+      //Default initial value will be 0.
       const sum = nums.reduce((acc, cur, i, arr) => {
         return acc + cur;
       }, 0);
@@ -1370,5 +1371,6 @@
         alert("CurrentTarget = " + event.currentTarget.tagName);
       }
     </script>
+    <h4>Source : Roadside Coder</h4>
   </body>
 </html>

@@ -150,7 +150,7 @@
     <h3>Question: 15</h3>
     <script>
       function sums(n1, n2) {
-        // "use strict"
+        "use strict";
         let nn1 = 100;
         let nn2 = 200;
         return arguments[0] + arguments[1];
@@ -192,16 +192,14 @@
 
       var result = [] || true || 0;
       console.log(result);
-      //Logical OR operator always returns the truthy value, If all are falsy, it returns the last value.
+      //Logical OR operator always returns the first truthy value, If all are falsy, it returns the last value.
     </script>
 
     <h3>Question: 19</h3>
     <script>
-      var data = { a: 1, b: 2, c: 3 };
-      console.log(data.a);
-      console.log(data["a"]);
-      console.log(data.hasOwnProperty("d"));
-      console.log(data.hasOwnProperty("c"));
+      var finalScore = 1 + scores;
+      scores = 10;
+      console.log(finalScore);
     </script>
 
     <h3>Question: 20</h3>
@@ -261,13 +259,12 @@
       console.log(sumValue(1, 2, 3));
       console.log(sumValue(...[1, 2, 3]));
       console.log(sumValue(...[...[1, 2, 3]]));
-      //Above three are equal
       console.log(sumValue([...[1, 2, 3]]));
       console.log(sumValue([1, 2, 3]));
       // console.log(sumValue([...1, 2, 3]));
       //Trying to spread a non-iterable value, return error.
-      console.clear();
-      console.log("----------------------------------------------");
+      // console.clear();
+      console.log("-------------------------------------");
     </script>
 
     <h3>Question: 26</h3>
@@ -408,13 +405,21 @@
     <h3>Question: 41</h3>
     <script>
       for (var i = 0; i < 3; i++) {
+        console.log(i);
+      }
+
+      for (var i = 0; i < 3; i++) {
         setTimeout(() => console.log(i));
       }
-      //Callback is added to the event queue after the loop finishes executing and final value of i is 3.
+      //Callback is added to the event queue after the loop finishes executing.
     </script>
 
     <h3>Question: 42</h3>
     <script>
+      for (let i = 0; i < 3; i++) {
+        console.log(i);
+      }
+
       for (let i = 0; i < 3; i++) {
         setTimeout(() => console.log(i));
       }
@@ -440,7 +445,7 @@
       d = c;
       c.name = "Pator";
       console.log(d.name);
-      //Shallow copy create reference the original object and changes will impact both.
+      //Shallow copy create reference the original object and changes will impact both way.
     </script>
 
     <h3>Question: 45</h3>
@@ -465,6 +470,7 @@
     <script>
       function getAge(...args) {
         console.log(args);
+        console.log(...args);
         console.log(typeof args);
       }
       getAge(21);
@@ -496,7 +502,7 @@
       console.log(obj.hasOwnProperty("1"));
       console.log(obj.hasOwnProperty(1));
       //Object keys are automatically converted to strings.
-      console.clear();
+      // console.clear();
       console.log("----------------------------------");
     </script>
 
@@ -508,6 +514,13 @@
         console.log(zx);
       }
       console.log(zx);
+
+      let xz = 10;
+      {
+        let xz = 20;
+        console.log(xz);
+      }
+      console.log(xz);
     </script>
 
     <h3>Question: 52</h3>
@@ -710,7 +723,7 @@
       })();
       console.log(typeof evl);
       console.log(typeof ya);
-      //Declaration of y is global scope, but declaration of evl with let inside function has local scope.
+      //Declaration of ya is global scope, but declaration of evl with let inside function has local scope.
     </script>
 
     <h3>Question: 72</h3>
@@ -755,7 +768,7 @@
       console.log(data.hasOwnProperty("d"));
       console.log(data.hasOwnProperty("c"));
 
-      console.clear();
+      // console.clear();
       console.log("------------------------------");
     </script>
 
@@ -781,6 +794,7 @@
     <script>
       console.log(2 + 3 + "5" + 6 + 7);
       console.log("1" + 2 + 3 + 4 + 5);
+      console.log(+"1" + 2 + 3 + 4 + 5);
     </script>
 
     <h3>Question: 79</h3>
@@ -810,9 +824,11 @@
           console.log(this.lang);
         };
       }
-      const datas = new show();
-      const dataFun = datas.showLang;
-      dataFun();
+      show();
+      showLang();
+      // const datas = new show();
+      // const dataFun = datas.showLang;
+      // dataFun();
     </script>
 
     <h3>Question: 82</h3>
@@ -821,7 +837,12 @@
         continue;
         console.log(i);
       }
+      for (let i = 0; i < 3; i++) {
+        break;
+        console.log(i);
+      }
       //The continue statement causes the loop to skip the console.
+      //Break statement immediately exits the loop.
     </script>
 
     <h3>Question: 83</h3>
@@ -845,6 +866,7 @@
       }
       console.log(y);
     </script>
+
     <h3>Question: 85</h3>
     <script>
       const summ = (n1 = 5, n2 = 7) => {
@@ -863,19 +885,13 @@
 
     <h3>Question: 87</h3>
     <script>
-      var finalScore = 1 + scores;
-      scores = 10;
-      console.log(finalScore);
-    </script>
-
-    <h3>Question: 88</h3>
-    <script>
       function transform(arr) {
         console.log(arr?.[99]);
       }
       transform();
     </script>
-    <h3>Question: 89</h3>
+
+    <h3>Question: 88</h3>
     <script>
       var lenth = 20;
       function count() {
@@ -883,18 +899,75 @@
       }
       const dataa = [count, "A", 0];
       dataa[0]("Hey!");
+      //call dataa[0]("Hey!") => invoke count function
+      //this refers to the array dataa, which has a length property of 3.
     </script>
-    <h3>Question: 90</h3>
+
+    <h3>Question: 89</h3>
     <script>
       console.log(0.1 + 0.2 === 0.3);
       console.log(0.2 + 0.3 === 0.5);
+      //Floating-point numbers are represented in binary, there can be slight inaccuracies when performing arithmetic operations.
+    </script>
+
+    <h3>Question: 90</h3>
+    <script>
+      let n11 = 0;
+      let n12 = 10;
+
+      if (n11) {
+        console.log(n11);
+      }
+      if (n12) {
+        console.log(n12);
+      }
     </script>
 
     <h3>Question: 91</h3>
-    <h3>Question: 92</h3>
+    <script>
+      const printName = {
+        name: "India",
+        sayHello: function () {
+          console.log("Regular function: ", this.name);
+        },
+        sayHii: () => {
+          console.log("Arraow function: ", this.name);
+        },
+      };
+      printName.sayHello();
+      printName.sayHii();
+      //Arrow function do not have their own this, so lexically inherited from the global context.
+    </script>
+
     <h3>Question: 93</h3>
+    <script>
+      let myself = {
+        firstname: "Tapan",
+        "last name": "Samal",
+      };
+      console.log(myself.firstname);
+      console.log(myself["firstname"]);
+      console.log(myself["last name"]);
+    </script>
+
     <h3>Question: 94</h3>
+    <script>
+      const arrr = [11, 0, "", false, 6, undefined, null, NaN];
+      const filter = arrr.filter(Boolean);
+      console.log(filter);
+      //Filter method only pass the truthy values to an new array
+    </script>
+
     <h3>Question: 95</h3>
+    <script>
+      let obj1 = { name: "tapan", age: 21 };
+      let obj2 = { name: "tapan", age: 21 };
+      console.log(Object.is(obj1, obj2));
+      console.log(obj1 === obj2);
+      console.log(JSON.stringify(obj1) === JSON.stringify(obj2));
+      //Both objects are different memory loaction.
+      //Deep comparison technique by using JSON.stringify()
+    </script>
     <h3>Question: 96</h3>
     <h3>Question: 97</h3>
     <h3>Question: 98</h3>
