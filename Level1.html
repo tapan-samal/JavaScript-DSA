@@ -32,9 +32,9 @@
       var a = [20];
       var b = ["20"];
       console.log(a[0] == b[0]);
-      //Loose Equality operator compare only value after performing type conversion.
+      //Loose equality operator compare only value after performing type conversion.
       console.log(a[0] === b[0]);
-      //Strict Equality compare both value and Data type, without performing type conversion.
+      //Strict equality compare both value and Data type, without performing type conversion.
     </script>
 
     <h3>Question: 4</h3>
@@ -53,7 +53,7 @@
       console.log(typeof null);
       //Bugs in JavaScript, Intensional absence of any object value.
       console.log(NaN === NaN);
-      //NaN is the only value that is not equal to itself.
+      //NaN is the unpredictable value, so not equal to itself.
       console.log(typeof +"9");
       //Plus operator (+) attempts to convert the operand into a number.
       console.log(typeof +"Hello");
@@ -176,8 +176,8 @@
 
     <h3>Question: 18</h3>
     <script>
-      //True Value: {}, [], 1, true
-      //False Value: "", null, 0, false
+      //True Value: {}, 1, true
+      //False Value: "", [], null, 0, false
       var result = false || {} || null;
       console.log(result);
 
@@ -198,7 +198,7 @@
     <h3>Question: 19</h3>
     <script>
       var finalScore = 1 + scores;
-      scores = 10;
+      var scores = 10;
       console.log(finalScore);
     </script>
 
@@ -225,7 +225,7 @@
       function getName() {
         console.log(nam);
         var nam = "Virat";
-        //undefined: var nam declaration is hoisted and initialized to undefined before the assignment "Virat".
+        //var nam declaration is hoisted and initialized to undefined before the assignment "Virat".
       }
       getName();
     </script>
@@ -241,7 +241,7 @@
       n++;
       console.log(n);
       getNum();
-      //Check sequence: 13, undefined, 15
+      //Check sequence properly
     </script>
 
     <h3>Question: 24</h3>
@@ -293,7 +293,7 @@
       person.age = 30;
       person.name = "Habu";
       console.log(person);
-      //once seal applied cannot add new property but change existing prop.
+      //once seal applied cannot add new property but change existing property.
     </script>
 
     <h3>Question: 29</h3>
@@ -450,11 +450,14 @@
 
     <h3>Question: 45</h3>
     <script>
-      var n = 30;
-      var m = new Number(30);
-      console.log(n == m);
-      console.log(n === m);
-      //m is an object.
+      var nn = Number("30");
+      var mm = new Number("30");
+      console.log(nn == mm);
+      console.log(nn === mm);
+      console.log(typeof nn);
+      console.log(typeof mm);
+
+      //new will create an instance of object.
     </script>
 
     <h3>Question: 46</h3>
@@ -602,15 +605,10 @@
 
     <h3>Question: 60</h3>
     <script>
-      let n1 = 20;
-      let n2 = 20;
-      let n3 = 20;
-      if ((n1 === n2) === n3) {
-        console.log("True Comparision!");
-      } else {
-        console.log("Worng Comparision!");
-      }
-      //First comparision will be true, then false.
+      console.log(a1);
+      // console.log(b1);
+      var a1 = (b1 = 5);
+      //b1 is not declared with var, so it’s not hoisted.
     </script>
 
     <h3>Question: 61</h3>
@@ -889,6 +887,8 @@
         console.log(arr?.[99]);
       }
       transform();
+      //Without argument, arr is undefined.
+      //Optional chaining (?.) will make arr?.[99] evaluate to undefined without throwing an error.
     </script>
 
     <h3>Question: 88</h3>
@@ -926,17 +926,17 @@
     <h3>Question: 91</h3>
     <script>
       const printName = {
-        name: "India",
+        country: "India",
         sayHello: function () {
-          console.log("Regular function: ", this.name);
+          console.log("Regular function: ", this.country);
         },
         sayHii: () => {
-          console.log("Arraow function: ", this.name);
+          console.log("Arraow function: ", this.country);
         },
       };
       printName.sayHello();
       printName.sayHii();
-      //Arrow function do not have their own this, so lexically inherited from the global context.
+      //Arrow function do not have their own this context, so lexically inherited from parent/global context.
     </script>
 
     <h3>Question: 93</h3>
@@ -968,10 +968,473 @@
       //Both objects are different memory loaction.
       //Deep comparison technique by using JSON.stringify()
     </script>
+
     <h3>Question: 96</h3>
+    <script>
+      let map = new Map();
+      console.log(map);
+    </script>
+
     <h3>Question: 97</h3>
+    <script>
+      let xxx = [];
+      let yyy = [];
+      let zzz = xxx + yyy;
+      console.log(typeof zzz);
+      //+ operator with arrays, converted to strings and concatenation occurs.
+    </script>
+
     <h3>Question: 98</h3>
+    <script>
+      const func = () => {
+        console.log(this.favName);
+      };
+      func.call({ favName: "Prag" });
+
+      function funcc() {
+        console.log(this.favName);
+      }
+      funcc.call({ favName: "Prag" });
+    </script>
+
     <h3>Question: 99</h3>
-    <h3>Question: 100</h3>
+    <script>
+      console.log([1, 2, 3] + [4, 5, 6]);
+      console.log([1, 2, 3].concat([4, 5, 6]));
+      console.log([...[1, 2, 3], ...[4, 5, 6]]);
+      //+ operator between two arrays converts to strings and concatenates them.
+    </script>
+
+    <h3>Question: 101</h3>
+    <script>
+      var obj = {
+        id: 123,
+        location: "Vizag",
+      };
+      Object.defineProperty(obj, "id", { writable: false });
+      obj.id = 258;
+      console.log(obj);
+      //Freeze object ID
+    </script>
+
+    <h3>Question: 102</h3>
+    <script>
+      var num1 = 10000000;
+      var num2 = 10_000_000;
+      console.log(num1 === num2);
+    </script>
+
+    <h3>Question: 103</h3>
+    <script>
+      var arr = [1, 2, 3, 4, 5, 6];
+      console.log(arr.slice(1));
+      console.log(arr.substring(1));
+      //substring is a string method, not array method.
+    </script>
+
+    <h3>Question: 104</h3>
+    <script>
+      let str = "123456";
+      console.log(str.substring(1));
+      console.log(str.slice(1));
+
+      console.log(str.substring(9, 1));
+      console.log(str.substring(1, 7));
+      //When the starting index is greater than end index, it will reverse.
+    </script>
+
+    <h3>Question: 105</h3>
+    <script>
+      const { length } = "JS";
+      console.log(length);
+    </script>
+
+    <h3>Question: 106</h3>
+    <script>
+      console.log("" == false);
+      console.log([] == false);
+      console.log({} == false);
+      //In strict comparison(===), JavaScript does not converts the operands to the same type before comparision.
+    </script>
+
+    <h3>Question: 107</h3>
+    <script>
+      let symbol1 = Symbol("uniqueId");
+      let symbol2 = Symbol("uniqueId");
+      console.log(symbol1 === symbol2);
+    </script>
+
+    <h3>Question: 108</h3>
+    <script>
+      var arr = [1, 2, 3, 4, 5];
+      var reverse = arr.reverse();
+      console.log(arr, reverse);
+      //Changed original array also.
+
+      let arr1 = [6, 7, 8, 9];
+      let reverse1 = arr1.slice().reverse();
+      console.log(arr1, reverse1);
+    </script>
+
+    <h3>Question: 109</h3>
+    <script>
+      let timer = setTimeout(() => {
+        console.log("Waiting to print...");
+      }, 0);
+      clearTimeout(timer);
+      // setTimeout function schedules a callback to be executed after a specified delay.
+      // Once clearTimeout is called, the callback will not be executed, even though the delay was 0.
+    </script>
+
+    <h3>Question: 110</h3>
+    <script>
+      if (false) {
+        var aa = "JS";
+      }
+      console.log(aa);
+      // Variables declared with var are hoisted with undefined, but it will not execute because of false.
+    </script>
+
+    <h3>Question: 111</h3>
+    <script>
+      var a = 1;
+      function b() {
+        console.log(a);
+        a = 10;
+        return;
+        function a() {}
+      }
+      b();
+      console.log(a);
+    </script>
+
+    <h3>Question: 112</h3>
+    <script>
+      var a = 1;
+      function b() {
+        console.log(a);
+        a = 10;
+        return function a() {};
+      }
+      b();
+      console.log(a);
+    </script>
+
+    <h3>Question: 113</h3>
+    <script>
+      console.log(1);
+
+      setTimeout(function () {
+        console.log(2);
+      }, 0);
+
+      Promise.reject(3)
+        .catch(function (value) {
+          console.log(value);
+          return 4;
+        })
+        .then(null)
+        .then((value) => {
+          console.log(value);
+          return 5;
+        })
+        .finally((value) => {
+          console.log(value);
+          return 6;
+        })
+        .then((value) => {
+          console.log(value);
+          return 7;
+        });
+
+      console.log(8);
+    </script>
+
+    <h3>Question: 114</h3>
+    <script>
+      const p1 = new Promise((resolve, reject) =>
+        setTimeout(reject, 150, "Error 1")
+      );
+      const p2 = new Promise((resolve, reject) =>
+        setTimeout(reject, 100, "Error 2")
+      );
+      const p3 = new Promise((resolve, reject) =>
+        setTimeout(resolve, 200, "Success 3")
+      );
+      const p4 = new Promise((resolve, reject) =>
+        setTimeout(resolve, 300, "Success 4")
+      );
+
+      Promise.any([p1, p2, p3, p4])
+        .then((value) => {
+          console.log("First successful:", value);
+          return Promise.all([p3, p4]);
+        })
+        .then((values) => {
+          console.log("All successful:", values);
+          return values.map((value) => value.toLowerCase());
+        })
+        .catch((error) => {
+          console.log("Caught an error:", error.message || error);
+          return "Fallback Value";
+        })
+        .then((value) => {
+          console.log("Final processing:", value);
+          return new Promise((resolve, reject) => {
+            setTimeout(() => reject("Final Error"), 100);
+          });
+        })
+        .then((value) => {
+          console.log("This will not run");
+        })
+        .catch((error) => {
+          console.log("Final error caught:", error);
+        })
+        .finally(() => {
+          console.log("Finally block executed");
+        });
+      // Promise.any() will wait for the first promise that resolves.
+    </script>
+
+    <h3>Question: 115</h3>
+    <script>
+      console.log(12 % 5);
+      console.log(6 % 12);
+      console.log(5 % 6);
+      //If first number lesser than second number, print first number.
+    </script>
+
+    <h3>Question: 116</h3>
+    <script>
+      var value1 = "1";
+      console.log(value1.padEnd(2, "0"));
+
+      var value2 = "10";
+      console.log(value2.padEnd(2, "0"));
+    </script>
+
+    <h3>Question: 117</h3>
+    <script>
+      var num = "10";
+      console.log(typeof Number(num));
+      console.log(typeof parseInt(num));
+      console.log(typeof num++);
+    </script>
+
+    <h3>Question: 118</h3>
+    <script>
+      var key = "name";
+      var value = "Tapan";
+
+      var coder = { key: value };
+      var coder1 = { [key]: value };
+      console.log(coder);
+      console.log(coder1);
+    </script>
+
+    <h3>Question: 119</h3>
+    <script>
+      var obj = {
+        10: "P",
+        [10]: "T",
+      };
+      console.log(obj);
+      //object keys are automatically converted to strings.
+      //In case of same property, it will overwrites.
+    </script>
+
+    <h3>Question: 120</h3>
+    <script>
+      var aa = 10;
+      var bb = 20;
+      var cc = 30;
+
+      aa = bb;
+      aa = bb = cc;
+      console.log(aa);
+    </script>
+
+    <h3>Question: 121</h3>
+    <script>
+      var aa = 15,
+        bb = 15,
+        cc = 15;
+      if ((aa == bb) == cc) {
+        console.log(true);
+      } else {
+        console.log(false);
+      }
+    </script>
+
+    <h3>Question: 122</h3>
+    <script>
+      y = 10;
+      var x = y + 1;
+      console.log(x);
+      // Variable declared without var, let and const keyword will be global variables.
+    </script>
+
+    <h3>Question: 123</h3>
+    <script>
+      function data() {
+        let a = (b = 5);
+      }
+      data();
+      console.log(b);
+      // b is global variable.
+    </script>
+
+    <h3>Question: 124</h3>
+    <script>
+      let arr11 = [1, 2, 3];
+      let str11 = "1,2,3";
+      console.log(arr11 == str11);
+      console.log(arr11 === str11);
+      // Loose equality performs type coercion and internally perform Array.prototype.toString() method.
+    </script>
+
+    <h3>Question: 125</h3>
+    <script>
+      let newList = [1].push(2);
+      console.log(newList);
+      console.log(newList.push(3));
+      // Array.push() method does not return the array itself. Instead, it returns the new length of the array.
+      // Hence, newList is assigned the value 2 (a number), not an array.
+    </script>
+
+    <h3>Question: 126</h3>
+    <script>
+      var a = [1];
+      var b = [2];
+      console.log(a + b);
+      // + operator converts the arrays to strings by calling toString() method.
+      // a + b becomes a.toString() + b.toString().
+    </script>
+
+    <h3>Question: 127</h3>
+    <script>
+      let namee = "Sri Krishna";
+      agee = 25;
+      console.log(delete namee);
+      console.log(delete agee);
+      // The delete operator is used to remove properties from an object.
+      // agee will be added to global object, so properties of object can be deleted using the delete operator.
+    </script>
+
+    <h3>Question: 128</h3>
+    <script>
+      pp++;
+      console.log(pp);
+      var pp = 11;
+      // Due var pp is hoisted and pp is undefined.
+      // Incrementing undefined → results in NaN.
+    </script>
+
+    <h3>Question: 129</h3>
+    <script>
+      var r = [];
+      r[4] = 1;
+      r.forEach((i) => console.log("Ram"));
+      //forEach method iterates over explicitly defined elements in an array and skips the empty slots.
+    </script>
+
+    <h3>Question: 130</h3>
+    <script>
+      var obj = { name: "Krishna" };
+      var arr = ["name"];
+      obj[arr] = "Radha";
+      console.log(obj.name);
+      // Key of an object can access either dot notation (obj.name) or bracket notation.
+      // When used as a key in bracket notation, JavaScript converts the array to a string using toString().
+    </script>
+
+    <h3>Question: 131</h3>
+    <script>
+      var strr = "JavaScript";
+      strr[0] = "Z";
+      console.log(strr);
+      strr.length = 0;
+      console.log(strr);
+      // Strings are primitive, so it's immutable in nature.
+    </script>
+
+    <h3>Question: 132</h3>
+    <script>
+      (function (num) {
+        console.log(num * num);
+      })(false);
+
+      (function (num) {
+        console.log(num * num);
+      })(true);
+      // Arithmetic operation will convert boolean value to numeric value.
+    </script>
+
+    <h3>Question: 133</h3>
+    <script>
+      new Promise(() => {
+        console.log("Promise");
+      });
+      console.log("Not a promise");
+      // The executor function of a Promise is executed synchronously, without then and catch method.
+    </script>
+
+    <h3>Question: 134</h3>
+    <script>
+      var person = { name: "tapan" };
+      var membr = person;
+      person = null;
+      console.log(membr);
+    </script>
+
+    <h3>Question: 135</h3>
+    <script>
+      let nn = 5 + "";
+      console.log(nn);
+      console.log(typeof nn);
+    </script>
+
+    <h3>Question: 136</h3>
+    <script>
+      let init = "16";
+      init = +init;
+      // init = ++init;
+      console.log(init);
+      console.log(typeof init);
+    </script>
+
+    <h3>Question: 137</h3>
+    <script>
+      let arr = [1, 2, 3, 4, 5];
+      console.log(arr.slice());
+      // No arguments returns a shallow copy of the entire array.
+      console.log(arr.slice(1));
+      // Starts extracting from index 1 (inclusive) to the end of the array.
+      console.log(arr.slice(-1));
+      // Starts extracting from the last element (-1 is the last index).
+      console.log(arr.slice(1, 3));
+      // Starts extracting from index 1 (inclusive) and stops before index 3 (exclusive).
+    </script>
+
+    <h3>Question: 138</h3>
+    <script>
+      console.log(Number.isFinite(Infinity));
+      console.log(Number.isNaN(NaN));
+      console.log(Number.parseInt("125"));
+      console.log(Number.parseInt("ab12"));
+      console.log(Number.parseInt("12ab"));
+    </script>
+    <h3>Question: 139</h3>
+    <h3>Question: 140</h3>
+    <h3>Question: 141</h3>
+    <h3>Question: 142</h3>
+    <h3>Question: 143</h3>
+    <h3>Question: 144</h3>
+    <h3>Question: 145</h3>
+    <h3>Question: 146</h3>
+    <h3>Question: 147</h3>
+    <h3>Question: 148</h3>
+    <h3>Question: 149</h3>
+    <h3>Question: 150</h3>
   </body>
 </html>
