@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript DSA</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">JavaScript DSA</h1>
+
+    <h3>1. Find the longest word in a string.</h3>
+    <script>
+      //Using loop
+      const longestWord = (str) => {
+        if (str.trim().length === 0) return "";
+        let arr = str.split(/\s+/);
+        let word = "";
+
+        for (let i = 0; i < arr.length; i++) {
+          if (word.length < arr[i].length) {
+            word = arr[i];
+          }
+        }
+        return word;
+      };
+      console.log(longestWord("I love my India"));
+
+      //Using sort
+      const findLongestWord = (str) => {
+        if (str.trim().length === 0) return "";
+        let arr = str.split(/\s+/);
+        arr.sort((a, b) => b.length - a.length);
+        return arr[0];
+      };
+      console.log(findLongestWord("JavaScript DSA questions"));
+
+      //Using reduce
+      const getLongestWord = (str) => {
+        if (str.trim().length === 0) return "";
+        let arr = str.split(/\s+/);
+        return arr.reduce(
+          (acc, cur) => (acc.length > cur.length ? acc : cur),
+          ""
+        );
+      };
+      console.log(getLongestWord("To search a is my compulsion"));
+    </script>
+
+    <h3>2. Convert a string to #String with Pascal Case.</h3>
+    <script>
+      //Using loop
+      const hashString = (str) => {
+        let arr = str.split(" ");
+        let hash = "#";
+        for (let word of arr) {
+          hash += word[0].toUpperCase().concat(word.slice(1));
+        }
+        return hash;
+      };
+      console.log(hashString("Love you India"));
+
+      //Using map
+      const getHashString = (str) => {
+        let arr = str.split(" ");
+        let hash = arr.map((word) =>
+          word.replace(word[0], word[0].toUpperCase())
+        );
+        return `#${hash.join("")}`;
+      };
+      console.log(getHashString("tapan kumar samal"));
+    </script>
+
+    <h3>3. Count letter occurrences of a string.</h3>
+    <script>
+      //Using loop
+      const countOccurrences = (str, target) => {
+        let newStr = str.toUpperCase();
+        let occurrence = 0;
+        for (let i = 0; i < str.length; i++) {
+          if (newStr[i] === target) {
+            occurrence++;
+          }
+        }
+        return `Occurrence is : ${occurrence}`;
+      };
+      console.log(countOccurrences("India will win", "I"));
+
+      //Using reduce
+      const getOccurrences = (str, target) => {
+        let arr = str.toUpperCase().split("");
+        let occurrence = arr.reduce((acc, value) => {
+          if (value === target) {
+            acc++;
+          }
+          return acc;
+        }, 0);
+        return `Occurrence is : ${occurrence}`;
+      };
+      console.log(getOccurrences("Bharat Rastra", "R"));
+    </script>
+
+    <h3>4. Compare two arrays.</h3>
+    <script>
+      //Using loop
+      const checkArray = (arr1, arr2) => {
+        if (arr1.length !== arr2.length) return false;
+
+        for (let i = 0; i < arr1.length; i++) {
+          if (arr1[i] !== arr2[i]) {
+            return false;
+          }
+        }
+        return true;
+      };
+      console.log(checkArray([1, 2, 3], [1, 2, 3]));
+      console.log(checkArray([1, 2, 3], [1, 2, 4]));
+      console.log(checkArray([1, 2, 3], [1, 2]));
+
+      //Using every
+      const checkArrayEquality = (arr1, arr2) => {
+        if (arr1.length !== arr2.length) return false;
+        return arr1.every((value, index) => value === arr2[index]);
+      };
+      console.log(checkArrayEquality([1, 2, 3], [1, 2, 3]));
+      console.log(checkArrayEquality([1, 2, 3], [1, 2, 4]));
+      console.log(checkArrayEquality([1, 2, 3], [1, 2]));
+    </script>
+
+    <h3>5. Find sum of vowel in string.</h3>
+    <script>
+      //Using match method
+      const countVowels = (str) => {
+        let matches = str.match(/[aeiou]/gi);
+        return matches ? matches.length : 0;
+      };
+      console.log(countVowels("Helloo India"));
+
+      //Using match method
+      const countTheVowel = (str) => {
+        let vowels = ["a", "e", "i", "o", "u"];
+        return str
+          .toLowerCase()
+          .split("")
+          .filter((char) => vowels.includes(char)).length;
+      };
+      console.log(countTheVowel("Helloo India"));
+
+      //Using loop
+      const countVowel = (str) => {
+        let vowels = ["a", "e", "i", "o", "u"];
+        let count = 0;
+        let arr = str.toLowerCase().split("");
+
+        for (let i = 0; i < arr.length; i++) {
+          if (vowels.includes(arr[i])) {
+            count++;
+          }
+        }
+        return count;
+      };
+      console.log(countVowel("Helloo India"));
+    </script>
+
+    <h3>7. Check the number, power of two or not.</h3>
+    <script>
+      //Using loop
+      const checkPowerOfTwo = (num) => {
+        for (let i = 1; 2 ** i <= num; i++) {
+          if (2 ** i === num) return true;
+        }
+        return false;
+      };
+      console.log(checkPowerOfTwo(16));
+      console.log(checkPowerOfTwo(20));
+
+      //Using bitwise approach
+      const isPowerOfTwo = (num) => {
+        return num > 0 && (num & (num - 1)) === 0;
+      };
+      console.log(isPowerOfTwo(32));
+      console.log(isPowerOfTwo(18));
+
+      //Using while
+      const powerOfTwo = (num) => {
+        if (num <= 0) return false;
+        while (num % 2 === 0) {
+          num /= 2;
+        }
+        return num === 1;
+      };
+      console.log(powerOfTwo(64));
+      console.log(powerOfTwo(24));
+    </script>
+
+    <h3>8. Sum of all square elements.</h3>
+    <script>
+      //Using loop
+      const sumOfSquare = (arr) => {
+        let sum = 0;
+        for (let num of arr) {
+          sum += num * num;
+        }
+        return sum;
+      };
+      console.log(sumOfSquare([1, 2, 3, 4]));
+
+      //Using reduce
+      const sumOfSquares = (arr) => {
+        return arr.reduce((acc, curr) => acc + curr * curr, 0);
+      };
+      console.log(sumOfSquares([1, 2, 3, 4]));
+    </script>
+
+    <h3>9. Convert a string to camel-case.</h3>
+    <script>
+      const toCamelCase = (str) => {
+        return str
+          .split(" ")
+          .map((elem, index) =>
+            index === 0
+              ? elem.toLowerCase()
+              : elem.charAt(0).toUpperCase() + elem.slice(1).toLowerCase()
+          )
+          .join("");
+      };
+      console.log(toCamelCase("Tapan kumar samAL"));
+    </script>
+
+    <h3>10. Check uppercase.</h3>
+    <script>
+      //Using char code
+      const checkUpperCase = (str) =>
+        str.charCodeAt(0) >= 65 && str.charCodeAt(0) <= 90;
+
+      console.log(checkUpperCase("sfs"));
+      console.log(checkUpperCase("Sfs"));
+
+      //Using test method
+      const chkUpperCase = (str) => /^[A-Z]/.test(str);
+
+      console.log(chkUpperCase("sfs"));
+      console.log(chkUpperCase("Sfs"));
+    </script>
+
+    <h3>11. Check lowerCase.</h3>
+    <script>
+      //Using char code
+      const checkLowerCase = (str) =>
+        str.charCodeAt(0) >= 97 && str.charCodeAt(0) <= 122;
+
+      console.log(checkLowerCase("sfs"));
+      console.log(checkLowerCase("Sfs"));
+
+      //Using test method
+      const chkLowerCase = (str) => /^[a-z]/.test(str);
+
+      console.log(chkLowerCase("sfs"));
+      console.log(chkLowerCase("Sfs"));
+    </script>
+
+    <h3>12. Find median from an array.</h3>
+    <script>
+      const findMedian = (arr) => {
+        const sorted = [...arr].sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+
+        if (sorted.length % 2 === 0) {
+          return (sorted[mid] + sorted[mid - 1]) / 2;
+        } else {
+          return sorted[mid];
+        }
+      };
+      console.log(findMedian([1, 2, 3, 4, 5, 6]));
+      console.log(findMedian([1, 2, 3, 4, 5]));
+    </script>
+
+    <h3>13. Find the mode from elements.</h3>
+    <script>
+      const findMode = (arr) => {
+        let count = {};
+        let maxNum = 0;
+        let mode = null;
+
+        for (let element of arr) {
+          count[element] = (count[element] || 0) + 1;
+          if (count[element] > maxNum) {
+            maxNum = count[element];
+            mode = element;
+          }
+        }
+        return mode;
+      };
+      console.log(findMode([2, 3, 4, 2, 6, 2, 4]));
+      console.log(findMode([]));
+    </script>
+
+    <h3>14. Repeat the string as per argument.</h3>
+    <script>
+      //Using method
+      const repeatStr = (str, num) => {
+        return num > 0 ? str.repeat(num) : str;
+      };
+      console.log(repeatStr("Abc", 5));
+
+      //Using loop
+      const repeatString = (str, num) => {
+        let result = "";
+        for (let i = 0; i < num; i++) {
+          result += str;
+        }
+        return result;
+      };
+      console.log(repeatString("Abc", 5));
+    </script>
+
+    <h3>15. Create truncate string.</h3>
+    <script>
+      const trunCateStr = (str, count) => {
+        let result = "";
+        for (let i = 0; i < count && i < str.length; i++) {
+          result += str[i];
+        }
+        return result.concat("...");
+      };
+      console.log(trunCateStr("Tapan Kumar Samal", 7));
+
+      const trunCateString = (str, count) => {
+        return count < str.length ? str.slice(0, count).concat("...") : str;
+      };
+
+      console.log(trunCateString("Tapan Kumar Samal", 20));
+      console.log(trunCateString("Tapan Kumar Samal", 7));
+    </script>
+
+    <h3>16. Print range of numbers.</h3>
+    <script>
+      //Using for loop
+      const printRangeOfNumber = (n1, n2) => {
+        let array = [];
+        for (let i = n1; i <= n2; i++) {
+          array.push(i);
+        }
+        return array;
+      };
+      console.log(printRangeOfNumber(1, 6));
+      console.log(printRangeOfNumber(-2, 3));
+
+      //Using while loop
+      const printRangeOfNum = (n1, n2) => {
+        let array = [];
+        while (n1 <= n2) {
+          array.push(n1);
+          n1++;
+        }
+        return array;
+      };
+      console.log(printRangeOfNum(1, 6));
+      console.log(printRangeOfNum(-2, 3));
+
+      //Using recursive
+      const printRangeOfNums = (n1, n2, array = []) => {
+        if (n1 <= n2) {
+          return printRangeOfNum(n1 + 1, n2, [...array, n1]);
+        }
+        return array;
+      };
+      console.log(printRangeOfNums(1, 6));
+      console.log(printRangeOfNums(-2, 3));
+    </script>
+
+    <h3>17. Check password validation</h3>
+    <script>
+      //Using If statement
+      const checkPasswordValidation = (password) => {
+        let hasUpperCase = false;
+        let hasLowerCase = false;
+        let hasNumber = false;
+
+        if (password.length >= 8 && password.length <= 12) {
+          for (let char of password) {
+            if (!isNaN(Number(char))) {
+              hasNumber = true;
+            } else if (char === char.toLowerCase()) {
+              hasLowerCase = true;
+            } else if (char === char.toUpperCase()) {
+              hasUpperCase = true;
+            }
+          }
+          if (hasUpperCase && hasLowerCase && hasNumber) return true;
+        }
+        return false;
+      };
+
+      console.log(checkPasswordValidation("Tapan12345"));
+      console.log(checkPasswordValidation("tapan12345"));
+
+      //Using regular expression
+      const PasswordValidator = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/;
+        return regex.test(password);
+      };
+
+      console.log(PasswordValidator("Tapan12345"));
+      console.log(PasswordValidator("tapan12345"));
+
+      //Using methods
+      const checkPasswordValidator = (password) => {
+        if (password.length < 8 || password.length > 12) return false;
+
+        const hasUpperCase = password
+          .split("")
+          .some((char) => char === char.toUpperCase() && isNaN(char));
+        const hasLowerCase = password
+          .split("")
+          .some((char) => char === char.toLowerCase() && isNaN(char));
+        const hasNumber = password.split("").some((char) => !isNaN(char));
+
+        return hasUpperCase && hasLowerCase && hasNumber;
+      };
+
+      console.log(checkPasswordValidator("Tapan12345"));
+      console.log(checkPasswordValidator("tapan12345"));
+    </script>
+
+    <h3>18. Generate hexadecimal numbers.</h3>
+    <script>
+      const hexadecimalNum = () => {
+        return `#${Math.random().toString(16).slice(2, 8).padEnd(6, "0")}`;
+      };
+      console.log(hexadecimalNum());
+    </script>
+
+    <h3>19. Convert object to array and array to object.</h3>
+    <script>
+      const objectToArrayAndArrayToObject = (obj) => {
+        const toArray = Object.entries(obj);
+        const toObject = Object.fromEntries(toArray);
+        return toObject;
+      };
+      console.log(
+        objectToArrayAndArrayToObject({
+          name: "tapan",
+          age: "30",
+          location: "Bangalore",
+        })
+      );
+    </script>
+
+    <h3>20. Find days between two dates.</h3>
+    <script>
+      const findDays = (d1, d2) => {
+        let date1 = new Date(d1);
+        let date2 = new Date(d2);
+
+        let daysInMilliSecond = Math.abs(date2 - date1);
+
+        return Math.floor(daysInMilliSecond / (24 * 60 * 60 * 1000));
+      };
+
+      console.log(findDays("2024-01-01", "2024-01-31"));
+    </script>
+
+    <h3>21. Find Age.</h3>
+    <script>
+      const findAge = (birthDate) => {
+        let todayDate = new Date();
+        birthDate = new Date(birthDate);
+
+        let year = todayDate.getFullYear() - birthDate.getFullYear();
+        let month = todayDate.getMonth() - birthDate.getMonth();
+
+        if (
+          month < 0 ||
+          (month === 0 && todayDate.getDate() < birthDate.getDate())
+        ) {
+          year--;
+        }
+        return year;
+      };
+
+      console.log(findAge("1992-08-23"));
+    </script>
+
+    <h3>22. Generate bar chat from array of elements.</h3>
+    <script>
+      //Using map method
+      const generateBarChats = (arr) => {
+        let newArr = arr.map((element, index) => {
+          return `${index + 1}: ${"*".repeat(element)}`;
+        });
+        return newArr.join("\n");
+      };
+      console.log(generateBarChats([2, 4, 5, 3]));
+
+      //Using reduce method
+      const generateBarChat = (arr) => {
+        return arr.reduce((result, element, index) => {
+          return result + `${index + 1}: ${"*".repeat(element)}\n`;
+        }, "");
+      };
+      console.log(generateBarChat([2, 4, 5, 3]));
+
+      //Using loop
+      const generateBarChatss = (arr) => {
+        let newArr = arr.map((element, index) => {
+          let star = "";
+          for (let i = 0; i < element; i++) {
+            star += "*";
+          }
+          return `${index + 1}: ${star}`;
+        });
+        return newArr.join("\n");
+      };
+      console.log(generateBarChatss([2, 4, 5, 3]));
+    </script>
+
+    <h3>23. Convert Courrency.</h3>
+    <script>
+      const rates = {
+        USD: 1,
+        INR: 84,
+        EURO: 0.92,
+        GBP: 0.77,
+      };
+
+      const convertCurrency = (amount, fromCurrency, toCurrency) => {
+        let amountToUSD = amount / rates[fromCurrency];
+
+        let convertedAmount = amountToUSD * rates[toCurrency];
+        return Number(convertedAmount.toFixed(2));
+      };
+      console.log(convertCurrency(100, "USD", "INR"));
+      console.log(convertCurrency(100, "INR", "USD"));
+      console.log(convertCurrency(100, "EURO", "GBP"));
+    </script>
+
+    <h3>24. Check credit card validation.</h3>
+    <script>
+      //Reverse the string => Double odd index => If > 9 minus 9 => Add all numbers => modulus = 10 => Valid
+      const validateCreditCardNumber = (str) => {
+        str = str.replace(/\D/g, "");
+
+        //Reverse
+        let reverseStr = "";
+        for (let i = str.length - 1; i >= 0; i--) {
+          reverseStr += str[i];
+        }
+
+        let sumOfElement = reverseStr
+          .split("")
+          .map((element, index) => {
+            //Double
+            if (index % 2 !== 0) {
+              element = Number(element) * 2;
+              //Minus 9
+              if (element > 9) {
+                element = element - 9;
+              } else {
+                element = element;
+              }
+            }
+            return element;
+          })
+          //Sum elements
+          .reduce((acc, value) => acc + Number(value), 0);
+
+        //Check validation
+        return sumOfElement % 10 === 0;
+      };
+      console.log(validateCreditCardNumber("2844 7659 4585"));
+      console.log(validateCreditCardNumber("2244 5658 4542"));
+    </script>
+
+    <h3>25. FizzBuzz challenge.</h3>
+    <script>
+      //Replace number => divisible by 3 = Fizz => divisible by 4 = Buzz => divisible by 3 && 4 = FizzBuzz
+      const fizzBuzz = (n1, n2) => {
+        let result = [];
+        for (let i = n1; i <= n2; i++) {
+          if (i % 3 === 0 && i % 4 === 0) {
+            result.push("FizzBuzz");
+          } else if (i % 3 === 0) {
+            result.push("Fizz");
+          } else if (i % 4 === 0) {
+            result.push("Buzz");
+          } else {
+            result.push(i);
+          }
+        }
+        return result;
+      };
+      console.log(fizzBuzz(1, 12));
+    </script>
+
+    <h3>26. Create a button, that clickable only once.</h3>
+    <button id="click-once">Click Once</button>
+    <script>
+      let myBtn = document.getElementById("click-once");
+      const buttonCallback = () => {
+        console.log("Clcked Once!");
+        // myBtn.removeEventListener("click", buttonCallback )
+      };
+
+      myBtn.addEventListener("click", buttonCallback, {once: true});
+    </script>
+
+    <h4>Source: Thapa Technical</h4>
+  </body>
+</html>
